@@ -23,9 +23,6 @@
         </property>
         <!--<property name="annotatedClasses">-->
             <!--<list>-->
-<!--                <value>com.sv.gauge.server.model.TransactionDetail</value>
-                <value>com.sv.gauge.server.model.Transaction</value>
-                <value>com.sv.gauge.server.model.User</value>-->
             <!--</list>-->
         <!--</property>-->
         
