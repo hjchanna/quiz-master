@@ -5,6 +5,8 @@
  */
 package com.sv.quiz_master.admin;
 
+import com.sv.quiz_master.admin.model.Question;
+import com.sv.quiz_master.admin.model.QuestionPaper;
 import java.util.List;
 
 /**

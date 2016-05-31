@@ -5,6 +5,11 @@
  */
 package com.sv.quiz_master.user;
 
+import com.sv.quiz_master.user.model.Question;
+import com.sv.quiz_master.user.model.QuizSession;
+import com.sv.quiz_master.user.model.QuizSessionUser;
+import java.util.List;
+
 /**
  *
  * @author Mohan

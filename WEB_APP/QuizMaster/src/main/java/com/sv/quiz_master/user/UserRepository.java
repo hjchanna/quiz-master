@@ -5,6 +5,10 @@
  */
 package com.sv.quiz_master.user;
 
+import com.sv.quiz_master.user.model.Question;
+import com.sv.quiz_master.user.model.QuizSession;
+import com.sv.quiz_master.user.model.QuizSessionUser;
+import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import java.util.List;
 
 /**
@@ -17,18 +21,12 @@ public interface UserRepository {
 
     public QuizSession getQuizSession(Integer indexNo);
 
-
-
     public int saveQuizSessionUser(QuizSessionUser quizSessionUser);
 
     public QuizSessionUser getQuizSessionUser(Integer indexNo);
 
-
-
     public Question getNextQuestion(Integer quizSession, Integer currentQuestion);
-    
 
-    
-    public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer)
+    public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer);
 
 }
