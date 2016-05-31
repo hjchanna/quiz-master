@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="quiz_db"/>
+  <table-filter match-name="quiz_session_user"/>
+  <table-filter match-name="quiz_session"/>
+  <table-filter match-name="question"/>
+  <table-filter match-name="quiz_session_user_answer"/>
+  <table-filter match-name="question_paper"/>
+</hibernate-reverse-engineering>
