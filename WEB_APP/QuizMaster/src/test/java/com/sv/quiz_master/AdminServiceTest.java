@@ -16,13 +16,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  *
  * @author Mohan
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:**/root-context.xml", "classpath:**/admin-context.xml"})
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = {"classpath:**/root-context.xml", "classpath:**/admin-context.xml"})
 public class AdminServiceTest {
 
-    @Autowired
+//    @Autowired
 //    private AdminService adminService;
-    private SessionFactory sessionFactory;
+//    private SessionFactory sessionFactory;
 
     @Test
     public void testQuestionList() {

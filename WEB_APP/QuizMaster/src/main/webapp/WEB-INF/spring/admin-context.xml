@@ -18,7 +18,7 @@
     </beans:bean>
     
     <!--START ITEM MANAGER-->
-    <beans:bean id="adminReposiroty" class="com.sv.quiz_master.admin.AdminReposirotyImpl">
+    <beans:bean id="adminRepository" class="com.sv.quiz_master.admin.AdminRepositoryImpl">
     </beans:bean>
     
     <beans:bean id="adminService" class="com.sv.quiz_master.admin.AdminServiceImpl">

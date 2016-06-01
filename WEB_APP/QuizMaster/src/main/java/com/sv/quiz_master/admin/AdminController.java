@@ -84,14 +84,14 @@ public class AdminController {
         return modelAndView;
     }
 
-    @RequestMapping("/save-question-paper")
+    @RequestMapping("/save-question")
     public String saveQuestion(@ModelAttribute Question question) {
         int indexNo = adminService.saveQuestion(question);
 
         return "forward:/question/" + indexNo;
     }
 
-    @RequestMapping("/update-question-paper")
+    @RequestMapping("/update-question")
     public String updateQuestion(@ModelAttribute Question question) {
         int indexNo = adminService.updateQuestion(question);
 

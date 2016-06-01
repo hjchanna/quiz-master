@@ -4,7 +4,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="${pageContext.request.contextPath}/resources/theme/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
                 <p>Channa Jayamuni</p>
@@ -23,46 +23,43 @@
             </li>
             <!--end home-->
 
-            <!--start control panels-->
+            <!--start administration-->
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Control Panel</span> <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-dashboard"></i> <span>Administration</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
 
                 <ul class="treeview-menu">
-                    <li><a href="${pageContext.request.contextPath}/app/item-list"><i class="fa fa-circle-o"></i> Item Control Panel</a></li>
-                    <li><a href="${pageContext.request.contextPath}/app/customer-list"><i class="fa fa-circle-o"></i> Customer Control Panel</a></li>
-                    <li><a href="${pageContext.request.contextPath}/app/supplier-list"><i class="fa fa-circle-o"></i> Supplier Control Panel</a></li>
-                    <li><a href="${pageContext.request.contextPath}/app/user-list"><i class="fa fa-circle-o"></i> User Control Panel</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
                 </ul>
             </li>
+            <!--end administration-->
 
-            <!--end control panels-->
 
-            <!--start approval-->
+            <!--start master-->
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-check"></i> <span>Approval</span> <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-dashboard"></i> <span>Quiz Master</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
 
                 <ul class="treeview-menu">
-                    <li><a href="${pageContext.request.contextPath}/app/customer-approval"><i class="fa fa-circle-o"></i> Customer Approval</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Order Approval</a></li>
+                    <li><a href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
                 </ul>
             </li>
-            <!--end approval-->
+            <!--end master-->
 
-            <!--start reports-->
+
+            <!--start master-->
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-files-o"></i> <span>Reports</span> <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-dashboard"></i> <span>User</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
 
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Order Summary</a></li>
+                    <li><a href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
                 </ul>
             </li>
-            <!--end reports-->
+            <!--end master-->
 
         </ul>
     </section>
