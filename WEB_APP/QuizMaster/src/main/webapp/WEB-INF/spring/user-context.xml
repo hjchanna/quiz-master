@@ -25,7 +25,7 @@
     </beans:bean>
     <!--END BEANS-->
     
-    <context:component-scan base-package="com.sv.quiz_master.master"/>
+    <context:component-scan base-package="com.sv.quiz_master.user"/>
     
     <!-- Configure to plugin JSON as request and response in method handler -->
     <beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">

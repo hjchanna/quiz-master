@@ -17,9 +17,9 @@ public interface MasterService {
 
     public List<QuestionPaper> getQuestionPaperList();
 
-    public QuestionPaper getQuestionPaper(Integer indexNo);
+    public QuestionPaper getQuestionPaper(Integer questionPaperId);
 
-    public List<Question> getQuestionList(Integer questionPaper);
+    public List<Question> getQuestionList(Integer questionPaperId);
     
     public int newQuizSession(Integer questionPaper);
 }
