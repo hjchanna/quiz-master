@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Quiz Master</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!--css-->
+        <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="resources/bootstrap/css/usebootstrap.css"/>
+    </head>
+
+
+    <body>
+
+        <!--start navigation bar-->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Quiz Master</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="question-paper-list.html">Question Papers</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Hi, user <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Logout</a></li>
+                                <!--<li class="divider"></li>-->
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--end naviagation bar-->
+
+        <!--start content-->
+        <div class="container-fluid">
+
+            <form>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="input-group-addon" style="min-width: 106px;">Question (EN)</label>                        
+                                <input type="text" class="form-control" id="description" aria-label="...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="input-group-addon" style="min-width: 106px;">Question (SI)</label>                        
+                                <input type="text" class="form-control" id="description" aria-label="...">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <label class="input-group-addon" style="min-width: 106px;">Question (TA)</label>                        
+                                <input type="text" class="form-control" id="description" aria-label="...">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!--start answer A-->
+                    <div class="col-sm-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                <div class="radio-inline">
+                                    <label><input type="radio"> Answer - A</label> 
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">EN</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <!--end answer A-->
+
+                    <!--start answer B-->
+                    <div class="col-sm-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                <div class="radio-inline">
+                                    <label><input type="radio"> Answer - B</label> 
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">EN</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <!--end answer B-->
+
+                    <!--start answer C-->
+                    <div class="col-sm-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                <div class="radio-inline">
+                                    <label><input type="radio"> Answer - C</label> 
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">EN</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <!--end answer C-->
+
+                    <!--start answer D-->
+                    <div class="col-sm-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading text-center">
+                                <div class="radio-inline">
+                                    <label><input type="radio"> Answer - D</label> 
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">EN</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                                <div class="form-group input-group col-lg-12">
+                                    <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                &nbsp;
+                            </div>
+                        </div>
+                    </div>
+                    <!--end answer D-->
+
+                </div>
+
+            </form>
+        </div>
+        <!--end content-->
+
+        <!--js-->
+        <script src="resources/jquery/jquery-1.10.2.min.js"></script>
+        <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+        <script src="resources/bootstrap/js/usebootstrap.js"></script>
+    </body>
+</html>
