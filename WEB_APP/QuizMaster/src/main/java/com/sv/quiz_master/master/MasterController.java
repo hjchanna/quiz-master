@@ -26,17 +26,18 @@ public class MasterController {
     public ModelAndView attemptQuestionPaperList() {
         ModelAndView modelAndView = new ModelAndView("master/question-paper-list");
 
-        modelAndView.addObject("paper-list", masterService.getQuestionPaperList());
+        modelAndView.addObject("paperlist", masterService.getQuestionPaperList());
+        System.out.println(masterService.getQuestionPaperList());
 
         return modelAndView;
     }
 
     @RequestMapping("/question-paper/{indexNo}")
-    public ModelAndView attemptQuesionPaper(@PathVariable Integer indexNo) {
+    public ModelAndView attemptQuesionPaper(@PathVariable Integer paperIndexNo) {
         ModelAndView modelAndView = new ModelAndView("master/question-paper");
 
-        modelAndView.addObject("paper", masterService.getQuestionPaper(indexNo));
-        modelAndView.addObject("question-list", masterService.getQuestionList(indexNo));
+        modelAndView.addObject("paper", masterService.getQuestionPaper(paperIndexNo));
+        modelAndView.addObject("questionlist", masterService.getQuestionList(paperIndexNo));
 
         return modelAndView;
     }

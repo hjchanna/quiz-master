@@ -42,15 +42,16 @@ public class MasterRepositoryImpl implements MasterRepository {
     @Override
     public List<Question> getQuestionList(Integer questionPaper) {
         Session session = sessionFactory.getCurrentSession();
-        return (List<Question>) session.createCriteria(Question.class)
-                .add(Restrictions.eq("questionPaper", questionPaper)).list();
+        return session.createCriteria(Question.class)
+                .add(Restrictions.eq("questionPaper.indexNo", questionPaper))
+                .list();
     }
 
     @Override
     public int saveQuizSession(QuizSession quizSession) {
         Session session = sessionFactory.getCurrentSession();
         session.save(quizSession);
-        return quizSession.getIndexNo();    
+        return quizSession.getIndexNo();
     }
 
 }
