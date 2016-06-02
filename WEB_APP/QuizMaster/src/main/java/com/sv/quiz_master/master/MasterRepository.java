@@ -22,5 +22,5 @@ public interface MasterRepository {
 
     public List<Question> getQuestionList(Integer questionPaper);
 
-    public int newQuizSession(QuizSession quizSession);
+    public int saveQuizSession(QuizSession quizSession);
 }
