@@ -24,12 +24,6 @@ public interface UserService {
 
     public Question getNextQuestion(Integer quizSession, Integer currentQuestion);
 
-    public void saveAnswer(
-            Integer quizSession,
-            Integer quizSessionUser,
-            Integer quesionPaper,
-            Integer question,
-            String answer,
-            Integer duration);
+    public void saveAnswer(Integer quizSessionId, Integer quizSessionUserId, Integer quesionPaperId, Integer questionId, String answer, Integer duration);
 
 }

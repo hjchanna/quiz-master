@@ -5,6 +5,7 @@
  */
 package com.sv.quiz_master.user;
 
+import com.sv.quiz_master.user.model.QuizSessionUser;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ public class UserController {
     public ModelAndView attemptQuizSessionList() {
         ModelAndView modelAndView = new ModelAndView("user/quiz-session-list");
 
-        modelAndView.addObject("quiz-session-list", userService.getQuizSessionList);
+        modelAndView.addObject("quiz-session-list", userService.getQuizSessionList());
 
         return modelAndView;
     }
@@ -44,9 +45,9 @@ public class UserController {
 
         quizSessionUser = userService.saveQuizSessionUser(quizSessionUser);
 
-        Integer quizSession =  ?;
-        Integer quizUser =  ?;
-        Integer questionPaper =  ?;
+        Integer quizSession =  quizSessionUser.getQuizSession().getIndexNo();
+        Integer quizUser =  quizSessionUser.getIndexNo();
+        Integer questionPaper =  quizSessionUser.getQuizSession().getQuestionPaper().getIndexNo();
 
         servletRequest.getSession().setAttribute("quiz-session", quizSession);
         servletRequest.getSession().setAttribute("question-paper", questionPaper);

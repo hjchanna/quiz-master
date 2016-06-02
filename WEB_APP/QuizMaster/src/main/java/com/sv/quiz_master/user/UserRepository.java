@@ -26,6 +26,8 @@ public interface UserRepository {
     public QuizSessionUser getQuizSessionUser(Integer indexNo);
 
     public Question getNextQuestion(Integer quizSession, Integer currentQuestion);
+    
+    public Question getQuestion(Integer indexNo);
 
     public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer);
 
