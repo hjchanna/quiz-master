@@ -23,12 +23,13 @@
             <h3 class="box-title">Available Question Papers</h3>
 
             <div class="pull-right" >
-                <a class="btn btn-xs btn-success" href="${pageContext.request.contextPath}/app/customer-form/new"><i class="fa fa-plus"></i>&nbsp;New Question Paper</a>
+                <a class="btn btn-xs btn-success" href="${pageContext.request.contextPath}/admin/new-question-paper"><i class="fa fa-plus"></i>&nbsp;New Question Paper</a>
             </div>
         </div>
 
         <div class="box-body  no-padding" id="item-list">
             <!--content-->
+
             <table class="table table-hover">
                 <thead>
                 <th>#</th>
@@ -36,16 +37,18 @@
                 <th>Last Used On</th>
                 <th></th>
                 </head>
-                <tr>
-                    <td>00123</td>
-                    <td>Sample Question Paper</td>
-                    <td>21<sup>th</sup> Jun. 2016</td>
-                    <td class="text-right">
-                        <a class="btn btn-success btn-xs" href="question-paper.html">
-                            <span class="glyphicon glyphicon-play"></span> View
-                        </a>
-                    </td>
-                </tr>
+                <c:forEach items="${paperlist}" var="paperlist">
+                    <tr>
+                        <td>${paperlist.indexNo}</td>
+                        <td>${paperlist.description}</td>
+                        <td>${paperlist.lastUsedOn}</td>
+                        <td class="text-right">
+                            <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paperlist.indexNo}">
+                                <span class="glyphicon glyphicon-play"></span> View
+                            </a>
+                        </td>
+                    </tr>
+                </c:forEach>
             </table>
 
         </div>
