@@ -7,6 +7,7 @@ package com.sv.quiz_master.admin;
 
 import com.sv.quiz_master.admin.model.Question;
 import com.sv.quiz_master.admin.model.QuestionPaper;
+import java.util.HashSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +30,7 @@ public class AdminController {
     public ModelAndView attemptQuesionPaperList() {
         ModelAndView modelAndView = new ModelAndView("admin/question-paper-list");
 
-        modelAndView.addObject("paper-list", adminService.getQuestionPaperList());
+        modelAndView.addObject("paperlist", adminService.getQuestionPaperList());
 
         return modelAndView;
     }
@@ -39,7 +40,7 @@ public class AdminController {
         ModelAndView modelAndView = new ModelAndView("admin/question-paper");
 
         modelAndView.addObject("paper", adminService.getQuestionPaper(questionPaper));
-        modelAndView.addObject("question-list", adminService.getQuestionList(questionPaper));
+        modelAndView.addObject("questionlist", adminService.getQuestionList(questionPaper));
 
         return modelAndView;
     }
@@ -47,6 +48,9 @@ public class AdminController {
     @RequestMapping("/new-question-paper")
     public ModelAndView attemptNewQuestionPaper() {
         ModelAndView modelAndView = new ModelAndView("admin/question-paper");
+
+        modelAndView.addObject("paper", new QuestionPaper());
+        modelAndView.addObject("paperlist", new HashSet<Question>());
 
         return modelAndView;
     }
