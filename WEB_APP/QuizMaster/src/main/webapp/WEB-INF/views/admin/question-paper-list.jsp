@@ -24,7 +24,7 @@
 
             <div class="pull-right" >
                 <a class="btn btn-xs btn-success" href="${pageContext.request.contextPath}/admin/new-question-paper"><i class="fa fa-plus"></i>&nbsp;New Question Paper</a>
-            </div>
+            </div>   
         </div>
 
         <div class="box-body  no-padding" id="item-list">
@@ -37,18 +37,20 @@
                 <th>Last Used On</th>
                 <th></th>
                 </head>
-                <c:forEach items="${paperlist}" var="paperlist">
-                    <tr>
-                        <td>${paperlist.indexNo}</td>
-                        <td>${paperlist.description}</td>
-                        <td>${paperlist.lastUsedOn}</td>
-                        <td class="text-right">
-                            <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paperlist.indexNo}">
-                                <span class="glyphicon glyphicon-play"></span> View
-                            </a>
-                        </td>
-                    </tr>
-                </c:forEach>
+                <tbody>
+                    <c:forEach items="${paperlist}" var="paperlist">
+                        <tr>
+                            <td>${paperlist.indexNo}</td>
+                            <td>${paperlist.description}</td>
+                            <td>${paperlist.lastUsedOn}</td>
+                            <td class="text-right">
+                                <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paperlist.indexNo}">
+                                    <span class="glyphicon glyphicon-play"></span> View
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
             </table>
 
         </div>

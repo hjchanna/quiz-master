@@ -56,7 +56,7 @@ public class AdminRepositoryImpl implements AdminRepository {
     public List<Question> getQuestionList(Integer questionPaper) {
         Session session = sessionFactory.getCurrentSession();
         return session.createCriteria(Question.class)
-                .add(Restrictions.eq("indexNo", questionPaper))
+                .add(Restrictions.eq("questionPaper.indexNo", questionPaper))
                 .list();
                 
     }
