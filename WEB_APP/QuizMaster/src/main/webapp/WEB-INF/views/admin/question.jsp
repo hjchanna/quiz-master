@@ -30,7 +30,7 @@
                 <div class="row">
                     <div class="col-lg-10">
                         <div class="form-group">
-                            <div class="input-group">
+                            <div class="input-group"> 
                                 <label class="input-group-addon" style="min-width: 106px;">Question (EN)</label>                        
                                 <input type="text" value="${question.questionEn}" class="form-control" id="description" aria-label="...">
                             </div>
@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="input-group-addon" style="min-width: 106px;">Question (TA)</label>                        
-                                <input type="text" value="${question.questionTa} class="form-control" id="description" aria-label="...">
+                                <input type="text" value="${question.questionTa}" class="form-control" id="description" aria-label="...">
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <label class="input-group-addon" style="min-width: 106px;">Duration</label>                        
-                                <input type="text" value="${question.duration} class="form-control" id="description" aria-label="...">
+                                <input type="text" value="${question.duration}" class="form-control" id="description" aria-label="...">
                             </div>
                         </div>               
                     </div>
@@ -72,15 +72,15 @@
                             <div class="panel-body">
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">EN</label>                        
-                                    <input type="text" value="${question.answerAEn} class="form-control">
+                                    <input type="text" value="${question.answerAEn}" class="form-control">
                                 </div>
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
-                                    <input type="text" value="${question.answerASi} class="form-control">
+                                    <input type="text" value="${question.answerASi}" class="form-control">
                                 </div>
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
-                                    <input type="text" value="${question.answerATa} class="form-control">
+                                    <input type="text" value="${question.answerATa}" class="form-control">
                                 </div>
                             </div>
                             <div class="panel-footer">
@@ -101,15 +101,15 @@
                             <div class="panel-body">
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">EN</label>                        
-                                    <input type="text" value="${question.answerBEn} class="form-control">
+                                    <input type="text" value="${question.answerBEn}" class="form-control">
                                 </div>
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
-                                    <input type="text" value="${question.answerBSi}  class="form-control">
+                                    <input type="text" value="${question.answerBSi}"  class="form-control">
                                 </div>
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
-                                    <input type="text" value="${question.answerBTa}  class="form-control">
+                                    <input type="text" value="${question.answerBTa}"  class="form-control">
                                 </div>
                             </div>
                             <div class="panel-footer">
@@ -130,15 +130,15 @@
                             <div class="panel-body">
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">EN</label>                        
-                                    <input type="text" value="${question.answerCEn} class="form-control">
+                                    <input type="text" value="${question.answerCEn}" class="form-control">
                                 </div>
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
-                                    <input type="text" value="${question.answerCSi} class="form-control">
+                                    <input type="text" value="${question.answerCSi}" class="form-control">
                                 </div>
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
-                                    <input type="text" value="${question.answerCTa} class="form-control">
+                                    <input type="text" value="${question.answerCTa}" class="form-control">
                                 </div>
                             </div>
                             <div class="panel-footer">
@@ -159,15 +159,15 @@
                             <div class="panel-body">
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">EN</label>                        
-                                    <input type="text" value="${question.answerDEn} class="form-control">
+                                    <input type="text" value="${question.answerDEn}" class="form-control">
                                 </div>
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
-                                    <input type="text" value="${question.answerDSi} class="form-control">
+                                    <input type="text" value="${question.answerDSi}" class="form-control">
                                 </div>
                                 <div class="form-group input-group col-lg-12">
                                     <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
-                                    <input type="text" value="${question.answerDTa} class="form-control">
+                                    <input type="text" value="${question.answerDTa}" class="form-control">
                                 </div>
                             </div>
                             <div class="panel-footer">
