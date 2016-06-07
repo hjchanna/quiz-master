@@ -7,52 +7,63 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#add').click(function () {
+        $('#save').click(function () {
             var disc = $('#disc').val();
+            var indexNo = $('#indexNo').val();
             if (disc != null) {
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/admin/save-question-paper",
-                    type: 'POST',
-                    data: "discription=" + disc,
-                    cache: false,
-                    success: function (data) {
-                        alert(data);
-                    },
-                    error: function (data) {
-                        console.log(data)
-                        alert("An error has occured!!!");
-                    }
-                });
+                if (null == indexNo || "" == indexNo) {
+
+                    $.ajax({
+                        url: "${pageContext.request.contextPath}/admin/save-question-paper",
+                        type: 'POST',
+                        data: "discription=" + disc,
+                        cache: false,
+                        success: function (data) {
+                            alert(data + " added Successfully..");
+                        },
+                        error: function (data) {
+                            console.log(data);
+                            alert("An error has occured!!!");
+                        }
+                    });
+                } else {
+                    alert('getValue' + indexNo + '  ' + disc);
+                    $.ajax({
+                        url: "${pageContext.request.contextPath}/admin/update-question-paper",
+                        type: 'POST',
+                        data: "indexNo=" + indexNo + "&disc=" + disc,
+                        cache: false,
+                        success: function (data) {
+                            alert(data + " Update Successfully..");
+                        },
+                        error: function (data) {
+                            console.log(data)
+                            alert("An error has occured!!!");
+                        }
+                    });
+                }
+            } else {
+                alert("Paper Description is empty...");
+
             }
         });
-    });
-</script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#update").click(function () {
-            var index = $('#indexNo').val();
-            var disc = $('#disc').val();
+        $('#searchText').keyup(function () {
             $.ajax({
                 url: "${pageContext.request.contextPath}/admin/update-question-paper",
                 type: 'POST',
-                data: "indexNo=" + index + "&disc=" + disc,
+                data: "indexNo=" + indexNo + "&disc=" + disc,
                 cache: false,
                 success: function (data) {
-                    if (data.status == "Success") {
-                        alert(data);
-                    } else {
-                        alert("Error occurs on the Database level!");
-                    }
+                    alert(data + " Update Successfully..");
                 },
                 error: function (data) {
                     console.log(data)
                     alert("An error has occured!!!");
                 }
             });
-
         });
-    });
 
+    });
 </script>
 
 
@@ -72,22 +83,33 @@
     <!--start item basic information-->
     <div class="box box-primary">
         <div class="box-header with-border"> 
-            <label for="description"><h2>Question Paper</h2></label>
-
+            <label for="description"><h3>Question Paper</h3></label>
+            <a class="btn btn-success pull-right" href="${pageContext.request.contextPath}/admin/new-question/${paper.indexNo}"><span class="fa fa-plus"></span>&nbsp;Question</a>
 
             <div class="form-group">
                 <div class="input-group">
                     <form:form action=""  modelAttribute="paper">
                         <form:input path="description" id="disc" cssClass="form-control"></form:input>
-                        <form:input type="hidden" path="indexNo" id="indexNo" cssClass="form-control"></form:input>
+                        <form:input type="hidden" path="indexNo" id="indexNo" name="indexNo" cssClass="form-control"></form:input>
                     </form:form>
                     <div class="input-group-btn">
-                        <a id="add" class="btn btn-success"><span  class="glyphicon glyphicon-plus" ></span></a>-->
-                        <a id="update" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span></a>
+                        <!--<a id="add" class="btn btn-success"><span  class="glyphicon glyphicon-plus" ></span></a>-->-->
+                        <a id="save" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span></a>
                         <a href="${pageContext.request.contextPath}/admin/question-paper-list" class="btn btn-success"><span class="glyphicon glyphicon-chevron-left"></span></a>
                     </div>
                 </div>
             </div>
+            <c:if test="${not empty questionlist }">
+
+                <div class="form-group ">
+                    <div class="input-group col-lg-6">           
+                        <input  id="searchText" class="form-control" placeholder="question name "/>
+                        <div class="input-group-btn">
+                            <a id="save" class="btn btn-primary" ><span class="glyphicon glyphicon-search"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </c:if>
 
             <!--            
             <form:form action="${pageContext.request.contextPath}/admin/save-question-paper" method="POST" modelAttribute="paper">
@@ -110,33 +132,39 @@
         </div>
 
         <div class="box-body">
-            <table class="table table-hover ">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Question (EN)</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!--jsp loop-->
-                    <c:forEach items="${questionlist}" var="question">
+            <c:if test="${not empty questionlist }">
+
+                <table class="table table-hover ">
+                    <thead>
                         <tr>
-                            <td>${question.indexNo}</td>
-                            <td>${question.questionEn}</td>
-                            <td class="text-right">
-                                <a class="btn btn-success btn-xs"  href="${pageContext.request.contextPath}/admin/question/${paper.indexNo}/${question.indexNo}">
-                                    <span class="glyphicon glyphicon-edit"></span> Edit
-                                </a>
-                                <a class="btn btn-success btn-xs" href="#">
-                                    <span class="glyphicon glyphicon-eye-close"></span> Disable
-                                </a>
-                            </td>
+                            <th>#</th>
+                            <th>Question (EN)</th>
+                            <th></th>
                         </tr>
-                    </c:forEach>
-                    <!--end jsp loop-->
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <!--jsp loop-->
+                        <c:forEach items="${questionlist}" var="question">
+                            <tr>
+                                <td>${question.indexNo}</td>
+                                <td>${question.questionEn}</td>
+                                <td class="text-right">
+                                    <a class="btn btn-success btn-xs"  href="${pageContext.request.contextPath}/admin/question/${paper.indexNo}/${question.indexNo}">
+                                        <span class="glyphicon glyphicon-edit"></span> Edit
+                                    </a>
+                                    <a class="btn btn-success btn-xs" href="#">
+                                        <span class="glyphicon glyphicon-eye-close"></span> Disable
+                                    </a>
+                                    <a class="btn btn-danger btn-xs" href="#">
+                                        <span class="glyphicon glyphicon-trash"></span> 
+                                    </a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        <!--end jsp loop-->
+                    </tbody>
+                </table>
+            </c:if>
         </div>  
     </div>  
 

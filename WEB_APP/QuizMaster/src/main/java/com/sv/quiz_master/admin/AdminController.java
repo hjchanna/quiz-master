@@ -67,18 +67,18 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/save-question-paper", method = RequestMethod.POST)
-    public String saveQuestionPaper(@RequestParam("discription") String discription) {
+    public int saveQuestionPaper(@RequestParam("discription") String discription) {
         QuestionPaper questionPaper = new QuestionPaper();
 
         questionPaper.setDescription(discription);
         questionPaper.setLastUsedOn(new Date());
         int indexNo = adminService.saveQuestionPaper(questionPaper);
 
-        return "redirect:/admin/new-question/" + indexNo;
+        return indexNo;
     }
 
     @RequestMapping(value = "/update-question-paper", method = RequestMethod.POST)
-    public String updateQuestionPaper(@RequestParam("indexNo") String index, @RequestParam("disc") String disc) {
+    public int updateQuestionPaper(@RequestParam("indexNo") String index, @RequestParam("disc") String disc) {
         QuestionPaper questionPaper = new QuestionPaper();
 
         questionPaper.setIndexNo(Integer.parseInt(index));
@@ -86,7 +86,15 @@ public class AdminController {
         questionPaper.setLastUsedOn(new Date());
         int indexNo = adminService.updateQuestionPaper(questionPaper);
 
-        return "forward:/admin/question-paper/" + indexNo;
+        return indexNo;
+
+    }
+    @RequestMapping(value = "/search-question-paper", method = RequestMethod.POST)
+    public int updateQuestionPaper(@RequestParam("searchText") String text) {
+       
+//        int indexNo = adminService.updateQue
+
+        return 1;
 
     }
 
@@ -102,10 +110,19 @@ public class AdminController {
     }
 
     //copy
+    @RequestMapping("/new-question/{questionPaper}")
+    public ModelAndView attemptNewQuestion(@PathVariable Integer questionPaper) {
+        ModelAndView modelAndView = new ModelAndView("admin/question");
+        modelAndView.addObject("paperlist", adminService.getQuestionPaperList());
+        modelAndView.addObject("question", new Question());
+//        modelAndView.addObject("paperId", questionPaper);
+
+        return modelAndView;
+    }
+
     @RequestMapping("/new-question")
     public ModelAndView attemptNewQuestion() {
         ModelAndView modelAndView = new ModelAndView("admin/question");
-
         modelAndView.addObject("paperlist", adminService.getQuestionPaperList());
         modelAndView.addObject("question", new Question());
 
@@ -126,11 +143,6 @@ public class AdminController {
     public String saveQuestion(HttpServletRequest hsr) {
         String[] attribute = (String[]) hsr.getAttribute("questions");
 
-        System.out.println("ssssssssssssssssssssssssssss");
-        System.out.println(attribute[0]);
-        System.out.println(attribute[1]);
-        System.out.println(attribute[2]);
-        System.out.println(attribute[3]);
         return null;
 
 //        return "forward:/admin/question-paper/" + indexNo;

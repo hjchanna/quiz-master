@@ -81,4 +81,13 @@ public class AdminRepositoryImpl implements AdminRepository {
         session.update(question);
     }
 
+    @Override
+    public List<Question> searchQuestion(String question) {
+        Session session = sessionFactory.getCurrentSession();
+      return session.createCriteria(Question.class)
+                .add(Restrictions.like("question_en", question))
+                .list();
+        
+    }
+
 }

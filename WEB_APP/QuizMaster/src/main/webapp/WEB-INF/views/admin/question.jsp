@@ -20,9 +20,9 @@
 <section class="content">
     <!--start item basic information-->
     <div class="box box-primary">
-        <div class="box-header with-border">
-            <h3 class="box-title">Customer Information</h3>
-        </div>
+        <!--        <div class="box-header with-border">
+                    <h3 class="box-title">Customer Information</h3>
+                </div>-->
 
         <div class="box-body  no-padding">
             <!--start content-->
@@ -39,7 +39,7 @@
                         <c:if test="${not empty paperlist}">
                             <div class="container-fluid" >
                                 <form:select path="questionPaper.indexNo" id="paperCombo" cssClass="form-control">     
-                                    <c:forEach items="${paperlist}" var="paper">
+                                    <c:forEach items="${paperlist}" var="paper" >
                                         <form:option value="${paper.indexNo}" label="${paper.description}"/>
                                     </c:forEach>
                                 </form:select>
@@ -78,8 +78,14 @@
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <div class="input-group">
+                                    <c:if test="${not empty question.indexNo}">
+                                        <input type="submit" value="Update"  class="btn btn-warning btn-sm" aria-label="..."/>
+
+                                    </c:if>
+                                    <c:if test="${empty question.indexNo}">
+                                        
                                     <input type="button" value="Save" id="btn-save" class="btn btn-success btn-sm" aria-label="..."/>&nbsp;
-                                    <input type="submit" value="Update"  class="btn btn-warning btn-sm" aria-label="..."/>
+                                    </c:if>
 
                                 </div>
                             </div>               
@@ -279,7 +285,7 @@
         $.ajax({
             type: "POST", //HTTP POST Method  
             url: "${pageContext.request.contextPath}/admin/save-question", // Controller/View   
-            data: questions={questionPaper: $('#paperCombo').val(),
+            data: questions = {questionPaper: $('#paperCombo').val(),
                 questionEn: $('#questionEn'),
                 questionSi: $('#questionSi'),
                 questionTa: $('#questionTa'),

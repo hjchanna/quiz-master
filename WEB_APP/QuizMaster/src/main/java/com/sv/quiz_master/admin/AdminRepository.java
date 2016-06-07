@@ -32,5 +32,7 @@ public interface AdminRepository {
     public void saveQuestion(Question question);
 
     public void updateQuestion(Question question);
+    
+    public List<Question> searchQuestion(String question);
 
 }
