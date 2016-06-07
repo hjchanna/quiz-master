@@ -59,7 +59,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int saveQuestion(Question question) {
         adminRepository.saveQuestion(question);
-        return question.getIndexNo();
+        return question.getQuestionPaper().getIndexNo();
     }
 
     @Override

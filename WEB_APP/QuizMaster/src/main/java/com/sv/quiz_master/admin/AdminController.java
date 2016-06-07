@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -34,8 +35,13 @@ public class AdminController {
     @RequestMapping("/question-paper-list")
     public ModelAndView attemptQuesionPaperList() {
         ModelAndView modelAndView = new ModelAndView("admin/question-paper-list");
-
+        ArrayList<String> size = new ArrayList<String>();
+        List<QuestionPaper> list = adminService.getQuestionPaperList();
+        for (QuestionPaper questionPaper : list) {
+            size.add(adminService.getQuestionList(questionPaper.getIndexNo()).size() + "");
+        }
         modelAndView.addObject("paperlist", adminService.getQuestionPaperList());
+        modelAndView.addObject("questionsize", size);
 
         return modelAndView;
     }
@@ -62,70 +68,80 @@ public class AdminController {
 
     @RequestMapping(value = "/save-question-paper", method = RequestMethod.POST)
     public String saveQuestionPaper(@RequestParam("discription") String discription) {
-
-        System.out.println("ssssssssssssssssssssssssssssss");
-        System.out.println(discription);
         QuestionPaper questionPaper = new QuestionPaper();
 
         questionPaper.setDescription(discription);
         questionPaper.setLastUsedOn(new Date());
         int indexNo = adminService.saveQuestionPaper(questionPaper);
-        System.out.println(indexNo);
 
         return "redirect:/admin/new-question/" + indexNo;
     }
 
     @RequestMapping(value = "/update-question-paper", method = RequestMethod.POST)
-    public String updateQuestionPaper(@RequestParam("indexNo") String index, @RequestParam("discription") String disc) {
-        System.out.println("eeeeeeeeeeeeeeeeeeeeeeee 222222222");
+    public String updateQuestionPaper(@RequestParam("indexNo") String index, @RequestParam("disc") String disc) {
+        QuestionPaper questionPaper = new QuestionPaper();
 
-        System.out.println(disc);
-        System.out.println(index);
-        System.out.println(index.split("discription=")[1]);
-//        System.out.println(disc);
+        questionPaper.setIndexNo(Integer.parseInt(index));
+        questionPaper.setDescription(disc);
+        questionPaper.setLastUsedOn(new Date());
+        int indexNo = adminService.updateQuestionPaper(questionPaper);
 
-//        System.out.println(paperlist[0]);
-//        for (String list : paperlist) {
-//            System.out.println(list);
-//        }
-//        QuestionPaper questionPaper = new QuestionPaper();
-//
-//        questionPaper.setIndexNo(Integer.parseInt(paperlist[0]));
-//        questionPaper.setDescription(paperlist[1]);
-//        questionPaper.setLastUsedOn(new Date());
-//        int indexNo = adminService.updateQuestionPaper(questionPaper);
-//
-        return "forward:/admin/question-paper/";
-//        return "forward:/admin/question-paper/" + indexNo;
+        return "forward:/admin/question-paper/" + indexNo;
 
     }
 
     @RequestMapping("/question/{questionPaper}/{quesion}")
-    public ModelAndView attemptQuestion(Integer questionPaper, Integer quesion) {
+    public ModelAndView attemptQuestion(@PathVariable Integer questionPaper, @PathVariable Integer quesion) {
         ModelAndView modelAndView = new ModelAndView("admin/question");
 
         modelAndView.addObject("question", adminService.getQuestion(quesion));
         modelAndView.addObject("questionpaper", adminService.getQuestionPaper(questionPaper));
+        modelAndView.addObject("paperlist", adminService.getQuestionPaperList());
 
         return modelAndView;
     }
 
-    @RequestMapping("/new-question/{questionPaper}")
-    public ModelAndView attemptNewQuestion(Integer questionPaper) {
+    //copy
+    @RequestMapping("/new-question")
+    public ModelAndView attemptNewQuestion() {
         ModelAndView modelAndView = new ModelAndView("admin/question");
 
-        modelAndView.addObject("question-paper", adminService.getQuestionPaper(questionPaper));
+        modelAndView.addObject("paperlist", adminService.getQuestionPaperList());
+        modelAndView.addObject("question", new Question());
 
         return modelAndView;
     }
+//    @RequestMapping("/new-question/{questionPaper}")
+//    public ModelAndView attemptNewQuestion(Integer questionPaper) {
+//        ModelAndView modelAndView = new ModelAndView("admin/question");
+//
+//        modelAndView.addObject("questionpaper", adminService.getQuestionPaper(questionPaper));
+//        modelAndView.addObject("question", new Question());
+//
+//        return modelAndView;
+//    }
 
-    @RequestMapping("/save-question")
-    public String saveQuestion(@ModelAttribute Question question) {
-        int indexNo = adminService.saveQuestion(question);
+//    copy
+    @RequestMapping(value = "/save-question", method = RequestMethod.POST)
+    public String saveQuestion(HttpServletRequest hsr) {
+        String[] attribute = (String[]) hsr.getAttribute("questions");
 
-        return "forward:/question/" + indexNo;
+        System.out.println("ssssssssssssssssssssssssssss");
+        System.out.println(attribute[0]);
+        System.out.println(attribute[1]);
+        System.out.println(attribute[2]);
+        System.out.println(attribute[3]);
+        return null;
+
+//        return "forward:/admin/question-paper/" + indexNo;
     }
 
+//    @RequestMapping("/save-question")
+//    public String saveQuestion(@ModelAttribute Question question) {
+//        int indexNo = adminService.saveQuestion(question);
+//
+//        return "forward:/admin/question-paper/" + indexNo;
+//    }
     @RequestMapping("/update-question")
     public String updateQuestion(@ModelAttribute Question question) {
         int indexNo = adminService.updateQuestion(question);

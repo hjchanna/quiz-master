@@ -16,11 +16,7 @@
                     data: "discription=" + disc,
                     cache: false,
                     success: function (data) {
-                        if (data.status == "Success") {
-                            alert(data);
-                        } else {
-                            alert("Error occurs on the Database level!");
-                        }
+                        alert(data);
                     },
                     error: function (data) {
                         console.log(data)
@@ -39,7 +35,7 @@
             $.ajax({
                 url: "${pageContext.request.contextPath}/admin/update-question-paper",
                 type: 'POST',
-                data: "indexNo=" + index + "discription=" + disc,
+                data: "indexNo=" + index + "&disc=" + disc,
                 cache: false,
                 success: function (data) {
                     if (data.status == "Success") {

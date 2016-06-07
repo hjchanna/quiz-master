@@ -20,12 +20,22 @@
     <!--start item basic information-->
     <div class="box box-primary">
         <div class="box-header with-border">
-            <h3 class="box-title">Available Question Papers</h3>
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <input type="text" placeholder="paper name" class="form-control">
+                    <span class="input-group-btn">
+                        <a id="update" class="btn btn-linkedin"><span class="glyphicon glyphicon-search"></span></a>
+                    </span>
+                </div>
+            </div>
+            <div class="col-lg-2 pull-right">
+                <a class="btn btn-success" href="${pageContext.request.contextPath}/admin/new-question-paper"><i class="fa fa-plus"></i>&nbsp;New Question Paper</a>
+            </div>
 
-            <div class="pull-right" >
-                <a class="btn btn-xs btn-success" href="${pageContext.request.contextPath}/admin/new-question-paper"><i class="fa fa-plus"></i>&nbsp;New Question Paper</a>
-            </div>   
+
         </div>
+
+
 
         <div class="box-body  no-padding" id="item-list">
             <!--content-->
