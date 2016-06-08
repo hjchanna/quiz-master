@@ -139,17 +139,29 @@ public class AdminController {
     }
 
     //copy
-    @RequestMapping("/new-question/{questionPaper}")
-    public ModelAndView attemptNewQuestion(@PathVariable Integer questionPaper) {
-        ModelAndView modelAndView = new ModelAndView("admin/question");
-        modelAndView.addObject("paperlist", adminService.getQuestionPaperList());
-        modelAndView.addObject("question", new Question());
-//        modelAndView.addObject("paperId", questionPaper);
+    @RequestMapping("/new-question")
+    public String attemptNewQuestion(@ModelAttribute Question question, @RequestParam("paperId") Integer beforePapId) {
+        int questionId = 0;
+        int paperId = question.getQuestionPaper().getIndexNo();
+        if (null != question.getIndexNo()) {
+            if (paperId != beforePapId) {
+                QuestionPaper questionPaper = adminService.getQuestionPaper(paperId);
+                question.setQuestionPaper(questionPaper);
+                questionId = adminService.saveQuestion(question);
+            } else {
+                questionId = adminService.updateQuestion(question);
 
-        return modelAndView;
+            }
+        } else {
+            QuestionPaper questionPaper = adminService.getQuestionPaper(paperId);
+            question.setQuestionPaper(questionPaper);
+            questionId = adminService.saveQuestion(question);
+        }
+
+        return "forward:/admin/question/" + paperId + "/" + questionId;
     }
 
-    @RequestMapping("/new-question")
+    @RequestMapping("/new-question/{questionPaper}")
     public ModelAndView attemptNewQuestion() {
         ModelAndView modelAndView = new ModelAndView("admin/question");
         modelAndView.addObject("paperlist", adminService.getQuestionPaperList());

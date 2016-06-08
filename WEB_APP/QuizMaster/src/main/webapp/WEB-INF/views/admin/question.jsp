@@ -29,34 +29,38 @@
             <div class="container-fluid">
                 <div>&nbsp;</div>
                 <div class="pull-right">
-                    <div class="form-group ">
-                        <div class="input-group">
-                            <c:if test="${not empty question.indexNo}">
-                                <input type="submit" value="Update"  class="btn btn-warning btn-sm" aria-label="..."/>
+                    <form:form modelAttribute="question" action="${pageContext.request.contextPath}/admin/new-question">
+                        <div class="form-group ">
+                            <div class="input-group">
+                                <c:if test="${not empty question.indexNo}">
+                                    <input type="submit" value="Update"  class="btn btn-warning btn-sm" aria-label="..."/>
 
-                            </c:if>
-                            <c:if test="${empty question.indexNo}">
+                                </c:if>
+                                <c:if test="${empty question.indexNo}">
 
-                                <input type="button" value="Save" id="btn-save" class="btn btn-success btn-sm" aria-label="..."/>&nbsp;
-                            </c:if>
+                                    <input type="submit" value="Save" id="btn-save" class="btn btn-success btn-sm" aria-label="..."/>&nbsp;
+                                </c:if>
 
+                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <h1>Question</h1>
 
-                <div class="row">
-                    <!--start form-->
+                    <h1>Question</h1>
 
-                    <form:form modelAttribute="question" >
-                        <%--<form:input type="text" name="" path="indexNo" id="indexNo" />--%>
-                        <form:input type="hidden"  name="" path="correctAnswer" id="correctAnswer" />
+                    <div class="row">
+                        <!--start form-->
+
+                        <form:input type="hidden" path="correctAnswer" id="correctAnswer" />
+                        <form:input type="hidden" path="indexNo" />
+                        <input type="text" value="${questionpaper.indexNo}" name="paperId" id="paperId"/>
+                        
+                        
+                        
                         <c:if test="${not empty paperlist}">
                             <div class="container-fluid" >
                                 <form:select path="questionPaper.indexNo" id="paperCombo" cssClass="form-control">     
                                     <c:forEach items="${paperlist}" var="paper" >
-                                        <form:option value="${paper.indexNo}" label="${paper.description}"/>
+                                        <form:option value="${paper.indexNo}" label="${paper.indexNo} ${paper.description}"/>
                                     </c:forEach>
                                 </form:select>
                             </div><br>
@@ -216,99 +220,41 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var correctAnswer = '${question.correctAnswer}';
-        if ("a" === correctAnswer) {
+        if ("A" === correctAnswer) {
             $('#radio-A').attr('checked', true);
         }
-        else if ("b" === correctAnswer) {
+        else if ("B" === correctAnswer) {
             $('#radio-B').attr('checked', true);
         }
-        else if ("c" === correctAnswer) {
+        else if ("C" === correctAnswer) {
             $('#radio-C').attr('checked', true);
         }
-        else if ("d" === correctAnswer) {
+        else if ("D" === correctAnswer) {
             $('#radio-D').attr('checked', true);
         } else {
-            alert('Select Correct Answer');
+
         }
     });
-    $("#btn-save").click(function () {
-        var correctAnswer = null;
+    $("#radio-A").change(function () {
         if ($("#radio-A").is(":checked")) {
-            correctAnswer = 'a';
+            $('#correctAnswer').val("A");
         }
-        else if ($("#radio-B").is(":checked")) {
-            correctAnswer = 'b';
-        }
-        else if ($("#radio-C").is(":checked")) {
-            correctAnswer = 'c';
-        }
-        else if ($("#radio-D").is(":checked")) {
-            correctAnswer = 'd';
-        }
-        else {
-            //type me....
-
-        }
-        alert(correctAnswer);
-
-
-//        var data = {//set value to var data
-//            questionPaper: $('#paperCombo').val(),
-//            questionEn: $('#questionEn'),
-//            questionSi: $('#questionSi'),
-//            questionTa: $('#questionTa'),
-//            answerAEn: $('#answerAEn'),
-//            answerASi: $('#answerASi'),
-//            answerATa: $('#answerATa'),
-//            answerBEn: $('#answerBEn'),
-//            answerBSi: $('#answerBSi'),
-//            answerBTa: $('#answerBTa'),
-//            answerCEn: $('#answerCEn'),
-//            answerCSi: $('#answerCSi'),
-//            answerCTa: $('#answerCTa'),
-//            answerDEn: $('#answerDEn'),
-//            answerDSi: $('#answerDSi'),
-//            answerDTa: $('#answerDTa'),
-//            correctAnswer: correctAnswer,
-//            duration: $('#duration')
-//        };
-//        alert(data);
-        $.ajax({
-            type: "POST", //HTTP POST Method  
-            url: "${pageContext.request.contextPath}/admin/save-question", // Controller/View   
-            data: questions = {questionPaper: $('#paperCombo').val(),
-                questionEn: $('#questionEn'),
-                questionSi: $('#questionSi'),
-                questionTa: $('#questionTa'),
-                answerAEn: $('#answerAEn'),
-                answerASi: $('#answerASi'),
-                answerATa: $('#answerATa'),
-                answerBEn: $('#answerBEn'),
-                answerBSi: $('#answerBSi'),
-                answerBTa: $('#answerBTa'),
-                answerCEn: $('#answerCEn'),
-                answerCSi: $('#answerCSi'),
-                answerCTa: $('#answerCTa'),
-                answerDEn: $('#answerDEn'),
-                answerDSi: $('#answerDSi'),
-                answerDTa: $('#answerDTa'),
-                correctAnswer: correctAnswer,
-                duration: $('#duration')},
-            success: function (response) {
-                console.log(data);
-                alert(response);
-
-            },
-            error: function (data) {
-                console.log(data);
-                alert('error');
-            }
-
-
-        });
     });
-
-
+    $("#radio-B").change(function () {
+        if ($("#radio-B").is(":checked")) {
+            $('#correctAnswer').val("B");
+        }
+    });
+    $("#radio-C").change(function () {
+        if ($("#radio-C").is(":checked")) {
+            $('#correctAnswer').val("C");
+        }
+    });
+    $("#radio-D").change(function () {
+        if ($("#radio-D").is(":checked")) {
+            $('#correctAnswer').val("D");
+        }
+    });
 
 </script>
 <!--start bottom contents of page-->
