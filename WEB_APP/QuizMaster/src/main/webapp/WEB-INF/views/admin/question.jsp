@@ -12,60 +12,48 @@
         <small>Manage Questions</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Control Panel</a></li>
-        <li class="active">Customer Control Panel</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Administration</a></li>
+        <li class="active">Question Papers</li>
+        <li class="active">Question</li>
+        <li class="active">${question.indexNo}</li>
     </ol>
 </section>
 
 <section class="content">
     <!--start item basic information-->
-    <div class="box box-primary">
-        <!--        <div class="box-header with-border">
-                    <h3 class="box-title">Customer Information</h3>
-                </div>-->
 
-        <div class="box-body  no-padding">
-            <!--start content-->
-            <div class="container-fluid">
-                <div>&nbsp;</div>
-                <div class="pull-right">
-                    <form:form modelAttribute="question" action="${pageContext.request.contextPath}/admin/new-question">
-                        <div class="form-group ">
-                            <div class="input-group">
-                                <c:if test="${not empty question.indexNo}">
-                                    <input type="submit" value="Update"  class="btn btn-warning btn-sm" aria-label="..."/>
+    <form:form modelAttribute="question" action="${pageContext.request.contextPath}/admin/save-question/${questionpaper.indexNo}" method="POST">
 
-                                </c:if>
-                                <c:if test="${empty question.indexNo}">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <div class="col-lg-9">
+                    <form:select path="questionPaper.indexNo" id="paperCombo" cssClass="form-control">     
+                        <c:forEach items="${paperlist}" var="paper" >
+                            <form:option value="${paper.indexNo}" label="${paper.indexNo} - ${paper.description}"/>
+                        </c:forEach>
+                    </form:select>
+                </div>
 
-                                    <input type="submit" value="Save" id="btn-save" class="btn btn-success btn-sm" aria-label="..."/>&nbsp;
-                                </c:if>
-
-                            </div>
-                        </div>
+                <div class="col-lg-3">
+                    <div class="pull-right">
+                        <button class="btn btn-success"  type="submit" value="save" ><span class="fa fa-save"></span>&nbsp;Save</button>
+                        <a href="${pageContext.request.contextPath}/admin/question-paper/${questionpaper.indexNo}" class="btn btn-success show_tip" data-original-title="back" ><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Back</a>          
                     </div>
+                </div>
+            </div>
 
-                    <h1>Question</h1>
-
+            <div class="box-body">
+                <!--start content-->
+                <div class="content">
+                    
                     <div class="row">
                         <!--start form-->
 
                         <form:input type="hidden" path="correctAnswer" id="correctAnswer" />
                         <form:input type="hidden" path="indexNo" />
-                        <input type="text" value="${questionpaper.indexNo}" name="paperId" id="paperId"/>
-                        
-                        
-                        
-                        <c:if test="${not empty paperlist}">
-                            <div class="container-fluid" >
-                                <form:select path="questionPaper.indexNo" id="paperCombo" cssClass="form-control">     
-                                    <c:forEach items="${paperlist}" var="paper" >
-                                        <form:option value="${paper.indexNo}" label="${paper.indexNo} ${paper.description}"/>
-                                    </c:forEach>
-                                </form:select>
-                            </div><br>
-                        </c:if>
-                        <div class="col-lg-9">
+                        <input type="hidden" value="${questionpaper.indexNo}" name="paperId" id="paperId"/>
+
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <div class="input-group">
                                     <label class="input-group-addon" style="min-width: 106px;">Question (EN)</label>                        
@@ -91,7 +79,7 @@
                         <!--start answer A-->
                         <div class="col-sm-6">
                             <div class="panel panel-primary">
-                                <div class="panel-heading text-center">
+                                <div class="panel-heading text-center sm">
                                     <div class="radio-inline">
                                         <label><input name="group" type="radio" id="radio-A"> Answer - A</label> 
                                     </div>
@@ -110,9 +98,9 @@
                                         <form:input type="text" path="answerATa" class="form-control" id="answerATa"/>
                                     </div>
                                 </div>
-                                <div class="panel-footer">
-                                    &nbsp;
-                                </div>
+                                <!--                                <div class="panel-footer">
+                                                                    &nbsp;
+                                                                </div>-->
                             </div>
                         </div>
                         <!--end answer A-->
@@ -139,9 +127,9 @@
                                         <form:input type="text" path="answerBTa"  class="form-control" id="answerBTa"/>
                                     </div>
                                 </div>
-                                <div class="panel-footer">
-                                    &nbsp;
-                                </div>
+                                <!--                                <div class="panel-footer">
+                                                                    &nbsp;
+                                                                </div>-->
                             </div>
                         </div>
                         <!--end answer B-->
@@ -168,9 +156,9 @@
                                         <form:input type="text" path="answerCTa" class="form-control" id="answerCTa"/>
                                     </div>
                                 </div>
-                                <div class="panel-footer">
-                                    &nbsp;
-                                </div>
+                                <!--                                <div class="panel-footer">
+                                                                    &nbsp;
+                                                                </div>-->
                             </div>
                         </div>
                         <!--end answer C-->
@@ -197,19 +185,19 @@
                                         <form:input type="text" path="answerDTa" class="form-control" id="answerDTa"/>
                                     </div>
                                 </div>
-                                <div class="panel-footer">
-                                    &nbsp;
-                                </div>
+                                <!--                                <div class="panel-footer">
+                                                                    &nbsp;
+                                                                </div>-->
                             </div>
                         </div>
                         <!--end answer D-->
-                    </form:form>
-                    <!--end form-->
+                        <!--end form-->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
+    </form:form>
 </section>
 <!--end page content-->
 
@@ -222,14 +210,11 @@
         var correctAnswer = '${question.correctAnswer}';
         if ("A" === correctAnswer) {
             $('#radio-A').attr('checked', true);
-        }
-        else if ("B" === correctAnswer) {
+        } else if ("B" === correctAnswer) {
             $('#radio-B').attr('checked', true);
-        }
-        else if ("C" === correctAnswer) {
+        } else if ("C" === correctAnswer) {
             $('#radio-C').attr('checked', true);
-        }
-        else if ("D" === correctAnswer) {
+        } else if ("D" === correctAnswer) {
             $('#radio-D').attr('checked', true);
         } else {
 

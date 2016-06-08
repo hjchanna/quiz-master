@@ -1,12 +1,17 @@
+<%@page import="com.sv.quiz_master.admin.model.QuestionPaper"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!--start top contents of page-->
 <jsp:include page="/WEB-INF/views/import-top.jsp"/>
 <!--end top contents of page-->
+<%
+    //date format to format dates
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+%>
 
-
-<script type='text/javascript'>
+<!--<script type='text/javascript'>
     $(window).load(function () {
         $(function () {
             $("#mytable").on("click", ".remove", function () {
@@ -23,7 +28,7 @@
             $('[title]').tooltip();
         });
     });
-</script>
+</script>-->
 
 
 
@@ -44,15 +49,15 @@
     <!--start item basic information-->
     <div class="box box-primary">
         <div class="box-header with-border">
-            <div class="col-sm-8">
-                <form:form action="${pageContext.request.contextPath}/admin/search-question-paper" modelAttribute="paper">
+            <div class="col-lg-10">
+                <form>
                     <div class="input-group">
-                        <form:input  placeholder="paper name"  class="form-control" path="description"></form:input>
-                            <span class="input-group-btn">
-                                <input type="submit"  value="search" class="btn btn-primary" />
-                            </span>
-                    </form:form>
-                </div>
+                        <input name="keyword" placeholder="Search question paper"  class="form-control" />
+                        <span class="input-group-btn">
+                            <button type="submit"  value="Search" class="btn btn-success"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
             </div>
             <div class="col-lg-2 pull-right">
                 <a class="btn btn-success" href="${pageContext.request.contextPath}/admin/new-question-paper"><i class="fa fa-plus"></i>&nbsp;New Question Paper</a>
@@ -72,29 +77,18 @@
                 <tbody>
 
 
-                    <%
-                        int val = 0;
-                    %>
-
-                    <c:forEach items="${paperlist}" var="paperlist">
+                    <c:forEach items="${paperlist}" var="paper">
                         <tr>
-                            <td>${paperlist.indexNo}</td>
-                            <td>${paperlist.description}</td>
-                            <td>${paperlist.lastUsedOn}</td>
-                            <c:forEach items="${questionsize}" var="sizes" end="<%=val%>" begin="<%=val%>">
-                                <td>${sizes}</td>
-                            </c:forEach>
-
-
-                            <%
-                                val++;
-                            %>
+                            <td>${paper.indexNo}</td>
+                            <td>${paper.description}</td>
+                            <td><%=dateFormat.format(((QuestionPaper) pageContext.getAttribute("paper")).getLastUsedOn())%></td>
+                            <td>${paper.questions.size()}</td>
 
                             <td class="text-right">
-                                <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paperlist.indexNo}">  
+                                <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paper.indexNo}">  
                                     <span class="glyphicon glyphicon-play"></span> View
                                 </a>
-                                <a class="btn btn-danger remove show_tip btn-xs" data-original-title="Delete" href="${pageContext.request.contextPath}/admin/delete-paper/${paperlist.indexNo}">
+                                <a class="btn btn-danger remove show_tip btn-xs" data-original-title="Delete" href="${pageContext.request.contextPath}/admin/delete-paper/${paper.indexNo}">
                                     <span ><i class="fa fa-trash-o"></i></span>
                                 </a> 
                             </td>

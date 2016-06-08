@@ -27,7 +27,7 @@
         <!--jquery ui css-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.css">
     </head>
-    <body class="hold-transition skin-blue sidebar-mini">
+    <body class="hold-transition skin-green sidebar-mini">
         <!--start js import-->
 
         <!-- jQuery 2.1.4 -->

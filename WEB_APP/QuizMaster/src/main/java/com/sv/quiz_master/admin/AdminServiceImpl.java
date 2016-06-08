@@ -24,8 +24,8 @@ public class AdminServiceImpl implements AdminService {
     private AdminRepository adminRepository;
 
     @Override
-    public List<QuestionPaper> getQuestionPaperList() {
-        return adminRepository.getQuestionPaperList();
+    public List<QuestionPaper> getQuestionPaperList(String description) {
+        return adminRepository.getQuestionPaperList(description);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Question> getQuestionList(Integer questionPaper) {
-        return adminRepository.getQuestionList(questionPaper);
+    public List<Question> getQuestionList(Integer questionPaper, String question) {
+        return adminRepository.getQuestionList(questionPaper, question);
     }
 
     @Override
@@ -57,9 +57,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int saveQuestion(Question question) {
-        adminRepository.saveQuestion(question);
-        return question.getQuestionPaper().getIndexNo();
+    public Integer saveQuestion(Question question) {
+        if (question.getIndexNo() != null) {
+            return adminRepository.updateQuestion(question);
+        } else {
+            return adminRepository.saveQuestion(question);
+        }
     }
 
     @Override
@@ -69,19 +72,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<Question> searchQuestionList(String question) {
-        return adminRepository.searchQuestion(question);
-
-    }
-
-    @Override
     public int deleteQuestionPaper(Integer indexNo) {
         adminRepository.deleteQuestionPaper(indexNo);
         return indexNo;
     }
 
-    @Override
-    public List<QuestionPaper> searchQuestionPaper(String description) {
-        return adminRepository.searchQuestionPaper(description);
-    }
 }

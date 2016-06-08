@@ -49,7 +49,7 @@
      });*/
 
 
-    </script>
+</script>
 
 
 <!--start page content-->
@@ -59,47 +59,50 @@
         <small>manage question papers</small>
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Control Panel</a></li>
-        <li class="active">Customer Control Panel</li>
+        <li><a href="#"><i class="fa fa-dashboard"></i> Administration</a></li>
+        <li class="active">Question Papers</li>
+        <li class="active">${paper.description}</li>
     </ol>
 </section>
 
 <section class="content">
     <!--start item basic information-->
     <div class="box box-primary">
-        <div class="box-header with-border"> 
-            <form:form action="${pageContext.request.contextPath}/admin/save-question-paper"  modelAttribute="paper">
-                <div class="text-right ">
-                    <input class="btn btn-success"  type="submit" value="save" />
-                    <a class="btn btn-success" href="${pageContext.request.contextPath}/admin/new-question/${paper.indexNo}"><span class="fa fa-plus"></span>&nbsp;Question</a>
-                    <a href="${pageContext.request.contextPath}/admin/question-paper-list" class="btn btn-success show_tip" data-original-title="back" ><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <div class="box-header with-border">
 
-                </div>
-
-                <div class="form-group">
-                    <label class="pull-left" for="description"><h3>Question Paper</h3></label>
-
-                    <form:input path="description" id="disc" cssClass="form-control"></form:input>
-                    <form:input type="hidden" path="indexNo" id="indexNo" name="indexNo" cssClass="form-control"></form:input>
-                </form:form>
+            <div class="col-lg-9">
+                <c:if test="${!paper.questions.isEmpty()}">
+                    <form action="${pageContext.request.contextPath}/admin/question-paper/${paper.indexNo}">
+                        <div class="input-group">           
+                            <input name="keyword" id="searchText" class="form-control" placeholder="Question"/>
+                            <div class="input-group-btn">
+                                <button id="save" class="btn btn-success" ><span class="glyphicon glyphicon-search"></span></button>
+                            </div>
+                        </div>
+                    </form>
+                </c:if>
             </div>
 
-            <c:if test="${not empty questionlist }">
-
-                <div class="form-group ">
-                    <div class="input-group col-lg-6">           
-                        <input  id="searchText" class="form-control" placeholder="question name "/>
-                        <div class="input-group-btn">
-                            <a id="save" class="btn btn-primary" ><span class="glyphicon glyphicon-search"></span></a>
-                        </div>
-                    </div>
+            <form:form modelAttribute="paper" action="${pageContext.request.contextPath}/admin/save-question-paper">
+                <div class="col-lg-3 pull-right">
+                    <button class="btn btn-success"  type="submit" value="save" ><span class="fa fa-save"></span>&nbsp;Save</button>
+                    <a class="btn btn-success" href="${pageContext.request.contextPath}/admin/new-question/${paper.indexNo}"><span class="fa fa-plus"></span>&nbsp;Question</a>
+                    <a href="${pageContext.request.contextPath}/admin/question-paper-list" class="btn btn-success show_tip" data-original-title="back" ><span class="glyphicon glyphicon-chevron-left"></span>&nbsp;Back</a>
                 </div>
-            </c:if>      
-        </div>
+            </div>
 
-        <div class="box-body">
-            <c:if test="${not empty questionlist }">
+            <div class="box-body">
+                <div class="col-lg-9">
+                    <!--<label class="pull-left" for="description"><h3>Question Paper</h3></label>-->
+                    <form:input path="description" type="text" cssClass="form-control"/>
+                    <form:input path="indexNo" type="hidden" id="indexNo" name="indexNo" cssClass="form-control"/>
+                </div>
+                <div class="col-lg-3 pull-right">
+                    <form:input path="description" type="text" cssClass="form-control"/>
+                </div>
+            </form:form>
 
+            <c:if test="${!paper.questions.isEmpty()}">
                 <table class="table table-hover " id="tableQuestion">
                     <thead>
                         <tr>
@@ -110,7 +113,7 @@
                     </thead>
                     <tbody>
                         <!--jsp loop-->
-                        <c:forEach items="${questionlist}" var="question">
+                        <c:forEach items="${paper.questions}" var="question">
                             <tr>
                                 <td>${question.indexNo}</td>
                                 <td>${question.questionEn}</td>

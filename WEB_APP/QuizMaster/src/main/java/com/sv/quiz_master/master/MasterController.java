@@ -32,7 +32,7 @@ public class MasterController {
         return modelAndView;
     }
 
-    @RequestMapping("/question-paper/{indexNo}")
+    @RequestMapping("/question-paper/{paperIndexNo}")
     public ModelAndView attemptQuesionPaper(@PathVariable Integer paperIndexNo) {
         ModelAndView modelAndView = new ModelAndView("master/question-paper");
 
@@ -49,7 +49,7 @@ public class MasterController {
         servletRequest.getSession().setAttribute("quiz-session", quizSession);
         servletRequest.getSession().setAttribute("question-paper", questionPaper);
 
-        return "forward:/quiz-session-info";
+        return "redirect:/master/quiz-session-info";
     }
 
     @RequestMapping("/quiz-session-info")

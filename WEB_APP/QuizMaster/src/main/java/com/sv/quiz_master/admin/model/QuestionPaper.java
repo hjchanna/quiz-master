@@ -70,7 +70,7 @@ public class QuestionPaper implements java.io.Serializable {
         this.lastUsedOn = lastUsedOn;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "questionPaper")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionPaper")
     public Set<Question> getQuestions() {
         return this.questions;
     }

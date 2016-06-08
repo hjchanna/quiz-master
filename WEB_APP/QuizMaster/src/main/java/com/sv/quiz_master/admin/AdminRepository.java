@@ -16,7 +16,7 @@ import java.util.List;
 public interface AdminRepository {
 
     //question paper
-    public List<QuestionPaper> getQuestionPaperList();
+    public List<QuestionPaper> getQuestionPaperList(String description);
 
     public QuestionPaper getQuestionPaper(Integer indexNo);
 
@@ -26,17 +26,12 @@ public interface AdminRepository {
 
     public void deleteQuestionPaper(Integer indexNo);
 
-    public List<QuestionPaper> searchQuestionPaper(String description);
-
     //question
-    public List<Question> getQuestionList(Integer questionPaper);
+    public List<Question> getQuestionList(Integer questionPaper, String question);
 
     public Question getQuestion(Integer indexNo);
 
-    public void saveQuestion(Question question);
+    public Integer saveQuestion(Question question);
 
-    public void updateQuestion(Question question);
-
-    public List<Question> searchQuestion(String question);
-
+    public Integer updateQuestion(Question question);
 }

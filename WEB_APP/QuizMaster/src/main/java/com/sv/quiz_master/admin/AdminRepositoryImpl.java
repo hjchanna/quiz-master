@@ -8,8 +8,10 @@ package com.sv.quiz_master.admin;
 import com.sv.quiz_master.admin.model.Question;
 import com.sv.quiz_master.admin.model.QuestionPaper;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,10 +27,16 @@ public class AdminRepositoryImpl implements AdminRepository {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<QuestionPaper> getQuestionPaperList() {
+    public List<QuestionPaper> getQuestionPaperList(String description) {
         Session session = sessionFactory.getCurrentSession();
 
-        return session.createCriteria(QuestionPaper.class).list();
+        Criteria criteria = session.createCriteria(QuestionPaper.class);
+
+        if (description != null) {
+            criteria.add(Restrictions.ilike("description", description, MatchMode.ANYWHERE));
+        }
+
+        return criteria.list();
     }
 
     @Override
@@ -53,11 +61,20 @@ public class AdminRepositoryImpl implements AdminRepository {
     }
 
     @Override
-    public List<Question> getQuestionList(Integer questionPaper) {
+    public List<Question> getQuestionList(Integer questionPaper, String question) {
         Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Question.class)
-                .add(Restrictions.eq("questionPaper.indexNo", questionPaper))
-                .list();
+        Criteria criteria = session.createCriteria(Question.class)
+                .add(Restrictions.eq("questionPaper.indexNo", questionPaper));
+
+        if (question != null) {
+            criteria.add(Restrictions.or(
+                    Restrictions.ilike("questionEn", question, MatchMode.ANYWHERE),
+                    Restrictions.ilike("questionSi", question, MatchMode.ANYWHERE),
+                    Restrictions.ilike("questionTa", question, MatchMode.ANYWHERE)
+            ));
+        }
+
+        return criteria.list();
 
     }
 
@@ -70,24 +87,16 @@ public class AdminRepositoryImpl implements AdminRepository {
     }
 
     @Override
-    public void saveQuestion(Question question) {
+    public Integer saveQuestion(Question question) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(question);
+        return (Integer) session.save(question);
     }
 
     @Override
-    public void updateQuestion(Question question) {
+    public Integer updateQuestion(Question question) {
         Session session = sessionFactory.getCurrentSession();
         session.update(question);
-    }
-
-    @Override
-    public List<Question> searchQuestion(String question) {
-        Session session = sessionFactory.getCurrentSession();
-        return session.createCriteria(Question.class)
-                .add(Restrictions.like("question_en", question))
-                .list();
-
+        return question.getIndexNo();
     }
 
     @Override
@@ -96,13 +105,4 @@ public class AdminRepositoryImpl implements AdminRepository {
         QuestionPaper questionPaper = (QuestionPaper) session.get(QuestionPaper.class, indexNo);
         session.delete(questionPaper);
     }
-
-    @Override
-    public List<QuestionPaper> searchQuestionPaper(String description) {
-       Session session = sessionFactory.getCurrentSession();
-       return session.createCriteria(QuestionPaper.class)
-                .add(Restrictions.like("description", description))
-                .list();
-    }
-
 }
