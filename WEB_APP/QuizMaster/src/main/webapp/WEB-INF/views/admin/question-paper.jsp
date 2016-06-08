@@ -69,7 +69,7 @@
     <div class="box box-primary">
         <div class="box-header with-border"> 
             <form:form action="${pageContext.request.contextPath}/admin/save-question-paper"  modelAttribute="paper">
-                <div class="input-group-btn text-right ">
+                <div class="text-right ">
                     <input class="btn btn-success"  type="submit" value="save" />
                     <a class="btn btn-success" href="${pageContext.request.contextPath}/admin/new-question/${paper.indexNo}"><span class="fa fa-plus"></span>&nbsp;Question</a>
                     <a href="${pageContext.request.contextPath}/admin/question-paper-list" class="btn btn-success show_tip" data-original-title="back" ><span class="glyphicon glyphicon-chevron-left"></span></a>

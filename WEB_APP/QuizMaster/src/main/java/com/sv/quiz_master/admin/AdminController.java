@@ -42,6 +42,7 @@ public class AdminController {
         }
         modelAndView.addObject("paperlist", adminService.getQuestionPaperList());
         modelAndView.addObject("questionsize", size);
+        modelAndView.addObject("paper", new QuestionPaper());
 
         return modelAndView;
     }
@@ -56,14 +57,28 @@ public class AdminController {
         return modelAndView;
     }
 
-    @RequestMapping("/delete-paper/{questionPaper}")
-    public ModelAndView DeleteQuesionPaper(@PathVariable Integer questionPaper) {
-        ModelAndView modelAndView = new ModelAndView("admin/question-paper");
+    @RequestMapping("/search-question-paper")
+    public ModelAndView searchQuestionPaper(@ModelAttribute("paper") QuestionPaper questionPaper) {
+        ModelAndView modelAndView = new ModelAndView("admin/question-paper-list");
+        List<QuestionPaper> list = adminService.searchQuestionPaper(questionPaper.getDescription());
 
-        modelAndView.addObject("paper", adminService.getQuestionPaper(questionPaper));
-        modelAndView.addObject("questionlist", adminService.getQuestionList(questionPaper));
-//delete code.........
+        ArrayList<String> size = new ArrayList<String>();
+        List<QuestionPaper> list2 = adminService.getQuestionPaperList();
+        for (QuestionPaper paper : list2) {
+            size.add(adminService.getQuestionList(paper.getIndexNo()).size() + "");
+        }
+
+        modelAndView.addObject("paperlist", list);
+        modelAndView.addObject("questionsize", size);
+
         return modelAndView;
+    }
+
+    @RequestMapping("/delete-paper/{questionPaper}")
+    public String DeleteQuesionPaper(@PathVariable Integer questionPaper) {
+
+        adminService.deleteQuestionPaper(questionPaper);
+        return "redirect:/admin/question-paper-list";
     }
 
     @RequestMapping("/new-question-paper")
@@ -108,8 +123,6 @@ public class AdminController {
     public List<Question> searchQuestionPaperList(@RequestParam("searchText") String text) {
         System.out.println("Description Text" + text);
         List<Question> questionList = adminService.searchQuestionList(text);
-        System.out.println("Sixeeeeeeeeee" + questionList.size());
-        System.out.println("Sixeeeeeeeeee" + questionList.size());
         return questionList;
 
     }

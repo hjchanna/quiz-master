@@ -23,8 +23,10 @@ public interface AdminRepository {
     public void saveQuestionPaper(QuestionPaper questionPaper);
 
     public void updateQuestionPaper(QuestionPaper questionPaper);
-            
+
     public void deleteQuestionPaper(Integer indexNo);
+
+    public List<QuestionPaper> searchQuestionPaper(String description);
 
     //question
     public List<Question> getQuestionList(Integer questionPaper);
@@ -34,7 +36,7 @@ public interface AdminRepository {
     public void saveQuestion(Question question);
 
     public void updateQuestion(Question question);
-    
+
     public List<Question> searchQuestion(String question);
 
 }

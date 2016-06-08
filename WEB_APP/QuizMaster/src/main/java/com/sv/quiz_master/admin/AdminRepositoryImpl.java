@@ -93,7 +93,16 @@ public class AdminRepositoryImpl implements AdminRepository {
     @Override
     public void deleteQuestionPaper(Integer indexNo) {
         Session session = sessionFactory.getCurrentSession();
-//        session.delete
+        QuestionPaper questionPaper = (QuestionPaper) session.get(QuestionPaper.class, indexNo);
+        session.delete(questionPaper);
+    }
+
+    @Override
+    public List<QuestionPaper> searchQuestionPaper(String description) {
+       Session session = sessionFactory.getCurrentSession();
+       return session.createCriteria(QuestionPaper.class)
+                .add(Restrictions.like("description", description))
+                .list();
     }
 
 }

@@ -24,6 +24,10 @@ public interface AdminService {
 
     public int updateQuestionPaper(QuestionPaper questionPaper);
 
+    public int deleteQuestionPaper(Integer indexNo);
+
+    public List<QuestionPaper> searchQuestionPaper(String description);
+
     //question
     public List<Question> getQuestionList(Integer questionPaper);
 

@@ -73,4 +73,15 @@ public class AdminServiceImpl implements AdminService {
         return adminRepository.searchQuestion(question);
 
     }
+
+    @Override
+    public int deleteQuestionPaper(Integer indexNo) {
+        adminRepository.deleteQuestionPaper(indexNo);
+        return indexNo;
+    }
+
+    @Override
+    public List<QuestionPaper> searchQuestionPaper(String description) {
+        return adminRepository.searchQuestionPaper(description);
+    }
 }

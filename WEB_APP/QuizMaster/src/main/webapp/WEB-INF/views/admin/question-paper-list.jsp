@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!--start top contents of page-->
 <jsp:include page="/WEB-INF/views/import-top.jsp"/>
@@ -9,7 +10,6 @@
     $(window).load(function () {
         $(function () {
             $("#mytable").on("click", ".remove", function () {
-                alert()
                 $(this).closest('tr').remove();
             });
         });
@@ -45,11 +45,13 @@
     <div class="box box-primary">
         <div class="box-header with-border">
             <div class="col-sm-8">
-                <div class="input-group">
-                    <input type="text" placeholder="paper name" class="form-control"/>
-                    <span class="input-group-btn">
-                        <a id="update" class="btn btn-linkedin"><span class="glyphicon glyphicon-search"></span></a>
-                    </span>
+                <form:form action="${pageContext.request.contextPath}/admin/search-question-paper" modelAttribute="paper">
+                    <div class="input-group">
+                        <form:input  placeholder="paper name"  class="form-control" path="description"></form:input>
+                            <span class="input-group-btn">
+                                <input type="submit"  value="search" class="btn btn-primary" />
+                            </span>
+                    </form:form>
                 </div>
             </div>
             <div class="col-lg-2 pull-right">
@@ -69,7 +71,7 @@
                 </head>
                 <tbody>
 
-                    <!--create variable-->
+
                     <%
                         int val = 0;
                     %>
@@ -83,7 +85,7 @@
                                 <td>${sizes}</td>
                             </c:forEach>
 
-                            <!--increment-->
+
                             <%
                                 val++;
                             %>
@@ -92,7 +94,7 @@
                                 <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paperlist.indexNo}">  
                                     <span class="glyphicon glyphicon-play"></span> View
                                 </a>
-                                    <a class="btn btn-danger remove show_tip btn-xs" data-original-title="Delete" href="${pageContext.request.contextPath}/admin/delete-paper/${paperlist.indexNo}">
+                                <a class="btn btn-danger remove show_tip btn-xs" data-original-title="Delete" href="${pageContext.request.contextPath}/admin/delete-paper/${paperlist.indexNo}">
                                     <span ><i class="fa fa-trash-o"></i></span>
                                 </a> 
                             </td>
