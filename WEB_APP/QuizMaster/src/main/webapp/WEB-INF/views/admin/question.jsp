@@ -27,8 +27,24 @@
         <div class="box-body  no-padding">
             <!--start content-->
             <div class="container-fluid">
-                <h1>Question</h1>
+                <div>&nbsp;</div>
+                <div class="pull-right">
+                    <div class="form-group ">
+                        <div class="input-group">
+                            <c:if test="${not empty question.indexNo}">
+                                <input type="submit" value="Update"  class="btn btn-warning btn-sm" aria-label="..."/>
 
+                            </c:if>
+                            <c:if test="${empty question.indexNo}">
+
+                                <input type="button" value="Save" id="btn-save" class="btn btn-success btn-sm" aria-label="..."/>&nbsp;
+                            </c:if>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <h1>Question</h1>
 
                 <div class="row">
                     <!--start form-->
@@ -67,31 +83,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <label class="input-group-addon" style="min-width: 106px;">Duration</label>                        
-                                    <form:input type="text" path="duration" class="form-control" id="duration" aria-label="..."/>
-                                </div>
-                            </div>               
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <c:if test="${not empty question.indexNo}">
-                                        <input type="submit" value="Update"  class="btn btn-warning btn-sm" aria-label="..."/>
-
-                                    </c:if>
-                                    <c:if test="${empty question.indexNo}">
-                                        
-                                    <input type="button" value="Save" id="btn-save" class="btn btn-success btn-sm" aria-label="..."/>&nbsp;
-                                    </c:if>
-
-                                </div>
-                            </div>               
-                        </div>         
-
-
 
                         <!--start answer A-->
                         <div class="col-sm-6">

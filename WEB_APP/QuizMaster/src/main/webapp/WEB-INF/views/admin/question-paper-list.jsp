@@ -5,33 +5,25 @@
 <!--end top contents of page-->
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#deletebtn").click(function () {
-//            alert(document.getElementById("myTable").rows[1].cells.item(3).innerHTML);
-            var count = document.getElementById("myTable").rows[1].cells.item(3).innerHTML;
-            var indexNo = document.getElementById("myTable").rows[1].cells.item(1).innerHTML;
-            if (count = < 0) {
-                $.ajax({
-                    url: "${pageContext.request.contextPath}/admin/Delete-question-paper",
-                    type: 'POST',
-                    data: "indexNo=" + indexNo,
-                    cache: false,
-                    success: function (data) {
-                        alert("Delete Success!");
-                    },
-                    error: function (data) {
-                        console.log(data)
-                        alert("An error has occured!!!");
-                    }
-                });
-            }
+<script type='text/javascript'>
+    $(window).load(function () {
+        $(function () {
+            $("#mytable").on("click", ".remove", function () {
+                alert()
+                $(this).closest('tr').remove();
+            });
+        });
+        $(function () {
+            $(".show_tip").tooltip({
+                container: 'body'
+            });
+        });
+        $(document).click(function () {
+            $('.tooltip').remove();
+            $('[title]').tooltip();
         });
     });
-
-
 </script>
-
 
 
 
@@ -67,7 +59,7 @@
         <div class="box-body">
             <!--content-->
 
-            <table class="table table-hover" id="myTable">
+            <table class="table table-hover" id="mytable">
                 <thead>
                 <th>#</th>
                 <th>Description</th>
@@ -100,10 +92,9 @@
                                 <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paperlist.indexNo}">  
                                     <span class="glyphicon glyphicon-play"></span> View
                                 </a>
-                                <a class="btn btn-danger btn-xs">  
-                                    <span id="deletebtn" class="glyphicon glyphicon-trash"></span>
-                                </a>
-
+                                    <a class="btn btn-danger remove show_tip btn-xs" data-original-title="Delete" href="${pageContext.request.contextPath}/admin/delete-paper/${paperlist.indexNo}">
+                                    <span ><i class="fa fa-trash-o"></i></span>
+                                </a> 
                             </td>
                         </tr>
                     </c:forEach>

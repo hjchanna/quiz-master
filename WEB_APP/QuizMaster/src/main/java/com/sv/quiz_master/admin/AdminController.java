@@ -55,6 +55,7 @@ public class AdminController {
 
         return modelAndView;
     }
+
     @RequestMapping("/delete-paper/{questionPaper}")
     public ModelAndView DeleteQuesionPaper(@PathVariable Integer questionPaper) {
         ModelAndView modelAndView = new ModelAndView("admin/question-paper");
@@ -75,19 +76,23 @@ public class AdminController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/save-question-paper", method = RequestMethod.POST)
-    public int saveQuestionPaper(@RequestParam("discription") String discription) {
-        QuestionPaper questionPaper = new QuestionPaper();
+    @RequestMapping("/save-question-paper")
+    public String saveQuestionPaper(@ModelAttribute QuestionPaper questionPaper) {
 
-        questionPaper.setDescription(discription);
-        questionPaper.setLastUsedOn(new Date());
-        int indexNo = adminService.saveQuestionPaper(questionPaper);
+        int index = 0;
+        if (questionPaper.getIndexNo() != null) {
+            questionPaper.setLastUsedOn(new Date());
+            index = adminService.updateQuestionPaper(questionPaper);
+        } else {
+            questionPaper.setLastUsedOn(new Date());
+            index = adminService.saveQuestionPaper(questionPaper);
+        }
 
-        return indexNo;
+        return "redirect:/admin/question-paper/" + index;
     }
 
     @RequestMapping(value = "/update-question-paper", method = RequestMethod.POST)
-    public int updateQuestionPaper(@RequestParam("indexNo") String index, @RequestParam("disc") String disc) {
+    public String updateQuestionPaper(@RequestParam("indexNo") String index, @RequestParam("disc") String disc) {
         QuestionPaper questionPaper = new QuestionPaper();
 
         questionPaper.setIndexNo(Integer.parseInt(index));
@@ -95,15 +100,16 @@ public class AdminController {
         questionPaper.setLastUsedOn(new Date());
         int indexNo = adminService.updateQuestionPaper(questionPaper);
 
-        return indexNo;
+        return "redirect:/admin/question-paper/" + indexNo;
 
     }
-    @RequestMapping(value = "/search-question-list", method = RequestMethod.POST ,produces = "application/json")
+
+    @RequestMapping(value = "/search-question-list", method = RequestMethod.POST, produces = "application/json")
     public List<Question> searchQuestionPaperList(@RequestParam("searchText") String text) {
-        System.out.println("Description Text"+text); 
-       List<Question> questionList = adminService.searchQuestionList(text);
-        System.out.println("Sixeeeeeeeeee"+questionList.size());
-        System.out.println("Sixeeeeeeeeee"+questionList.size());
+        System.out.println("Description Text" + text);
+        List<Question> questionList = adminService.searchQuestionList(text);
+        System.out.println("Sixeeeeeeeeee" + questionList.size());
+        System.out.println("Sixeeeeeeeeee" + questionList.size());
         return questionList;
 
     }

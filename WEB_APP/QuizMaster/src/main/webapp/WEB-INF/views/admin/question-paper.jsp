@@ -6,86 +6,50 @@
 <!--end top contents of page-->
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#save').click(function () {
-            var disc = $('#disc').val();
-            var indexNo = $('#indexNo').val();
-            if (disc != null) {
-                if (null == indexNo || "" == indexNo) {
+    /*$(document).ready(function () {
+     $('#save').click(function () {
+     var disc = $('#disc').val();
+     var indexNo = $('#indexNo').val();
+     if (disc != null) {
+     if (null == indexNo || "" == indexNo) {
+     
+     $.ajax({
+     url: "{pageContext.request.contextPath}/admin/save-question-paper",
+     type: 'POST',
+     data: "discription=" + disc,
+     cache: false,
+     success: function (data) {
+     alert(data + " added Successfully..");
+     },
+     error: function (data) {
+     console.log(data);
+     alert("An error has occured!!!");
+     }
+     });
+     } else {
+     alert('getValue' + indexNo + '  ' + disc);
+     $.ajax({
+     url: "{pageContext.request.contextPath}/admin/update-question-paper",
+     type: 'POST',
+     data: "indexNo=" + indexNo + "&disc=" + disc,
+     cache: false,
+     success: function (data) {
+     alert(data + " Update Successfully..");
+     },
+     error: function (data) {
+     console.log(data)
+     alert("An error has occured!!!");
+     }
+     });
+     }
+     } else {
+     alert("Paper Description is empty...");
+     
+     }
+     });*/
 
-                    $.ajax({
-                        url: "${pageContext.request.contextPath}/admin/save-question-paper",
-                        type: 'POST',
-                        data: "discription=" + disc,
-                        cache: false,
-                        success: function (data) {
-                            alert(data + " added Successfully..");
-                        },
-                        error: function (data) {
-                            console.log(data);
-                            alert("An error has occured!!!");
-                        }
-                    });
-                } else {
-                    alert('getValue' + indexNo + '  ' + disc);
-                    $.ajax({
-                        url: "${pageContext.request.contextPath}/admin/update-question-paper",
-                        type: 'POST',
-                        data: "indexNo=" + indexNo + "&disc=" + disc,
-                        cache: false,
-                        success: function (data) {
-                            alert(data + " Update Successfully..");
-                        },
-                        error: function (data) {
-                            console.log(data)
-                            alert("An error has occured!!!");
-                        }
-                    });
-                }
-            } else {
-                alert("Paper Description is empty...");
 
-            }
-        });
-        $('#searchText').keyup(function () {
-//            var text = $('#searchText').val();
-            $.ajax({
-                url: "${pageContext.request.contextPath}/admin/search-question-list",
-                type: 'POST',
-                data: "searchText=" + $('#searchText').val(),
-                cache: false,
-                success: function (data) {
-                    alert(data + " search Successfully..");
-                    console.log(data);
-                    if (null != data) {
-                        $('#tableQuestion tbody').remove();
-    <%--<c:forEach items="da" var="row">--%>
-                        $('#tableQuestion').append('<tr>\n\
-                        <td>' + data.column1 + '</td>\n\
-                        <td>' + data.column2 + '</td>\n\
-                        <td class="text-right">\n\
-                                    <a class="btn btn-success btn-xs"  href="#">\n\
-                                        <span class="glyphicon glyphicon-edit"></span> Edit\n\
-                                    </a>\n\
-                                    <a class="btn btn-success btn-xs" href="#">\n\
-                                        <span class="glyphicon glyphicon-eye-close"></span> Disable\n\
-                                    </a>\n\
-                                    <a class="btn btn-danger btn-xs" href="#">\n\
-                                        <span class="glyphicon glyphicon-trash"></span> \n\
-                                    </a>\n\
-                                </td>\n\
-                        </tr>');
-    <%--</c:forEach>--%>
-                    }
-                },
-                error: function (ehr) {
-
-                    console.log(ehr);
-                }
-            });
-        });
-    });
-</script>
+    </script>
 
 
 <!--start page content-->
@@ -104,58 +68,33 @@
     <!--start item basic information-->
     <div class="box box-primary">
         <div class="box-header with-border"> 
-          
-
+            <form:form action="${pageContext.request.contextPath}/admin/save-question-paper"  modelAttribute="paper">
                 <div class="input-group-btn text-right ">
-                <div class="col-xs-6">
+                    <input class="btn btn-success"  type="submit" value="save" />
+                    <a class="btn btn-success" href="${pageContext.request.contextPath}/admin/new-question/${paper.indexNo}"><span class="fa fa-plus"></span>&nbsp;Question</a>
+                    <a href="${pageContext.request.contextPath}/admin/question-paper-list" class="btn btn-success show_tip" data-original-title="back" ><span class="glyphicon glyphicon-chevron-left"></span></a>
+
+                </div>
+
+                <div class="form-group">
                     <label class="pull-left" for="description"><h3>Question Paper</h3></label>
 
-                </div>
-                    <a id="save" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span></a>
-                    <a href="${pageContext.request.contextPath}/admin/question-paper-list" class="btn btn-success"><span class="glyphicon glyphicon-chevron-left"></span></a>
-                    <a class="btn btn-success" href="${pageContext.request.contextPath}/admin/new-question/${paper.indexNo}"><span class="fa fa-plus"></span>&nbsp;Question</a>
-
-                </div>
-
-            <div class="form-group">
-                <div class="input-group ">
-                    <form:form action=""  modelAttribute="paper">
-                        <form:input path="description" id="disc" cssClass="form-control"></form:input>
-                        <form:input type="hidden" path="indexNo" id="indexNo" name="indexNo" cssClass="form-control"></form:input>
-                    </form:form>
-
-                </div>
+                    <form:input path="description" id="disc" cssClass="form-control"></form:input>
+                    <form:input type="hidden" path="indexNo" id="indexNo" name="indexNo" cssClass="form-control"></form:input>
+                </form:form>
             </div>
+
             <c:if test="${not empty questionlist }">
 
                 <div class="form-group ">
-                    <div class="input-group ">           
+                    <div class="input-group col-lg-6">           
                         <input  id="searchText" class="form-control" placeholder="question name "/>
                         <div class="input-group-btn">
                             <a id="save" class="btn btn-primary" ><span class="glyphicon glyphicon-search"></span></a>
                         </div>
                     </div>
                 </div>
-            </c:if>
-
-            <!--            
-            <form:form action="${pageContext.request.contextPath}/admin/save-question-paper" method="POST" modelAttribute="paper">
-                <div class="input-group ">
-                <form:input path="description" id="discrip" cssClass="form-control"></form:input>
-                    <div class="input-group-btn">
-                        <input type="submit" value="Add" class="btn btn-success"/>
-            </form:form>
-            <form:form  action="${pageContext.request.contextPath}/admin/update-question-paper" modelAttribute="paper">
-                <form:input type="hidden" path="indexNo" cssClass="form-control"></form:input>
-                <form:input type="hidden"  path="description" cssClass="form-control"></form:input>
-                    <input type="submit" value="save" class="btn btn-success"/>
-            </form:form>
-            <a href="${pageContext.request.contextPath}/admin/question-paper-list" class="btn btn-success"><span class="glyphicon glyphicon-chevron-left"></span></a>
-            <a href="" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span></a>
-            <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span></a>
-        </div>
-
-    </div>-->
+            </c:if>      
         </div>
 
         <div class="box-body">
