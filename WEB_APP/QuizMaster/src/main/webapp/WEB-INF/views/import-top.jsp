@@ -26,6 +26,8 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme/css/skins/_all-skins.min.css">
         <!--jquery ui css-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.css">
+        <!--fonts-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/fonts/fonts.css">
     </head>
     <body class="hold-transition skin-green sidebar-mini">
         <!--start js import-->

@@ -98,7 +98,7 @@
                     <form:input path="indexNo" type="hidden" id="indexNo" name="indexNo" cssClass="form-control"/>
                 </div>
                 <div class="col-lg-3 pull-right">
-                    <form:input path="description" type="text" cssClass="form-control"/>
+                    <form:input path="durationPerQuestion" type="number" cssClass="form-control"/>
                 </div>
             </form:form>
 
@@ -121,12 +121,18 @@
                                     <a class="btn btn-success btn-xs"  href="${pageContext.request.contextPath}/admin/question/${paper.indexNo}/${question.indexNo}">
                                         <span class="glyphicon glyphicon-edit"></span> Edit
                                     </a>
-                                    <a class="btn btn-success btn-xs" href="#">
-                                        <span class="glyphicon glyphicon-eye-close"></span> Disable
-                                    </a>
-                                    <a class="btn btn-danger btn-xs" href="#">
-                                        <span class="glyphicon glyphicon-trash"></span> 
-                                    </a>
+                                    <c:choose>
+                                        <c:when test="${question.active}">
+                                            <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question/${paper.indexNo}/${question.indexNo}">
+                                                <span ><i class="glyphicon glyphicon-eye-open"></i> Activated</span>
+                                            </a> 
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question/${paper.indexNo}/${question.indexNo}">
+                                                <span ><i class="glyphicon glyphicon-eye-close"></i> Deactivated</span>
+                                            </a> 
+                                        </c:otherwise>
+                                    </c:choose>
                                 </td>
                             </tr>
                         </c:forEach>

@@ -35,17 +35,30 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int saveQuestionPaper(QuestionPaper questionPaper) {
-        adminRepository.saveQuestionPaper(questionPaper);
-        return questionPaper.getIndexNo();
+        if (questionPaper.getIndexNo()!=null) {
+            return  adminRepository.updateQuestionPaper(questionPaper);
+        }else{
+            questionPaper.setActive(true);
+            return adminRepository.saveQuestionPaper(questionPaper);
+        }
     }
 
     @Override
-    public int updateQuestionPaper(QuestionPaper questionPaper) {
-        adminRepository.updateQuestionPaper(questionPaper);
+    public int toggleEnabilityQuestionPaper(Integer indexNo) {
+        QuestionPaper questionPaper = adminRepository.getQuestionPaper(indexNo);
+        questionPaper.setActive(!questionPaper.isActive());
 
-        return questionPaper.getIndexNo();
+        adminRepository.saveQuestionPaper(questionPaper);
+
+        return indexNo;
     }
 
+//    @Override
+//    public int updateQuestionPaper(QuestionPaper questionPaper) {
+//        adminRepository.updateQuestionPaper(questionPaper);
+//
+//        return questionPaper.getIndexNo();
+//    }
     @Override
     public List<Question> getQuestionList(Integer questionPaper, String question) {
         return adminRepository.getQuestionList(questionPaper, question);
@@ -61,20 +74,25 @@ public class AdminServiceImpl implements AdminService {
         if (question.getIndexNo() != null) {
             return adminRepository.updateQuestion(question);
         } else {
+            question.setActive(true);
             return adminRepository.saveQuestion(question);
         }
     }
 
+//    @Override
+//    public int updateQuestion(Question question) {
+//        adminRepository.updateQuestion(question);
+//        return question.getIndexNo();
+//    }
     @Override
-    public int updateQuestion(Question question) {
-        adminRepository.updateQuestion(question);
-        return question.getIndexNo();
-    }
+    public int toggleEnabilityQuestion(Integer questionPaperId, Integer questionId) {
+        Question question = adminRepository.getQuestion(questionId);
+        
+        question.setActive(!question.isActive());
 
-    @Override
-    public int deleteQuestionPaper(Integer indexNo) {
-        adminRepository.deleteQuestionPaper(indexNo);
-        return indexNo;
+        adminRepository.saveQuestion(question);
+
+        return questionPaperId;
     }
 
 }

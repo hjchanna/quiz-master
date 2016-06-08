@@ -25,19 +25,11 @@ public class QuestionPaper implements java.io.Serializable {
     private Integer indexNo;
     private String description;
     private Date lastUsedOn;
+    private int durationPerQuestion;
+    private boolean active;
     private Set<Question> questions = new HashSet<Question>(0);
 
     public QuestionPaper() {
-    }
-
-    public QuestionPaper(String description) {
-        this.description = description;
-    }
-
-    public QuestionPaper(String description, Date lastUsedOn, Set<Question> questions) {
-        this.description = description;
-        this.lastUsedOn = lastUsedOn;
-        this.questions = questions;
     }
 
     @Id
@@ -68,6 +60,24 @@ public class QuestionPaper implements java.io.Serializable {
 
     public void setLastUsedOn(Date lastUsedOn) {
         this.lastUsedOn = lastUsedOn;
+    }
+
+    @Column(name = "duration_per_question", nullable = false)
+    public int getDurationPerQuestion() {
+        return durationPerQuestion;
+    }
+
+    public void setDurationPerQuestion(int durationPerQuestion) {
+        this.durationPerQuestion = durationPerQuestion;
+    }
+
+    @Column(name = "active", nullable = false)
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionPaper")

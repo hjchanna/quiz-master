@@ -7,7 +7,7 @@
                 <img src="${pageContext.request.contextPath}/resources/theme/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Channa Jayamuni</p>
+                <p>Sample User</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -17,7 +17,7 @@
 
             <!--start home-->
             <li class="active">
-                <a href="#">
+                <a href="${pageContext.request.contextPath}/">
                     <i class="fa fa-th"></i> <span>Home</span>
                 </a>
             </li>

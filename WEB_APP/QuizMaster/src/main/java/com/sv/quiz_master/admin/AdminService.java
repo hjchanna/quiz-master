@@ -22,9 +22,7 @@ public interface AdminService {
 
     public int saveQuestionPaper(QuestionPaper questionPaper);
 
-    public int updateQuestionPaper(QuestionPaper questionPaper);
-
-    public int deleteQuestionPaper(Integer indexNo);
+    public int toggleEnabilityQuestionPaper(Integer indexNo);
 
     //question
     public List<Question> getQuestionList(Integer questionPaper, String question);
@@ -33,6 +31,5 @@ public interface AdminService {
 
     public Integer saveQuestion(Question question);
 
-    public int updateQuestion(Question question);
-
+    public int toggleEnabilityQuestion(Integer questionPaperId, Integer questionId);
 }

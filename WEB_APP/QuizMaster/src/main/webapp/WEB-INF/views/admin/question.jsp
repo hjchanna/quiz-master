@@ -64,14 +64,14 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <label class="input-group-addon" style="min-width: 106px;">Question (SI)</label>                        
-                                    <form:input type="text" path="questionSi" class="form-control" id="description" aria-label="..."/>
+                                    <form:input type="text" path="questionSi" class="form-control sinhala" id="description" aria-label="..."/>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="input-group">
                                     <label class="input-group-addon" style="min-width: 106px;">Question (TA)</label>                        
-                                    <form:input type="text" path="questionTa" class="form-control" id="description" aria-label="..."/>
+                                    <form:input type="text" path="questionTa" class="form-control tamil" id="description" aria-label="..."/>
                                 </div>
                             </div>
                         </div>
@@ -91,11 +91,11 @@
                                     </div>
                                     <div class="form-group input-group col-lg-12">
                                         <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
-                                        <form:input type="text" path="answerASi" class="form-control" id="answerASi"/>
+                                        <form:input type="text" path="answerASi" class="form-control sinhala" id="answerASi"/>
                                     </div>
                                     <div class="form-group input-group col-lg-12">
                                         <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
-                                        <form:input type="text" path="answerATa" class="form-control" id="answerATa"/>
+                                        <form:input type="text" path="answerATa" class="form-control tamil" id="answerATa"/>
                                     </div>
                                 </div>
                                 <!--                                <div class="panel-footer">
@@ -120,11 +120,11 @@
                                     </div>
                                     <div class="form-group input-group col-lg-12">
                                         <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
-                                        <form:input type="text" path="answerBSi"  class="form-control" id="answerBSi"/>
+                                        <form:input type="text" path="answerBSi"  class="form-control sinhala" id="answerBSi"/>
                                     </div>
                                     <div class="form-group input-group col-lg-12">
                                         <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
-                                        <form:input type="text" path="answerBTa"  class="form-control" id="answerBTa"/>
+                                        <form:input type="text" path="answerBTa"  class="form-control tamil" id="answerBTa"/>
                                     </div>
                                 </div>
                                 <!--                                <div class="panel-footer">
@@ -149,11 +149,11 @@
                                     </div>
                                     <div class="form-group input-group col-lg-12">
                                         <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
-                                        <form:input type="text" path="answerCSi" class="form-control" id="answerCSi"/>
+                                        <form:input type="text" path="answerCSi" class="form-control sinhala" id="answerCSi"/>
                                     </div>
                                     <div class="form-group input-group col-lg-12">
                                         <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
-                                        <form:input type="text" path="answerCTa" class="form-control" id="answerCTa"/>
+                                        <form:input type="text" path="answerCTa" class="form-control tamil" id="answerCTa"/>
                                     </div>
                                 </div>
                                 <!--                                <div class="panel-footer">
@@ -178,11 +178,11 @@
                                     </div>
                                     <div class="form-group input-group col-lg-12">
                                         <label class="input-group-addon" style="min-width: 45px;">SI</label>                        
-                                        <form:input type="text" path="answerDSi" class="form-control" id="answerDSi"/>
+                                        <form:input type="text" path="answerDSi" class="form-control sinhala" id="answerDSi"/>
                                     </div>
                                     <div class="form-group input-group col-lg-12">
                                         <label class="input-group-addon" style="min-width: 45px;">TA</label>                        
-                                        <form:input type="text" path="answerDTa" class="form-control" id="answerDTa"/>
+                                        <form:input type="text" path="answerDTa" class="form-control tamil" id="answerDTa"/>
                                     </div>
                                 </div>
                                 <!--                                <div class="panel-footer">

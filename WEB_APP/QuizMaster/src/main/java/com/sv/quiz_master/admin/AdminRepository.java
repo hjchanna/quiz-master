@@ -20,11 +20,9 @@ public interface AdminRepository {
 
     public QuestionPaper getQuestionPaper(Integer indexNo);
 
-    public void saveQuestionPaper(QuestionPaper questionPaper);
+    public int saveQuestionPaper(QuestionPaper questionPaper);
 
-    public void updateQuestionPaper(QuestionPaper questionPaper);
-
-    public void deleteQuestionPaper(Integer indexNo);
+    public int updateQuestionPaper(QuestionPaper questionPaper);
 
     //question
     public List<Question> getQuestionList(Integer questionPaper, String question);

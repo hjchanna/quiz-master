@@ -11,28 +11,6 @@
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 %>
 
-<!--<script type='text/javascript'>
-    $(window).load(function () {
-        $(function () {
-            $("#mytable").on("click", ".remove", function () {
-                $(this).closest('tr').remove();
-            });
-        });
-        $(function () {
-            $(".show_tip").tooltip({
-                container: 'body'
-            });
-        });
-        $(document).click(function () {
-            $('.tooltip').remove();
-            $('[title]').tooltip();
-        });
-    });
-</script>-->
-
-
-
-
 <!--start page content-->
 <section class="content-header">
     <h1>
@@ -81,16 +59,30 @@
                         <tr>
                             <td>${paper.indexNo}</td>
                             <td>${paper.description}</td>
-                            <td><%=dateFormat.format(((QuestionPaper) pageContext.getAttribute("paper")).getLastUsedOn())%></td>
+                            <td>
+                                <%=((QuestionPaper) pageContext.getAttribute("paper")).getLastUsedOn() != null
+                                        ? dateFormat.format(((QuestionPaper) pageContext.getAttribute("paper")).getLastUsedOn())
+                                        : "N/A"%>
+                            </td>
                             <td>${paper.questions.size()}</td>
 
                             <td class="text-right">
                                 <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paper.indexNo}">  
                                     <span class="glyphicon glyphicon-play"></span> View
                                 </a>
-                                <a class="btn btn-danger remove show_tip btn-xs" data-original-title="Delete" href="${pageContext.request.contextPath}/admin/delete-paper/${paper.indexNo}">
-                                    <span ><i class="fa fa-trash-o"></i></span>
-                                </a> 
+
+                                <c:choose>
+                                    <c:when test="${paper.active}">
+                                        <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question-paper/${paper.indexNo}">
+                                            <span ><i class="glyphicon glyphicon-eye-open"></i> Activated</span>
+                                        </a> 
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question-paper/${paper.indexNo}">
+                                            <span ><i class="glyphicon glyphicon-eye-close"></i> Deactivated</span>
+                                        </a> 
+                                    </c:otherwise>
+                                </c:choose>
                             </td>
                         </tr>
                     </c:forEach>

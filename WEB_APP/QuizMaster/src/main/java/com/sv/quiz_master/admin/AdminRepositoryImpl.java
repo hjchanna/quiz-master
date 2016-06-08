@@ -9,6 +9,7 @@ import com.sv.quiz_master.admin.model.Question;
 import com.sv.quiz_master.admin.model.QuestionPaper;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
@@ -35,6 +36,8 @@ public class AdminRepositoryImpl implements AdminRepository {
         if (description != null) {
             criteria.add(Restrictions.ilike("description", description, MatchMode.ANYWHERE));
         }
+        
+        criteria.setFetchMode("questions", FetchMode.SELECT);
 
         return criteria.list();
     }
@@ -49,15 +52,16 @@ public class AdminRepositoryImpl implements AdminRepository {
     }
 
     @Override
-    public void saveQuestionPaper(QuestionPaper questionPaper) {
+    public int saveQuestionPaper(QuestionPaper questionPaper) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(questionPaper);
+        return (Integer) session.save(questionPaper);
     }
 
     @Override
-    public void updateQuestionPaper(QuestionPaper questionPaper) {
+    public int updateQuestionPaper(QuestionPaper questionPaper) {
         Session session = sessionFactory.getCurrentSession();
         session.update(questionPaper);
+        return questionPaper.getIndexNo();
     }
 
     @Override
@@ -97,12 +101,5 @@ public class AdminRepositoryImpl implements AdminRepository {
         Session session = sessionFactory.getCurrentSession();
         session.update(question);
         return question.getIndexNo();
-    }
-
-    @Override
-    public void deleteQuestionPaper(Integer indexNo) {
-        Session session = sessionFactory.getCurrentSession();
-        QuestionPaper questionPaper = (QuestionPaper) session.get(QuestionPaper.class, indexNo);
-        session.delete(questionPaper);
     }
 }
