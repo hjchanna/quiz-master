@@ -42,7 +42,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int updateQuestionPaper(QuestionPaper questionPaper) {
         adminRepository.updateQuestionPaper(questionPaper);
-        
+
         return questionPaper.getIndexNo();
     }
 
@@ -68,5 +68,9 @@ public class AdminServiceImpl implements AdminService {
         return question.getIndexNo();
     }
 
-    
+    @Override
+    public List<Question> searchQuestionList(String question) {
+        return adminRepository.searchQuestion(question);
+
+    }
 }

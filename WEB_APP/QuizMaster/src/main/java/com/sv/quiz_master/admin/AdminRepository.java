@@ -23,6 +23,8 @@ public interface AdminRepository {
     public void saveQuestionPaper(QuestionPaper questionPaper);
 
     public void updateQuestionPaper(QuestionPaper questionPaper);
+            
+    public void deleteQuestionPaper(Integer indexNo);
 
     //question
     public List<Question> getQuestionList(Integer questionPaper);

@@ -33,4 +33,5 @@ public interface AdminService {
 
     public int updateQuestion(Question question);
 
+    public List<Question> searchQuestionList(String question);
 }

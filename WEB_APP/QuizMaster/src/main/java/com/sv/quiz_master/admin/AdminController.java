@@ -55,6 +55,15 @@ public class AdminController {
 
         return modelAndView;
     }
+    @RequestMapping("/delete-paper/{questionPaper}")
+    public ModelAndView DeleteQuesionPaper(@PathVariable Integer questionPaper) {
+        ModelAndView modelAndView = new ModelAndView("admin/question-paper");
+
+        modelAndView.addObject("paper", adminService.getQuestionPaper(questionPaper));
+        modelAndView.addObject("questionlist", adminService.getQuestionList(questionPaper));
+//delete code.........
+        return modelAndView;
+    }
 
     @RequestMapping("/new-question-paper")
     public ModelAndView attemptNewQuestionPaper() {
@@ -89,12 +98,13 @@ public class AdminController {
         return indexNo;
 
     }
-    @RequestMapping(value = "/search-question-paper", method = RequestMethod.POST)
-    public int updateQuestionPaper(@RequestParam("searchText") String text) {
-       
-//        int indexNo = adminService.updateQue
-
-        return 1;
+    @RequestMapping(value = "/search-question-list", method = RequestMethod.POST ,produces = "application/json")
+    public List<Question> searchQuestionPaperList(@RequestParam("searchText") String text) {
+        System.out.println("Description Text"+text); 
+       List<Question> questionList = adminService.searchQuestionList(text);
+        System.out.println("Sixeeeeeeeeee"+questionList.size());
+        System.out.println("Sixeeeeeeeeee"+questionList.size());
+        return questionList;
 
     }
 

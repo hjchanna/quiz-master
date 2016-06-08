@@ -27,14 +27,14 @@ public class AdminRepositoryImpl implements AdminRepository {
     @Override
     public List<QuestionPaper> getQuestionPaperList() {
         Session session = sessionFactory.getCurrentSession();
-        
+
         return session.createCriteria(QuestionPaper.class).list();
     }
 
     @Override
     public QuestionPaper getQuestionPaper(Integer indexNo) {
         Session session = sessionFactory.getCurrentSession();
-        
+
         return (QuestionPaper) session.createCriteria(QuestionPaper.class)
                 .add(Restrictions.eq("indexNo", indexNo))
                 .uniqueResult();
@@ -58,7 +58,7 @@ public class AdminRepositoryImpl implements AdminRepository {
         return session.createCriteria(Question.class)
                 .add(Restrictions.eq("questionPaper.indexNo", questionPaper))
                 .list();
-                
+
     }
 
     @Override
@@ -84,10 +84,16 @@ public class AdminRepositoryImpl implements AdminRepository {
     @Override
     public List<Question> searchQuestion(String question) {
         Session session = sessionFactory.getCurrentSession();
-      return session.createCriteria(Question.class)
+        return session.createCriteria(Question.class)
                 .add(Restrictions.like("question_en", question))
                 .list();
-        
+
+    }
+
+    @Override
+    public void deleteQuestionPaper(Integer indexNo) {
+        Session session = sessionFactory.getCurrentSession();
+//        session.delete
     }
 
 }

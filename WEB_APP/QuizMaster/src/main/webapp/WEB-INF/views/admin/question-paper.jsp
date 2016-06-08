@@ -48,21 +48,42 @@
             }
         });
         $('#searchText').keyup(function () {
+//            var text = $('#searchText').val();
             $.ajax({
-                url: "${pageContext.request.contextPath}/admin/update-question-paper",
+                url: "${pageContext.request.contextPath}/admin/search-question-list",
                 type: 'POST',
-                data: "indexNo=" + indexNo + "&disc=" + disc,
+                data: "searchText=" + $('#searchText').val(),
                 cache: false,
                 success: function (data) {
-                    alert(data + " Update Successfully..");
+                    alert(data + " search Successfully..");
+                    console.log(data);
+                    if (null != data) {
+                        $('#tableQuestion tbody').remove();
+    <%--<c:forEach items="da" var="row">--%>
+                        $('#tableQuestion').append('<tr>\n\
+                        <td>' + data.column1 + '</td>\n\
+                        <td>' + data.column2 + '</td>\n\
+                        <td class="text-right">\n\
+                                    <a class="btn btn-success btn-xs"  href="#">\n\
+                                        <span class="glyphicon glyphicon-edit"></span> Edit\n\
+                                    </a>\n\
+                                    <a class="btn btn-success btn-xs" href="#">\n\
+                                        <span class="glyphicon glyphicon-eye-close"></span> Disable\n\
+                                    </a>\n\
+                                    <a class="btn btn-danger btn-xs" href="#">\n\
+                                        <span class="glyphicon glyphicon-trash"></span> \n\
+                                    </a>\n\
+                                </td>\n\
+                        </tr>');
+    <%--</c:forEach>--%>
+                    }
                 },
-                error: function (data) {
-                    console.log(data)
-                    alert("An error has occured!!!");
+                error: function (ehr) {
+
+                    console.log(ehr);
                 }
             });
         });
-
     });
 </script>
 
@@ -83,26 +104,32 @@
     <!--start item basic information-->
     <div class="box box-primary">
         <div class="box-header with-border"> 
-            <label for="description"><h3>Question Paper</h3></label>
-            <a class="btn btn-success pull-right" href="${pageContext.request.contextPath}/admin/new-question/${paper.indexNo}"><span class="fa fa-plus"></span>&nbsp;Question</a>
+          
+
+                <div class="input-group-btn text-right ">
+                <div class="col-xs-6">
+                    <label class="pull-left" for="description"><h3>Question Paper</h3></label>
+
+                </div>
+                    <a id="save" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span></a>
+                    <a href="${pageContext.request.contextPath}/admin/question-paper-list" class="btn btn-success"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                    <a class="btn btn-success" href="${pageContext.request.contextPath}/admin/new-question/${paper.indexNo}"><span class="fa fa-plus"></span>&nbsp;Question</a>
+
+                </div>
 
             <div class="form-group">
-                <div class="input-group">
+                <div class="input-group ">
                     <form:form action=""  modelAttribute="paper">
                         <form:input path="description" id="disc" cssClass="form-control"></form:input>
                         <form:input type="hidden" path="indexNo" id="indexNo" name="indexNo" cssClass="form-control"></form:input>
                     </form:form>
-                    <div class="input-group-btn">
-                        <!--<a id="add" class="btn btn-success"><span  class="glyphicon glyphicon-plus" ></span></a>-->-->
-                        <a id="save" class="btn btn-success"><span class="glyphicon glyphicon-floppy-save"></span></a>
-                        <a href="${pageContext.request.contextPath}/admin/question-paper-list" class="btn btn-success"><span class="glyphicon glyphicon-chevron-left"></span></a>
-                    </div>
+
                 </div>
             </div>
             <c:if test="${not empty questionlist }">
 
                 <div class="form-group ">
-                    <div class="input-group col-lg-6">           
+                    <div class="input-group ">           
                         <input  id="searchText" class="form-control" placeholder="question name "/>
                         <div class="input-group-btn">
                             <a id="save" class="btn btn-primary" ><span class="glyphicon glyphicon-search"></span></a>
@@ -134,7 +161,7 @@
         <div class="box-body">
             <c:if test="${not empty questionlist }">
 
-                <table class="table table-hover ">
+                <table class="table table-hover " id="tableQuestion">
                     <thead>
                         <tr>
                             <th>#</th>
