@@ -31,12 +31,13 @@ public class UserController {
     public ModelAndView attemptNewUser() {
         ModelAndView modelAndView = new ModelAndView("user/quiz-session-new-user");
 
+        modelAndView.addObject("quizSessionUser", new QuizSessionUser());
+        
         return modelAndView;
     }
 
     @RequestMapping("/quiz-session-save-user")
     public String saveNewUser(HttpServletRequest servletRequest, @ModelAttribute QuizSessionUser quizSessionUser) {
-
         QuizSession quizSession = userService.newQuizSession();   //create new question session and save
 
         //set quiz sessin to user
@@ -55,7 +56,9 @@ public class UserController {
 
     @RequestMapping("/quiz-session-pending")
     public ModelAndView attemptPendingScreen(HttpServletRequest servletRequest) {
-        ModelAndView modelAndView = new ModelAndView("user/quiz-pending");
+        ModelAndView modelAndView = new ModelAndView("user/quiz-session-pending");
+        
+        
 
 //        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
 //        QuestionPaper questionPaper = (QuestionPaper) servletRequest.getSession().getAttribute("questionpaper");

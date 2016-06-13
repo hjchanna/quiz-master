@@ -1,3 +1,5 @@
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,36 +28,28 @@
             <div class="login-box-body">
                 <p class="login-box-msg">Enter your identity information</p>
                 
-                <form action="../../index2.html" method="post">
+                <form:form action="${pageContext.request.contextPath}/user/quiz-session-save-user" method="post" modelAttribute="quizSessionUser">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Name">
+                        <form:input type="text" class="form-control" placeholder="Name" path="name"/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
                     
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Identity Card Number">
+                        <form:input type="text" class="form-control" placeholder="Identity Card Number" path="nicNo"/>
                         <span class="glyphicon glyphicon-certificate form-control-feedback"></span>
                     </div>
                     
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="Telephone">
+                        <form:input type="text" class="form-control" placeholder="Telephone" path="mobileNo"/>
                         <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                     </div>
                     
-                    
-                    <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Password">
-                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                    </div>
                     <div class="row">
-                        <div class="col-xs-8">
-                            
-                        </div>
-                        <div class="col-xs-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <div class="col-xs-12">
+                            <form:button type="submit" class="btn btn-primary btn-block btn-flat">Register</form:button>
                         </div>
                     </div>
-                </form>
+                </form:form>
             </div>
         </div>
         

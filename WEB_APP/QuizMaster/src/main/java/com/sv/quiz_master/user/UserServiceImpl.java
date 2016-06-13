@@ -11,6 +11,7 @@ import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import com.sv.quiz_master.zsystem.QuizSessionStatus;
+import java.io.Serializable;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,13 +30,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser) {
-        return (QuizSessionUser) userRepository.saveObject(quizSessionUser);
+        Serializable userId = userRepository.saveObject(quizSessionUser);
+        return (QuizSessionUser) userRepository.getObject(QuizSessionUser.class, userId);
     }
 
     @Override
     public QuizSession newQuizSession() {
         QuizSession quizSession = new QuizSession();
-        quizSession.setStartedOn(null);
+        quizSession.setStartedOn(new Date());
         quizSession.setStatus(QuizSessionStatus.PENDING);
         
         quizSession.setQuestionPaper(userRepository.getRandomQuestionPaper());

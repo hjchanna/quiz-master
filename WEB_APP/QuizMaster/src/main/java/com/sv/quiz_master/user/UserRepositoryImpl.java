@@ -10,8 +10,10 @@ import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import java.io.Serializable;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -68,11 +70,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Question getNextQuestion(QuestionPaper quizSession, Question question) {
+    public Question getNextQuestion(QuestionPaper questionPaper, Question question) {
         Session session = sessionFactory.getCurrentSession();
-        return (Question) session.createCriteria(Question.class)
-                .add(Restrictions.eq("questionPaper.indexNo", quizSession.getIndexNo()))
-                .add(Restrictions.eq("indexNo", question.getIndexNo()));
+
+        Criteria criteria = session.createCriteria(Question.class)
+                .add(Restrictions.eq("questionPaper", questionPaper));
+        if (question != null) {
+            criteria.add(Restrictions.gt("indexNo", question.getIndexNo()));
+        }
+
+        criteria.addOrder(Order.asc("indexNo"));
+        criteria.setMaxResults(1);
+
+        return (Question) criteria.list().get(0);
     }
 
 }
