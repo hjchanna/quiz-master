@@ -88,8 +88,13 @@ public class AdminController {
     public ModelAndView attemptNewQuestion(@PathVariable Integer questionPaper) {
         ModelAndView modelAndView = new ModelAndView("admin/question");
         modelAndView.addObject("paperlist", adminService.getQuestionPaperList(null));
-        modelAndView.addObject("questionpaper", adminService.getQuestionPaper(questionPaper));
-        modelAndView.addObject("question", new Question());
+        
+        QuestionPaper currentQuestionPaper  = adminService.getQuestionPaper(questionPaper);
+        modelAndView.addObject("questionpaper", currentQuestionPaper);
+        
+        Question question = new Question();
+        question.setQuestionPaper(currentQuestionPaper);
+        modelAndView.addObject("question", question);
 
         return modelAndView;
     }

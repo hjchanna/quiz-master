@@ -27,7 +27,7 @@
         <div class="box box-primary">
             <div class="box-header with-border">
                 <div class="col-lg-9">
-                    <form:select path="questionPaper.indexNo" id="paperCombo" cssClass="form-control">     
+                    <form:select path="questionPaper.indexNo" cssClass="form-control">     
                         <c:forEach items="${paperlist}" var="paper" >
                             <form:option value="${paper.indexNo}" label="${paper.indexNo} - ${paper.description}"/>
                         </c:forEach>
@@ -45,7 +45,7 @@
             <div class="box-body">
                 <!--start content-->
                 <div class="content">
-                    
+
                     <div class="row">
                         <!--start form-->
 

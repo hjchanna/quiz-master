@@ -118,9 +118,6 @@
                                 <td>${question.indexNo}</td>
                                 <td>${question.questionEn}</td>
                                 <td class="text-right">
-                                    <a class="btn btn-success btn-xs"  href="${pageContext.request.contextPath}/admin/question/${paper.indexNo}/${question.indexNo}">
-                                        <span class="glyphicon glyphicon-edit"></span> Edit
-                                    </a>
                                     <c:choose>
                                         <c:when test="${question.active}">
                                             <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question/${paper.indexNo}/${question.indexNo}">
@@ -133,6 +130,9 @@
                                             </a> 
                                         </c:otherwise>
                                     </c:choose>
+                                    <a class="btn btn-success btn-xs"  href="${pageContext.request.contextPath}/admin/question/${paper.indexNo}/${question.indexNo}">
+                                        <span class="glyphicon glyphicon-edit"></span> Edit
+                                    </a>
                                 </td>
                             </tr>
                         </c:forEach>

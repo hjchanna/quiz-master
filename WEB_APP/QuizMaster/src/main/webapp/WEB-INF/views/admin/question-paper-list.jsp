@@ -67,10 +67,6 @@
                             <td>${paper.questions.size()}</td>
 
                             <td class="text-right">
-                                <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paper.indexNo}">  
-                                    <span class="glyphicon glyphicon-play"></span> View
-                                </a>
-
                                 <c:choose>
                                     <c:when test="${paper.active}">
                                         <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question-paper/${paper.indexNo}">
@@ -83,6 +79,9 @@
                                         </a> 
                                     </c:otherwise>
                                 </c:choose>
+                                <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paper.indexNo}">  
+                                    <span class="glyphicon glyphicon-play"></span> View
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>

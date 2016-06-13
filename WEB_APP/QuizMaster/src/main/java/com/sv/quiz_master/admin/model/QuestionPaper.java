@@ -88,4 +88,30 @@ public class QuestionPaper implements java.io.Serializable {
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 17 * hash + (this.indexNo != null ? this.indexNo.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final QuestionPaper other = (QuestionPaper) obj;
+        if (this.indexNo != other.indexNo && (this.indexNo == null || !this.indexNo.equals(other.indexNo))) {
+            return false;
+        }
+        return true;
+    }
+
 }
