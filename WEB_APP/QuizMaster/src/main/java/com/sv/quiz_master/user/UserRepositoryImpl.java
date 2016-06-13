@@ -9,7 +9,7 @@ import com.sv.quiz_master.user.model.Question;
 import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import java.io.Serializable;
-import org.hibernate.Criteria;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -50,6 +50,21 @@ public class UserRepositoryImpl implements UserRepository {
     public void updateObject(Object object) {
         Session session = sessionFactory.getCurrentSession();
         session.update(object);
+    }
+
+    @Override
+    public QuestionPaper getRandomQuestionPaper() {
+        Session session = sessionFactory.getCurrentSession();
+
+        List<QuestionPaper> questionPapers
+                = session.createCriteria(QuestionPaper.class)
+                .add(Restrictions.eq("active", true))
+                .list();
+
+        int max = questionPapers.size() - 1;
+        int randomIndex = (int) (Math.random() * max);
+
+        return questionPapers.get(randomIndex);
     }
 
     @Override

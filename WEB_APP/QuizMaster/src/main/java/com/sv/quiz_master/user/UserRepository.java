@@ -21,6 +21,8 @@ public interface UserRepository {
     public Serializable saveObject(Object object);
 
     public void updateObject(Object object);
+    
+    public QuestionPaper getRandomQuestionPaper();
 
     public Question getNextQuestion(QuestionPaper quizSession, Question question);
 

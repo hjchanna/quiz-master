@@ -35,7 +35,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public QuizSession newQuizSession() {
         QuizSession quizSession = new QuizSession();
-        //TODO: set values to quiz session
+        quizSession.setStartedOn(null);
+        quizSession.setStatus(QuizSessionStatus.PENDING);
+        
+        quizSession.setQuestionPaper(userRepository.getRandomQuestionPaper());
         
         Integer quizSessinId = (Integer) userRepository.saveObject(quizSession);
         quizSession = (QuizSession) userRepository.getObject(QuizSession.class, quizSessinId);

@@ -25,6 +25,9 @@ public class QuestionPaper implements java.io.Serializable {
     private Integer indexNo;
     private String description;
     private Date lastUsedOn;
+    private int durationPerQuestion;
+    private boolean active;
+
     private Set<QuizSession> quizSessions = new HashSet<QuizSession>(0);
     private Set<Question> questions = new HashSet<Question>(0);
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
@@ -74,6 +77,24 @@ public class QuestionPaper implements java.io.Serializable {
         this.lastUsedOn = lastUsedOn;
     }
 
+    @Column(name = "duration_per_question", nullable = false)
+    public int getDurationPerQuestion() {
+        return durationPerQuestion;
+    }
+
+    public void setDurationPerQuestion(int durationPerQuestion) {
+        this.durationPerQuestion = durationPerQuestion;
+    }
+
+    @Column(name = "active", nullable = false)
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "questionPaper")
     public Set<QuizSession> getQuizSessions() {
         return this.quizSessions;
@@ -100,5 +121,4 @@ public class QuestionPaper implements java.io.Serializable {
     public void setQuizSessionUserAnswers(Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
         this.quizSessionUserAnswers = quizSessionUserAnswers;
     }
-
 }
