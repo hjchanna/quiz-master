@@ -6,9 +6,9 @@
 package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
+import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
-import java.util.List;
 
 /**
  *
@@ -16,14 +16,24 @@ import java.util.List;
  */
 public interface UserService {
 
-    public List<QuizSession> getQuizSessionList();
-
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser);
 
-    public void startQuizSession(Integer quizSession, Integer quizSessionUser);
+    public QuizSession newQuizSession();
 
-    public Question getNextQuestion(Integer quizSession, Integer currentQuestion);
+    public QuizSession startQuizSession(QuizSession quizSession);
 
-    public void saveAnswer(Integer quizSessionId, Integer quizSessionUserId, Integer quesionPaperId, Integer questionId, String answer, Integer duration);
+    public QuizSession finishQuizSession(QuizSession quizSession);
+
+    public void updateQuestionPaperLastUsed(QuestionPaper questionPaper);
+
+    public Question getNextQuestion(QuestionPaper questionPaper, Integer currentQuestion);
+
+    public void saveAnswer(
+            QuizSession quizSession,
+            QuizSessionUser quizSessionUser,
+            QuestionPaper questionPaper,
+            Question question,
+            String answer,
+            Integer duration);
 
 }

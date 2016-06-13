@@ -6,10 +6,9 @@
 package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
-import com.sv.quiz_master.user.model.QuizSession;
-import com.sv.quiz_master.user.model.QuizSessionUser;
+import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
-import java.util.List;
+import java.io.Serializable;
 
 /**
  *
@@ -17,17 +16,11 @@ import java.util.List;
  */
 public interface UserRepository {
 
-    public List<QuizSession> getQuizSessionList();
+    public Serializable saveObject();
 
-    public QuizSession getQuizSession(Integer indexNo);
+    public void updateObject();
 
-    public int saveQuizSessionUser(QuizSessionUser quizSessionUser);
-
-    public QuizSessionUser getQuizSessionUser(Integer indexNo);
-
-    public Question getNextQuestion(Integer quizSession, Integer currentQuestion);
-    
-    public Question getQuestion(Integer indexNo);
+    public Question getNextQuestion(QuestionPaper quizSession, Question question);
 
     public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer);
 
