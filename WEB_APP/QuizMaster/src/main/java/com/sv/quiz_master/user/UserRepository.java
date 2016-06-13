@@ -16,9 +16,9 @@ import java.io.Serializable;
  */
 public interface UserRepository {
 
-    public Serializable saveObject();
+    public Serializable saveObject(Object object);
 
-    public void updateObject();
+    public void updateObject(Object object);
 
     public Question getNextQuestion(QuestionPaper quizSession, Question question);
 

@@ -10,6 +10,7 @@ import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
+import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -29,59 +30,30 @@ public class UserRepositoryImpl implements UserRepository {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<QuizSession> getQuizSessionList() {
-        Session session=sessionFactory.getCurrentSession();
-        return session.createCriteria(QuizSession.class).list();
-    }
-
-    @Override
-    public QuizSession getQuizSession(Integer indexNo) {
-        Session session=sessionFactory.getCurrentSession();
-        return (QuizSession) session.createCriteria(QuizSession.class)
-                .add(Restrictions.eq("indexNo", indexNo));
-        
-    }
-
-    @Override
-    public int saveQuizSessionUser(QuizSessionUser quizSessionUser) {
-        Session session=sessionFactory.getCurrentSession();
-        session.save(quizSessionUser);
-        return quizSessionUser.getIndexNo();
-    }
-
-    @Override
-    public QuizSessionUser getQuizSessionUser(Integer indexNo) {
-        Session session=sessionFactory.getCurrentSession();
-        return (QuizSessionUser) session.createCriteria(QuizSessionUser.class)
-                .add(Restrictions.eq("indexNo", indexNo));
-    }
-
-    @Override
-    public Question getNextQuestion(Integer quizSession, Integer currentQuestion) {
-        Session session=sessionFactory.getCurrentSession();
-        QuizSession quizSession1 =(QuizSession) session.createCriteria(QuizSession.class)
-                .add(Restrictions.eq("indexNo", quizSession));
-        
-        QuestionPaper questionPaper = quizSession1.getQuestionPaper();
-        
-        return (Question) session.createCriteria(Question.class)
-                .add(Restrictions.eq("indexNo", currentQuestion+1))
-                .add(Restrictions.eq("questionPaper.indexNo", questionPaper.getIndexNo()))
-                .uniqueResult();
-    }
-
-    @Override
     public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer) {
-        Session session=sessionFactory.getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         session.save(quizSessionUserAnswer);
         return quizSessionUserAnswer.getIndexNo();
     }
 
     @Override
-    public Question getQuestion(Integer indexNo) {
-        Session session=sessionFactory.getCurrentSession();
-        return (Question) session.createCriteria(Question.class)
-                .add(Restrictions.eq("indexNo", indexNo))
-                .uniqueResult();
+    public Serializable saveObject(Object object) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.save(object);
     }
+
+    @Override
+    public void updateObject(Object object) {
+        Session session = sessionFactory.getCurrentSession();
+        session.update(object);
+    }
+
+    @Override
+    public Question getNextQuestion(QuestionPaper quizSession, Question question) {
+        Session session = sessionFactory.getCurrentSession();
+        return (Question) session.createCriteria(Question.class)
+                 .add(Restrictions.eq("questionPaper.indexNo", quizSession.getIndexNo()))
+                .add(Restrictions.eq("indexNo", question.getIndexNo()));
+    }
+
 }
