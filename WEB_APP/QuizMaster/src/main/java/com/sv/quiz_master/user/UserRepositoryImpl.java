@@ -7,11 +7,8 @@ package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
 import com.sv.quiz_master.user.model.QuestionPaper;
-import com.sv.quiz_master.user.model.QuizSession;
-import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import java.io.Serializable;
-import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -37,6 +34,13 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public Object getObject(Class c, Serializable id) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return session.load(c, id);
+    }
+
+    @Override
     public Serializable saveObject(Object object) {
         Session session = sessionFactory.getCurrentSession();
         return session.save(object);
@@ -52,7 +56,7 @@ public class UserRepositoryImpl implements UserRepository {
     public Question getNextQuestion(QuestionPaper quizSession, Question question) {
         Session session = sessionFactory.getCurrentSession();
         return (Question) session.createCriteria(Question.class)
-                 .add(Restrictions.eq("questionPaper.indexNo", quizSession.getIndexNo()))
+                .add(Restrictions.eq("questionPaper.indexNo", quizSession.getIndexNo()))
                 .add(Restrictions.eq("indexNo", question.getIndexNo()));
     }
 
