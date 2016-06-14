@@ -43,7 +43,7 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <form:button type="submit" class="btn btn-success btn-block btn-flat">Register</form:button>
+                            <form:button type="submit" class="btn btn-primary btn-block btn-flat">Login</form:button>
                             </div>
                         </div>
                 </form:form>
