@@ -7,6 +7,7 @@ package com.sv.quiz_master.security;
 
 import com.sv.quiz_master.security.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
  *
  * @author KAZA
  */
+@Controller
 public class SecurityController {
 
     @Autowired
