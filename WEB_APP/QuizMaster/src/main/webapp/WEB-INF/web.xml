@@ -98,21 +98,30 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
-     <!--start resource servlet-->
+
     <servlet-mapping>
         <servlet-name>resourceServlet</servlet-name>
         <url-pattern>/resources/*</url-pattern>
     </servlet-mapping>
-     <!--end resource servlet-->
+    <!--end resource servlet-->
     
-     <!--start sequrity servlet-->
+    <!--start sequrity servlet-->
+    <servlet>
+        <servlet-name>sequrityUserServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/sequrity-context.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>sequrityUserServlet</servlet-name>
         <url-pattern>/sequrity/*</url-pattern>
     </servlet-mapping>
     <!--end sequrity servlet-->
-    
+
     <!--start welcome file-->
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
