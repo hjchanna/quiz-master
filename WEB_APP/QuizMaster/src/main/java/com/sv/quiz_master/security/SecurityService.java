@@ -13,7 +13,7 @@ import com.sv.quiz_master.security.model.User;
  */
 public interface SecurityService {
 
-    public int newSequrityUser(User user);
+    public int newSecurityUser(User user);
 
-    public User getSequrityUser(User user);
+    public User getSecurityUser(User user);
 }

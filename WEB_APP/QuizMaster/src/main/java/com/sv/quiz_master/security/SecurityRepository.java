@@ -13,8 +13,8 @@ import com.sv.quiz_master.security.model.User;
  */
 public interface SecurityRepository {
     
-    public void newSequrityUser(User user);
+    public void newSecurityUser(User user);
     
-    public User getSequrityUser(User user);
+    public User getSecurityUser(User user);
     
 }

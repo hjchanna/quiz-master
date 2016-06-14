@@ -23,13 +23,13 @@ public class SecurityRepositoryImpl implements SecurityRepository {
     private SessionFactory sessionFactory;
 
     @Override
-    public void newSequrityUser(User user) {
+    public void newSecurityUser(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
     }
 
     @Override
-    public User getSequrityUser(User user) {
+    public User getSecurityUser(User user) {
         Session session = sessionFactory.getCurrentSession();
         return (User) session.createCriteria(User.class)
                 .add(Restrictions.eq("indexNo", user.getName()))
