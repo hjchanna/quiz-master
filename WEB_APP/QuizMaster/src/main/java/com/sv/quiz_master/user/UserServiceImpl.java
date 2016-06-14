@@ -10,6 +10,9 @@ import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
+import com.sv.quiz_master.zsystem.QuizSessionStatus;
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,12 +41,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public QuizSession startQuizSession(QuizSession quizSession) {
-
+        quizSession.setStartedOn(new Date());
+        quizSession.setStatus(QuizSessionStatus.ON_GOING);
+        userRepository.saveObject(quizSession);
+        return quizSession;
     }
 
     @Override
     public QuizSession finishQuizSession(QuizSession quizSession) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        quizSession.setFinishedOn(new Date());
+        quizSession.setStatus(QuizSessionStatus.COMPLETED);
+        userRepository.updateObject(quizSession);
+        return quizSession;
     }
 
     @Override
@@ -59,7 +68,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveAnswer(QuizSession quizSession, QuizSessionUser quizSessionUser, QuestionPaper questionPaper, Question question, String answer, Integer duration) {
 
-//         QuizSession quizSession = userRepository.getQuizSession(quizSessionId);
+//        QuizSession quizSession = userRepository.getQuizSession(quizSessionId);
 //        QuizSessionUser quizSessionUser = userRepository.getQuizSessionUser(quizSessionUserId);
 //        Question question = userRepository.getQuestion(questionId);
         QuizSessionUserAnswer quizSessionUserAnswer = new QuizSessionUserAnswer();
@@ -74,8 +83,6 @@ public class UserServiceImpl implements UserService {
         quizSessionUserAnswer.setDuration(duration);
 
         userRepository.saveQuizSessionUserAnswer(quizSessionUserAnswer);
-//        
-
     }
 
 }
