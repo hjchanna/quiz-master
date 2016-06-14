@@ -21,14 +21,14 @@ public class SecurityController {
     @Autowired
     SecurityService sequrityService;
 
-    @RequestMapping("new-security-user")
+    @RequestMapping("/new-security-user")
     public ModelAndView attemptUser() {
         ModelAndView modelAndView = new ModelAndView("security/register-user");
         modelAndView.addObject("user", new User());
         return modelAndView;
     }
 
-    @RequestMapping("save-security-user")
+    @RequestMapping("/save-security-user")
     public ModelAndView saveUser(@ModelAttribute User user) {
         ModelAndView modelAndView = new ModelAndView("security/register-user");
         modelAndView.addObject("user", sequrityService.newSecurityUser(user));
