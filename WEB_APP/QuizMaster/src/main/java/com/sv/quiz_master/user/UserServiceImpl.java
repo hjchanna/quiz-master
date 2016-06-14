@@ -6,6 +6,7 @@
 package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
+import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
@@ -26,34 +27,41 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public List<QuizSession> getQuizSessionList() {
-        return userRepository.getQuizSessionList();
-    }
-
-    @Override
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser) {
-        userRepository.saveQuizSessionUser(quizSessionUser);
-        return quizSessionUser;
+        return (QuizSessionUser) userRepository.saveObject(quizSessionUser);
     }
 
     @Override
-    public void startQuizSession(Integer quizSession, Integer quizSessionUser) {
-//        QuizSessionUser 
-//        userRepository.saveQuizSessionUser(null)
+    public QuizSession newQuizSession() {
+
     }
 
     @Override
-    public Question getNextQuestion(Integer quizSession, Integer currentQuestion) {
-        return userRepository.getNextQuestion(quizSession, currentQuestion);
+    public QuizSession startQuizSession(QuizSession quizSession) {
+
     }
 
     @Override
-    public void saveAnswer(Integer quizSessionId, Integer quizSessionUserId, Integer quesionPaperId, Integer questionId, String answer, Integer duration) {
+    public QuizSession finishQuizSession(QuizSession quizSession) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-        QuizSession quizSession = userRepository.getQuizSession(quizSessionId);
-        QuizSessionUser quizSessionUser = userRepository.getQuizSessionUser(quizSessionUserId);
-        Question question = userRepository.getQuestion(questionId);
+    @Override
+    public void updateQuestionPaperLastUsed(QuestionPaper questionPaper) {
+        userRepository.updateObject(questionPaper);
+    }
 
+    @Override
+    public Question getNextQuestion(QuestionPaper questionPaper, Integer currentQuestion) {
+        return userRepository.getNextQuestion(questionPaper, currentQuestion);
+    }
+
+    @Override
+    public void saveAnswer(QuizSession quizSession, QuizSessionUser quizSessionUser, QuestionPaper questionPaper, Question question, String answer, Integer duration) {
+
+//         QuizSession quizSession = userRepository.getQuizSession(quizSessionId);
+//        QuizSessionUser quizSessionUser = userRepository.getQuizSessionUser(quizSessionUserId);
+//        Question question = userRepository.getQuestion(questionId);
         QuizSessionUserAnswer quizSessionUserAnswer = new QuizSessionUserAnswer();
 
         //quizSessionUserAnswer.setIndexNo(null);   //auto increment
@@ -64,8 +72,10 @@ public class UserServiceImpl implements UserService {
         quizSessionUserAnswer.setAnswer(answer);
         quizSessionUserAnswer.setCorrect(question.getCorrectAnswer().equalsIgnoreCase(answer));
         quizSessionUserAnswer.setDuration(duration);
-        
-        
+
         userRepository.saveQuizSessionUserAnswer(quizSessionUserAnswer);
+//        
+
     }
+
 }
