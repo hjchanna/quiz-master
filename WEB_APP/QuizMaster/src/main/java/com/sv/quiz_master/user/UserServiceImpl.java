@@ -11,9 +11,7 @@ import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import com.sv.quiz_master.zsystem.QuizSessionStatus;
-import java.sql.Time;
 import java.util.Date;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +34,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public QuizSession newQuizSession() {
-
+        QuizSession quizSession = new QuizSession();
+        //TODO: set values to quiz session
+        
+        Integer quizSessinId = (Integer) userRepository.saveObject(quizSession);
+        quizSession = (QuizSession) userRepository.getObject(QuizSession.class, quizSessinId);
+        return quizSession;
     }
 
     @Override
@@ -61,7 +64,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Question getNextQuestion(QuestionPaper questionPaper, Integer currentQuestion) {
+    public Question getNextQuestion(QuestionPaper questionPaper, Question currentQuestion) {
         return userRepository.getNextQuestion(questionPaper, currentQuestion);
     }
 

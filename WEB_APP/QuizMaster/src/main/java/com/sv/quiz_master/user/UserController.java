@@ -87,9 +87,9 @@ public class UserController {
         QuizSessionUser quizSessionUser = (QuizSessionUser) servletRequest.getSession().getAttribute("quizuser");
 
         if (question == null) {//first question
-            question = userService.getNextQuestion(questionPaper, -1);
+            question = userService.getNextQuestion(questionPaper, null);
         } else {
-            question = userService.getNextQuestion(questionPaper, question.getIndexNo());
+            question = userService.getNextQuestion(questionPaper, question);
         }
 
         if (question == null) {//LAST QUESTION

@@ -26,7 +26,7 @@ public interface UserService {
 
     public void updateQuestionPaperLastUsed(QuestionPaper questionPaper);
 
-    public Question getNextQuestion(QuestionPaper questionPaper, Integer currentQuestion);
+    public Question getNextQuestion(QuestionPaper questionPaper, Question currentQuestion);
 
     public void saveAnswer(
             QuizSession quizSession,

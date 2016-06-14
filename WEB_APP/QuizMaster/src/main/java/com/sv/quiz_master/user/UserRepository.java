@@ -16,6 +16,8 @@ import java.io.Serializable;
  */
 public interface UserRepository {
 
+    public Object getObject(Class c, Serializable id);
+    
     public Serializable saveObject(Object object);
 
     public void updateObject(Object object);
