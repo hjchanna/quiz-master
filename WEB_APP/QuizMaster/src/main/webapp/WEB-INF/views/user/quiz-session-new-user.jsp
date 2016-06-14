@@ -45,8 +45,12 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-xs-12">
-                            <form:button type="submit" class="btn btn-primary btn-block btn-flat">Register</form:button>
+                        <div class="col-xs-12 form-group">
+                            <form:button type="submit" class="btn btn-success btn-block btn-flat">Register</form:button>
+                        </div>
+                        
+                        <div class="col-xs-12 form-group">
+                            <a class="btn btn-primary btn-block btn-flat" href="${pageContext.request.contextPath}/">Home</a>
                         </div>
                     </div>
                 </form:form>

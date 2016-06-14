@@ -23,21 +23,33 @@
             </li>
             <!--end home-->
 
-            <!--start administration-->
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Administration</span> <i class="fa fa-angle-left pull-right"></i>
+            <li class="active">
+                <a href="${pageContext.request.contextPath}/admin/question-paper-list">
+                    <i class="fa fa-bookmark"></i> <span>Question Papers</span>
                 </a>
-
-                <ul class="treeview-menu">
-                    <li><a href="${pageContext.request.contextPath}/admin/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
-                </ul>
             </li>
+
+            <li class="active">
+                <a href="${pageContext.request.contextPath}/user/quiz-session-new-user">
+                    <i class="fa fa-bell"></i> <span>Start Quiz Session</span>
+                </a>
+            </li>
+
+            <!--start administration-->
+            <!--            <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i> <span>Administration</span> <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+            
+                            <ul class="treeview-menu">
+                                <li><a href="${pageContext.request.contextPath}/admin/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
+                            </ul>
+                        </li>-->
             <!--end administration-->
 
 
             <!--start master-->
-            <li class="treeview">
+<!--            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>Quiz Master</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -45,12 +57,12 @@
                 <ul class="treeview-menu">
                     <li><a href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
                 </ul>
-            </li>
+            </li>-->
             <!--end master-->
 
 
             <!--start master-->
-            <li class="treeview">
+<!--            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-dashboard"></i> <span>User</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
@@ -58,7 +70,7 @@
                 <ul class="treeview-menu">
                     <li><a href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
                 </ul>
-            </li>
+            </li>-->
             <!--end master-->
 
         </ul>

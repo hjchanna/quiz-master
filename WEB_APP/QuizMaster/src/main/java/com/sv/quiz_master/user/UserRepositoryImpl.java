@@ -7,6 +7,7 @@ package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
 import com.sv.quiz_master.user.model.QuestionPaper;
+import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import java.io.Serializable;
 import java.util.List;
@@ -82,7 +83,18 @@ public class UserRepositoryImpl implements UserRepository {
         criteria.addOrder(Order.asc("indexNo"));
         criteria.setMaxResults(1);
 
-        return (Question) criteria.list().get(0);
+        List<Question> questions = criteria.list();
+
+        return questions.size() > 0 ? questions.get(0) : null;
     }
 
+    @Override
+    public List<QuizSessionUserAnswer> listResults(QuizSession quizSession) {
+        Session session = sessionFactory.getCurrentSession();
+
+        Criteria criteria = session.createCriteria(QuizSessionUserAnswer.class)
+                .add(Restrictions.eq("quizSession", quizSession));
+
+        return criteria.list();
+    }
 }

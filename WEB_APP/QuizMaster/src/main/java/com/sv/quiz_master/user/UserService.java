@@ -9,6 +9,8 @@ import com.sv.quiz_master.user.model.Question;
 import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
+import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
+import java.util.List;
 
 /**
  *
@@ -35,5 +37,7 @@ public interface UserService {
             Question question,
             String answer,
             Integer duration);
+
+    public List<QuizSessionUserAnswer> listResults(QuizSession quizSession);
 
 }

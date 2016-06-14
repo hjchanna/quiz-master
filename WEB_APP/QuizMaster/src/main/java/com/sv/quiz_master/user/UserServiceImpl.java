@@ -13,6 +13,7 @@ import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import com.sv.quiz_master.zsystem.QuizSessionStatus;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +40,9 @@ public class UserServiceImpl implements UserService {
         QuizSession quizSession = new QuizSession();
         quizSession.setStartedOn(new Date());
         quizSession.setStatus(QuizSessionStatus.PENDING);
-        
+
         quizSession.setQuestionPaper(userRepository.getRandomQuestionPaper());
-        
+
         Integer quizSessinId = (Integer) userRepository.saveObject(quizSession);
         quizSession = (QuizSession) userRepository.getObject(QuizSession.class, quizSessinId);
         return quizSession;
@@ -91,6 +92,11 @@ public class UserServiceImpl implements UserService {
         quizSessionUserAnswer.setDuration(duration);
 
         userRepository.saveQuizSessionUserAnswer(quizSessionUserAnswer);
+    }
+
+    @Override
+    public List<QuizSessionUserAnswer> listResults(QuizSession quizSession) {
+        return userRepository.listResults(quizSession);
     }
 
 }
