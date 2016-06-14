@@ -21,7 +21,7 @@
     <beans:bean id="securityRepository" class="com.sv.quiz_master.security.SecurityRepositoryImpl">
     </beans:bean>
     
-    <beans:bean id="securityService" class="com.sv.quiz_master.security.SecuritySerivceImpl">
+    <beans:bean id="securityService" class="com.sv.quiz_master.security.SecurityServiceImpl">
     </beans:bean>
     <!--END ITEM MANAGER-->
     

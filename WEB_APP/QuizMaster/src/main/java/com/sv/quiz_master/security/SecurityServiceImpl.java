@@ -14,9 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author KAZA
  */
-@Transactional
+
 @Service
-public class SecuritySerivceImpl implements SecurityService{
+@Transactional
+public class SecurityServiceImpl implements SecurityService{
 
     @Autowired
     private SecurityRepository sequrityRepository;
