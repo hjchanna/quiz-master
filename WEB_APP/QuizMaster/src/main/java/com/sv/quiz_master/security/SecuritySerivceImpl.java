@@ -22,14 +22,14 @@ public class SecuritySerivceImpl implements SecurityService{
     private SecurityRepository sequrityRepository;
     
     @Override
-    public int newSequrityUser(User user) {
-        sequrityRepository.newSequrityUser(user);
+    public int newSecurityUser(User user) {
+        sequrityRepository.newSecurityUser(user);
         return user.getIndexNo();
     }
 
     @Override
-    public User getSequrityUser(User user) {
-        return sequrityRepository.getSequrityUser(user);
+    public User getSecurityUser(User user) {
+        return sequrityRepository.getSecurityUser(user);
     }
     
 }
