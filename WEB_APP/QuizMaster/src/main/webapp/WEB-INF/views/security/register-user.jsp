@@ -31,7 +31,7 @@
             <div class="login-box-body">
                 <p class="login-box-msg">Enter your identity information</p>
 
-                <form:form action="${pageContext.request.contextPath}/security/new-security-user" method="post" modelAttribute="user">
+                <form:form action="${pageContext.request.contextPath}/security/save-security-user" method="post" modelAttribute="user">
                     <div class="form-group has-feedback">
                         <form:input type="text" class="form-control" placeholder="Name" path="name"/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
