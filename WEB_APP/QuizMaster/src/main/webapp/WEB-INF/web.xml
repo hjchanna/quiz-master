@@ -99,11 +99,19 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     
+     <!--start resource servlet-->
     <servlet-mapping>
         <servlet-name>resourceServlet</servlet-name>
         <url-pattern>/resources/*</url-pattern>
     </servlet-mapping>
-    <!--end resource servlet-->
+     <!--end resource servlet-->
+    
+     <!--start sequrity servlet-->
+    <servlet-mapping>
+        <servlet-name>sequrityUserServlet</servlet-name>
+        <url-pattern>/sequrity/*</url-pattern>
+    </servlet-mapping>
+    <!--end sequrity servlet-->
     
     <!--start welcome file-->
     <welcome-file-list>
