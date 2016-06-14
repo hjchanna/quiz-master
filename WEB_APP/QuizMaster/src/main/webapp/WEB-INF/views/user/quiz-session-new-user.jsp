@@ -18,9 +18,24 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme/css/skins/_all-skins.min.css">
         <!--jquery ui css-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.css">
+
+        <style>
+            .control-button{
+                right: 0px;
+                top: 10%;
+                position: absolute;
+            }
+        </style>
     </head>
-    
+
     <body class="hold-transition login-page">
+        <div class="control-button">
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/">
+                <span class="fa fa-home"></span>
+            </a>
+        </div>
+
+
         <div class="login-box" style="margin-top: 2%;">
             <div class="login-logo">
                 <div>
@@ -30,40 +45,34 @@
             </div><!-- /.login-logo -->
             <div class="login-box-body">
                 <p class="login-box-msg">Enter your identity information</p>
-                
+
                 <form:form action="${pageContext.request.contextPath}/user/quiz-session-save-user" method="post" modelAttribute="quizSessionUser">
                     <div class="form-group has-feedback">
                         <form:input type="text" class="form-control" placeholder="Name" path="name"/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
-                    
+
                     <div class="form-group has-feedback">
                         <form:input type="text" class="form-control" placeholder="Identity Card Number" path="nicNo"/>
                         <span class="glyphicon glyphicon-certificate form-control-feedback"></span>
                     </div>
-                    
+
                     <div class="form-group has-feedback">
                         <form:input type="text" class="form-control" placeholder="Telephone" path="mobileNo"/>
                         <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-xs-12 form-group">
-                            <form:button type="submit" class="btn btn-success btn-block btn-flat">Register</form:button>
-                        </div>
-                        
-                        <div class="col-xs-12 form-group">
-                            <a class="btn btn-primary btn-block btn-flat" href="${pageContext.request.contextPath}/">Home</a>
-                        </div>
-                        
-                        <div class="col-xs-12 form-group">
-                            <a class="btn btn-warning btn-block btn-flat" href="${pageContext.request.contextPath}/user/quiz-session-finish">Finish Session</a>
+                            <form:button type="submit" class="btn btn-success btn-block btn-flat">
+                                Register
+                            </form:button>
                         </div>
                     </div>
                 </form:form>
             </div>
         </div>
-        
+
         <!--start js import-->
 
         <!-- jQuery 2.1.4 -->

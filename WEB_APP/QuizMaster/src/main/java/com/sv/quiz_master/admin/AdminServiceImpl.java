@@ -36,6 +36,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int saveQuestionPaper(QuestionPaper questionPaper) {
         if (questionPaper.getIndexNo()!=null) {
+            questionPaper.setActive(true);
             return  adminRepository.updateQuestionPaper(questionPaper);
         }else{
             questionPaper.setActive(true);
@@ -72,6 +73,7 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public Integer saveQuestion(Question question) {
         if (question.getIndexNo() != null) {
+            question.setActive(true);
             return adminRepository.updateQuestion(question);
         } else {
             question.setActive(true);

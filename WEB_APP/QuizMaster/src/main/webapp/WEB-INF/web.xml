@@ -107,10 +107,10 @@
      <!--end resource servlet-->
     
      <!--start sequrity servlet-->
-    <servlet-mapping>
+<!--    <servlet-mapping>
         <servlet-name>sequrityUserServlet</servlet-name>
         <url-pattern>/sequrity/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     <!--end sequrity servlet-->
     
     <!--start welcome file-->

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
@@ -18,6 +19,9 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme/css/skins/_all-skins.min.css">
         <!--jquery ui css-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.css">
+        <!--video js-->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/video.js/video-js.min.css">
+
     </head>
 
     <body class="hold-transition login-page">
@@ -32,13 +36,16 @@
                 <div class="box box-default">
                     <div class="box-body">
                         <div class="col-lg-12">
-                            <h3>Hi ${sessionScope.quizuser.name},</h3>
-                            <h4 class="text-center">Are you ready to start, click <b>start</b> to continue.</h4>
+                            <video id="video" class="video-js vjs-default-skin col-lg-12"        
+                                   data-setup='{"controls" : false, "autoplay" : true, "preload" : "auto"}'
+                                   onended="next();">
+                                <source src="${pageContext.request.contextPath}/resources/video/dilmah.flv" type="video/x-flv">
+                            </video>
                         </div>
 
-                        <div class="col-xs-8 col-xs-offset-2" style="margin-top: 50px;">
-                            <a class="btn btn-primary btn-block" href="${pageContext.request.contextPath}/user/quiz-session-start">Start</a>
-                        </div>
+                        <!--                        <div class="col-xs-8 col-xs-offset-2" style="margin-top: 50px;">
+                                                    <a class="btn btn-primary btn-block" href="${pageContext.request.contextPath}/user/quiz-session-start">Start</a>
+                                                </div>-->
                     </div>
 
                 </div>
@@ -63,6 +70,31 @@
         <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
         <!-- AdminLTE App -->
         <script src="${pageContext.request.contextPath}/resources/theme/js/app.min.js"></script>
+        <!--video.js-->
+        <script src="${pageContext.request.contextPath}/resources/video.js/video.min.js"></script>
+
+        <script>
+            var baseUrl = '<c:out value="${pageContext.request.contextPath}"/>';
+            function next() {
+                var url = baseUrl + '/user/quiz-session-start';
+                document.location = url;
+            }
+
+            var player = videojs('video', {}, function () {});
+            player.ready(function () {
+//                var duration_time = Math.floor(this.duration());
+//                this.on('timeupdate', function () {
+//                    var current_time = Math.floor(this.currentTime());
+//                    if (current_time > 0 && (current_time == duration_time)) {
+//                        $('#continue_button').removeAttr("disabled");
+//                    }
+//                });
+                
+                this.on("ended", function(){
+                    setTimeout(next(),3000);
+                });
+            });
+        </script>
 
     </body>
 </html>

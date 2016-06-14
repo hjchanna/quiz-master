@@ -80,7 +80,7 @@
                     <div class="box-footer">
                         <div class="col-xs-12">
                             <div class="pull-right">
-                                <a type="button" class="btn btn-success">Skip</a>
+                                <a type="button" class="btn btn-success" onclick="skipQuestion();">Skip</a>
                             </div>
                         </div>
                     </div>

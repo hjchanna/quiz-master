@@ -13,6 +13,7 @@ import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,6 +39,7 @@ public class AdminRepositoryImpl implements AdminRepository {
         }
         
         criteria.setFetchMode("questions", FetchMode.SELECT);
+        criteria.addOrder(Order.asc("indexNo"));
 
         return criteria.list();
     }
@@ -77,6 +79,8 @@ public class AdminRepositoryImpl implements AdminRepository {
                     Restrictions.ilike("questionTa", question, MatchMode.ANYWHERE)
             ));
         }
+        
+        criteria.addOrder(Order.asc("indexNo"));
 
         return criteria.list();
 
