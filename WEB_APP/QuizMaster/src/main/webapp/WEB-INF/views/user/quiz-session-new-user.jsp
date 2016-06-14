@@ -21,8 +21,11 @@
     </head>
     
     <body class="hold-transition login-page">
-        <div class="login-box">
+        <div class="login-box" style="margin-top: 2%;">
             <div class="login-logo">
+                <div>
+                    <img src="${pageContext.request.contextPath}/resources/image/dilmah-logo.jpg" width="88px" height="66px"/>
+                </div>
                 <b>Quiz</b>Master
             </div><!-- /.login-logo -->
             <div class="login-box-body">
@@ -51,6 +54,10 @@
                         
                         <div class="col-xs-12 form-group">
                             <a class="btn btn-primary btn-block btn-flat" href="${pageContext.request.contextPath}/">Home</a>
+                        </div>
+                        
+                        <div class="col-xs-12 form-group">
+                            <a class="btn btn-warning btn-block btn-flat" href="${pageContext.request.contextPath}/user/quiz-session-finish">Finish Session</a>
                         </div>
                     </div>
                 </form:form>

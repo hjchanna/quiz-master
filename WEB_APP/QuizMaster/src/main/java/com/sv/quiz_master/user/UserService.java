@@ -20,9 +20,7 @@ public interface UserService {
 
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser);
 
-    public QuizSession newQuizSession();
-
-    public QuizSession startQuizSession(QuizSession quizSession);
+    public QuizSession newQuizSession(QuizSession quizSession);
 
     public QuizSession finishQuizSession(QuizSession quizSession);
 
@@ -38,6 +36,6 @@ public interface UserService {
             String answer,
             Integer duration);
 
-    public List<QuizSessionUserAnswer> listResults(QuizSession quizSession);
+    public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser);
 
 }

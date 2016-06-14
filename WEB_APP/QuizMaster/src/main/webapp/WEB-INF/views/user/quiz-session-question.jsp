@@ -24,11 +24,18 @@
 
     <body class="hold-transition login-page">
         <div class="row">
-            <div class="col-sm-8 col-sm-offset-2" style="margin-top: 7%;">
+            <div class="col-sm-8 col-sm-offset-2" style="margin-top: 2%;">
                 <div class="login-logo">
-                    <b>Quiz</b>Master
-                    <div class="pull-right">
-                        <h2><label id="second"></label></h2>
+                    <div>
+                        <img src="${pageContext.request.contextPath}/resources/image/dilmah-logo.jpg" width="88px" height="66px"/>
+                    </div>
+
+                    <div>
+                        <b>Quiz</b>Master
+
+                        <div class="pull-right">
+                            <h2><label id="second"></label></h2>
+                        </div>
                     </div>
                 </div>
                 <div class="box box-default">

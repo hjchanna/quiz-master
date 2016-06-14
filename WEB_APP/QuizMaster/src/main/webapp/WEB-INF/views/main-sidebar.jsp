@@ -30,7 +30,7 @@
             </li>
 
             <li class="active">
-                <a href="${pageContext.request.contextPath}/user/quiz-session-new-user">
+                <a href="${pageContext.request.contextPath}/user/quiz-session">
                     <i class="fa fa-bell"></i> <span>Start Quiz Session</span>
                 </a>
             </li>

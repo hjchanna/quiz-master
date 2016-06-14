@@ -29,6 +29,45 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping("/quiz-session")
+    public String attemptQuizSession(HttpServletRequest servletRequest) {
+        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+
+        if (quizSession == null) {
+            return "redirect:/user/quiz-session-new";
+        } else {
+            return "redirect:/user/quiz-session-new-user";
+        }
+    }
+
+    @RequestMapping("/quiz-session-new")
+    public ModelAndView attemptNewQuizSession() {
+        ModelAndView modelAndView = new ModelAndView("user/quiz-session-new");
+
+        modelAndView.addObject("quizsession", new QuizSession());
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/quiz-session-save")
+    public String saveNewQuizSession(HttpServletRequest servletRequest, @ModelAttribute QuizSession quizSession) {
+
+        quizSession = userService.newQuizSession(quizSession);
+        servletRequest.getSession().setAttribute("quizsession", quizSession);
+
+        return "redirect:/user/quiz-session-new-user";
+    }
+
+    @RequestMapping("/quiz-session-finish")
+    public String finishQuizSession(HttpServletRequest servletRequest) {
+        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+
+        userService.finishQuizSession(quizSession);
+        servletRequest.getSession().setAttribute("quizsession", null);
+
+        return "redirect:/user/quiz-session";
+    }
+
     @RequestMapping("/quiz-session-new-user")
     public ModelAndView attemptNewUser() {
         ModelAndView modelAndView = new ModelAndView("user/quiz-session-new-user");
@@ -40,7 +79,7 @@ public class UserController {
 
     @RequestMapping("/quiz-session-save-user")
     public String saveNewUser(HttpServletRequest servletRequest, @ModelAttribute QuizSessionUser quizSessionUser) {
-        QuizSession quizSession = userService.newQuizSession();   //create new question session and save
+        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
 
         //set quiz sessin to user
         quizSessionUser.setQuizSession(quizSession);
@@ -49,7 +88,6 @@ public class UserController {
         quizSessionUser = userService.saveQuizSessionUser(quizSessionUser);
 
         //assign session variables
-        servletRequest.getSession().setAttribute("quizsession", quizSession);
         servletRequest.getSession().setAttribute("questionpaper", quizSession.getQuestionPaper());
         servletRequest.getSession().setAttribute("quizuser", quizSessionUser);
 
@@ -60,19 +98,11 @@ public class UserController {
     public ModelAndView attemptPendingScreen(HttpServletRequest servletRequest) {
         ModelAndView modelAndView = new ModelAndView("user/quiz-session-pending");
 
-//        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
-//        QuestionPaper questionPaper = (QuestionPaper) servletRequest.getSession().getAttribute("questionpaper");
-//        QuizSessionUser quizSessionUser = (QuizSessionUser) servletRequest.getSession().getAttribute("quizuser");
         return modelAndView;
     }
 
     @RequestMapping("/quiz-session-start")
     public String startQuestionPaper(HttpServletRequest servletRequest) {
-        //update quiz session as started and re assign to the session
-        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
-        quizSession = userService.startQuizSession(quizSession);
-        servletRequest.getSession().setAttribute("quizsession", quizSession);
-
         //update question paper last used on
         QuestionPaper questionPaper = (QuestionPaper) servletRequest.getSession().getAttribute("questionpaper");
         userService.updateQuestionPaperLastUsed(questionPaper);
@@ -86,7 +116,7 @@ public class UserController {
 
         Boolean allowNext = (Boolean) servletRequest.getSession().getAttribute("allownext");
 
-        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+//        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
         QuestionPaper questionPaper = (QuestionPaper) servletRequest.getSession().getAttribute("questionpaper");
         Question question = (Question) servletRequest.getSession().getAttribute("question");
         QuizSessionUser quizSessionUser = (QuizSessionUser) servletRequest.getSession().getAttribute("quizuser");
@@ -102,10 +132,7 @@ public class UserController {
         if (question == null) {//LAST QUESTION
             modelAndView = new ModelAndView("user/quiz-session-finish");
 
-            userService.finishQuizSession(quizSession);
-
-            //TODO: add result values
-            List<QuizSessionUserAnswer> answers = userService.listResults(quizSession);
+            List<QuizSessionUserAnswer> answers = userService.listResults(quizSessionUser);
             Integer totalAnswers = 0;
             Integer correctAnswers = 0;
             Integer totalDuration = 0;
@@ -115,7 +142,7 @@ public class UserController {
                 totalDuration += answer.getDuration();
             }
             Double correctPercent = ((double) correctAnswers) / ((double) totalAnswers) * 100;
-            
+
             modelAndView.addObject("totalAnswers", totalAnswers);
             modelAndView.addObject("correctAnswers", correctAnswers);
             modelAndView.addObject("correctPercent", String.format("%.2f", correctPercent));
@@ -179,9 +206,9 @@ public class UserController {
         return "redirect:/user/quiz-session-next-question";
     }
 
-    @RequestMapping("/quiz-session-clear")
-    public String clearQuizSession(HttpServletRequest servletRequest) {
-        servletRequest.getSession().setAttribute("quizsession", null);
+    @RequestMapping("/quiz-clear")
+    public String clearQuiz(HttpServletRequest servletRequest) {
+//        servletRequest.getSession().setAttribute("quizsession", null);
         servletRequest.getSession().setAttribute("questionpaper", null);
         servletRequest.getSession().setAttribute("quizuser", null);
         servletRequest.getSession().setAttribute("question", null);

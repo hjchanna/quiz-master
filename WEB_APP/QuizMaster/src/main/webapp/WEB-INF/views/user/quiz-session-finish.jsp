@@ -70,7 +70,7 @@
 
                     <div class="box-body">
                         <div class="col-xs-4 col-xs-offset-4" >
-                            <a type="button" class="btn btn-success btn-block btn-lg" href="${pageContext.request.contextPath}/user/quiz-session-clear">Finish</a>
+                            <a type="button" class="btn btn-success btn-block btn-lg" href="${pageContext.request.contextPath}/user/quiz-clear">Finish</a>
                         </div>
                     </div>
                 </div>

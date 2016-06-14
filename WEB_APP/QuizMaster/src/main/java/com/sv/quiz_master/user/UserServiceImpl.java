@@ -36,23 +36,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public QuizSession newQuizSession() {
-        QuizSession quizSession = new QuizSession();
+    public QuizSession newQuizSession(QuizSession quizSession) {
         quizSession.setStartedOn(new Date());
-        quizSession.setStatus(QuizSessionStatus.PENDING);
+        quizSession.setStatus(QuizSessionStatus.ON_GOING);
 
         quizSession.setQuestionPaper(userRepository.getRandomQuestionPaper());
 
         Integer quizSessinId = (Integer) userRepository.saveObject(quizSession);
         quizSession = (QuizSession) userRepository.getObject(QuizSession.class, quizSessinId);
-        return quizSession;
-    }
-
-    @Override
-    public QuizSession startQuizSession(QuizSession quizSession) {
-        quizSession.setStartedOn(new Date());
-        quizSession.setStatus(QuizSessionStatus.ON_GOING);
-        userRepository.saveObject(quizSession);
         return quizSession;
     }
 
@@ -76,10 +67,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void saveAnswer(QuizSession quizSession, QuizSessionUser quizSessionUser, QuestionPaper questionPaper, Question question, String answer, Integer duration) {
-
-//        QuizSession quizSession = userRepository.getQuizSession(quizSessionId);
-//        QuizSessionUser quizSessionUser = userRepository.getQuizSessionUser(quizSessionUserId);
-//        Question question = userRepository.getQuestion(questionId);
         QuizSessionUserAnswer quizSessionUserAnswer = new QuizSessionUserAnswer();
 
         //quizSessionUserAnswer.setIndexNo(null);   //auto increment
@@ -95,8 +82,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<QuizSessionUserAnswer> listResults(QuizSession quizSession) {
-        return userRepository.listResults(quizSession);
+    public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser) {
+        return userRepository.listResults(quizSessionUser);
     }
 
 }

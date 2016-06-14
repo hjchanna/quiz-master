@@ -28,6 +28,7 @@ public class QuizSession implements java.io.Serializable {
     private QuestionPaper questionPaper;
     private Date startedOn;
     private Date finishedOn;
+    private String location;
     private String status;
     private Set<QuizSessionUser> quizSessionUsers = new HashSet<QuizSessionUser>(0);
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
@@ -89,6 +90,15 @@ public class QuizSession implements java.io.Serializable {
 
     public void setFinishedOn(Date finishedOn) {
         this.finishedOn = finishedOn;
+    }
+
+    @Column(name = "location", nullable = true, length = 50)
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @Column(name = "status", nullable = false, length = 25)

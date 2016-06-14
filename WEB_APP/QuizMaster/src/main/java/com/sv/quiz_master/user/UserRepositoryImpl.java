@@ -7,7 +7,7 @@ package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
 import com.sv.quiz_master.user.model.QuestionPaper;
-import com.sv.quiz_master.user.model.QuizSession;
+import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import java.io.Serializable;
 import java.util.List;
@@ -89,11 +89,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public List<QuizSessionUserAnswer> listResults(QuizSession quizSession) {
+    public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser) {
         Session session = sessionFactory.getCurrentSession();
 
         Criteria criteria = session.createCriteria(QuizSessionUserAnswer.class)
-                .add(Restrictions.eq("quizSession", quizSession));
+                .add(Restrictions.eq("quizSessionUser", quizSessionUser));
 
         return criteria.list();
     }

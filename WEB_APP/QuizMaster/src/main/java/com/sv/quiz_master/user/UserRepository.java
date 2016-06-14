@@ -7,7 +7,7 @@ package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
 import com.sv.quiz_master.user.model.QuestionPaper;
-import com.sv.quiz_master.user.model.QuizSession;
+import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import java.io.Serializable;
 import java.util.List;
@@ -30,6 +30,6 @@ public interface UserRepository {
 
     public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer);
 
-    public List<QuizSessionUserAnswer> listResults(QuizSession quizSession);
+    public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser);
 
 }

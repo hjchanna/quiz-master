@@ -21,31 +21,33 @@
     </head>
 
     <body class="hold-transition login-page">
-        <div class="row">
-            <div class="col-sm-6 col-sm-offset-3" style="margin-top: 2%;">
-                <div class="login-logo">
-                    <div>
-                        <img src="${pageContext.request.contextPath}/resources/image/dilmah-logo.jpg" width="88px" height="66px"/>
-                    </div>
-                    <b>Quiz</b>Master
-                </div>
-                <div class="box box-default">
-                    <div class="box-body">
-                        <div class="col-lg-12">
-                            <h3>Hi ${sessionScope.quizuser.name},</h3>
-                            <h4 class="text-center">Are you ready to start, click <b>start</b> to continue.</h4>
-                        </div>
+        <div class="login-box">
+            <div class="login-logo">
+                <b>Quiz</b>Master
+            </div><!-- /.login-logo -->
+            <div class="login-box-body">
+                <p class="login-box-msg">Enter your identity information</p>
 
-                        <div class="col-xs-8 col-xs-offset-2" style="margin-top: 50px;">
-                            <a class="btn btn-primary btn-block" href="${pageContext.request.contextPath}/user/quiz-session-start">Start</a>
-                        </div>
+                <form:form action="${pageContext.request.contextPath}/user/quiz-session-save" method="post" modelAttribute="quizsession">
+                    <div class="form-group has-feedback">
+                        <form:input type="text" class="form-control" placeholder="Location" path="location"/>
+                        <span class="glyphicon glyphicon-map-marker form-control-feedback"></span>
                     </div>
 
-                </div>
+                    <div class="row">
+                        <div class="col-xs-12 form-group">
+                            <form:button type="submit" class="btn btn-success btn-block btn-flat">
+                                Start
+                            </form:button>
+                        </div>
+
+                        <div class="col-xs-12 form-group">
+                            <a class="btn btn-primary btn-block btn-flat" href="${pageContext.request.contextPath}/">Home</a>
+                        </div>
+                    </div>
+                </form:form>
             </div>
-
         </div>
-
 
         <!--start js import-->
 

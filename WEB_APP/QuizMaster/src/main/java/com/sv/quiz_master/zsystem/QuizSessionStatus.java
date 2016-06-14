@@ -13,7 +13,6 @@ package com.sv.quiz_master.zsystem;
  * @author Nidura Prageeth
  */
 public class QuizSessionStatus {
-    public static final String PENDING = "PENDING";
     public static final String ON_GOING = "ON_GOING";
     public static final String COMPLETED = "COMPLETED";
 }
