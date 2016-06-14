@@ -20,17 +20,17 @@ import org.springframework.transaction.annotation.Transactional;
 public class SecurityServiceImpl implements SecurityService{
 
     @Autowired
-    private SecurityRepository sequrityRepository;
+    private SecurityRepository securityRepository;
     
     @Override
     public int newSecurityUser(User user) {
-        sequrityRepository.newSecurityUser(user);
+        securityRepository.newSecurityUser(user);
         return user.getIndexNo();
     }
 
     @Override
     public User getSecurityUser(User user) {
-        return sequrityRepository.getSecurityUser(user);
+        return securityRepository.getSecurityUser(user);
     }
     
 }

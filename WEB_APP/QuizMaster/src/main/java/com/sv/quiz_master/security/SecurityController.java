@@ -7,6 +7,7 @@ package com.sv.quiz_master.security;
 
 import com.sv.quiz_master.security.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SecurityController {
 
-    @Autowired
-    SecurityService sequrityService;
+   @Autowired
+   SecurityService securityService;
 
     @RequestMapping("/new-security-user")
     public ModelAndView attemptUser() {
@@ -33,7 +34,7 @@ public class SecurityController {
     @RequestMapping("/save-security-user")
     public ModelAndView saveUser(@ModelAttribute User user) {
         ModelAndView modelAndView = new ModelAndView("security/register-user");
-        modelAndView.addObject("user", sequrityService.newSecurityUser(user));
+        modelAndView.addObject("user", securityService.newSecurityUser(user));
         return modelAndView;
     }
 }
