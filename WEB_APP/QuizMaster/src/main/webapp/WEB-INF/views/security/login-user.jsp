@@ -31,7 +31,7 @@
             <div class="login-box-body">
                 <p class="login-box-msg">Enter your identity information</p>
 
-                <form:form action="${pageContext.request.contextPath}/security/new-security-user" method="post" modelAttribute="user">
+                <form:form action="${pageContext.request.contextPath}/security/login-user" method="post" modelAttribute="user">
                     <div class="form-group has-feedback">
                         <form:input type="text" class="form-control" placeholder="Name" path="name"/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -41,15 +41,6 @@
                         <form:input type="password" class="form-control" placeholder="Password" path="password"/>
                         <span class="glyphicon glyphicon-certificate form-control-feedback"></span>
                     </div>
-
-                    <div class="form-group has-feedback">
-                        <form:select path="type" cssClass="form-control">     
-                            <form:option value="Admin" label="admin"/>
-                            <form:option value="Quiz Master" label="Quiz Master"/>
-                            <form:option value="User" label="User"/>
-                        </form:select>
-                    </div>
-
                     <div class="row">
                         <div class="col-xs-12 form-group">
                             <form:button type="submit" class="btn btn-success btn-block btn-flat">Register</form:button>
