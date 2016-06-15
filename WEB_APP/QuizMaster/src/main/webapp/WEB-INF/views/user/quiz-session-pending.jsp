@@ -36,9 +36,8 @@
                 <div class="box box-default">
                     <div class="box-body">
                         <div class="col-lg-12">
-                            <video id="video" class="video-js vjs-default-skin col-lg-12"        
-                                   data-setup='{"controls" : false, "autoplay" : true, "preload" : "auto"}'
-                                   onended="next();">
+                            <video id="video" class="video-js vjs-default-skin col-lg-12"
+                                   data-setup='{"controls" : false, "autoplay" : true, "preload" : "auto"}'>
                                 <source src="${pageContext.request.contextPath}/resources/video/dilmah.flv" type="video/x-flv">
                             </video>
                         </div>
@@ -75,6 +74,8 @@
 
         <script>
             var baseUrl = '<c:out value="${pageContext.request.contextPath}"/>';
+            videojs.options.flash.swf = baseUrl + "/resources/video.js/video-js.swf";
+            
             function next() {
                 var url = baseUrl + '/user/quiz-session-start';
                 document.location = url;
@@ -82,16 +83,8 @@
 
             var player = videojs('video', {}, function () {});
             player.ready(function () {
-//                var duration_time = Math.floor(this.duration());
-//                this.on('timeupdate', function () {
-//                    var current_time = Math.floor(this.currentTime());
-//                    if (current_time > 0 && (current_time == duration_time)) {
-//                        $('#continue_button').removeAttr("disabled");
-//                    }
-//                });
-                
-                this.on("ended", function(){
-                    setTimeout(next(),3000);
+                this.on("ended", function () {
+                    setTimeout(next(), 3000);
                 });
             });
         </script>
