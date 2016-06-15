@@ -21,8 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class SecurityController {
 
-   @Autowired
-   SecurityService securityService;
+    @Autowired
+    SecurityService securityService;
 
     @RequestMapping("/new-security-user")
     public ModelAndView attemptUser() {
@@ -35,6 +35,7 @@ public class SecurityController {
     public ModelAndView saveUser(@ModelAttribute User user) {
         ModelAndView modelAndView = new ModelAndView("security/register-user");
         modelAndView.addObject("user", securityService.newSecurityUser(user));
+        modelAndView.addObject("user", new User());
         return modelAndView;
     }
 }
