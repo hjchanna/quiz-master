@@ -27,18 +27,18 @@
                     <img src="${pageContext.request.contextPath}/resources/image/dilmah-logo.jpg" width="88px" height="66px"/>
                 </div>
                 <b>Quiz</b>Master
-            </div><!-- /.login-logo -->
+            </div> 
             <div class="login-box-body">
                 <p class="login-box-msg">Enter your identity information</p>
 
                 <form:form action="${pageContext.request.contextPath}/security/login-user" method="post" modelAttribute="user">
                     <div class="form-group has-feedback">
-                        <form:input type="text" class="form-control" placeholder="Name" path="name"/>
+                        <form:input type="text" class="form-control" placeholder="Name" path="name" />
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
 
                     <div class="form-group has-feedback">
-                        <form:input type="password" class="form-control" placeholder="Password" path="password"/>
+                        <form:input type="password" class="form-control" placeholder="Password" path="password" />
                         <span class="glyphicon glyphicon-certificate form-control-feedback"></span>
                     </div>
                     <div class="row">
@@ -49,6 +49,7 @@
                 </form:form>
             </div>
         </div>
+                           
 
         <!--start js import-->
 

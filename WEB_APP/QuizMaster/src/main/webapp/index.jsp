@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<c:if test="${sessionScope.user==null}">
+    <c:redirect url="security/login"/>
+</c:if>
+
 <!--start top contents of page-->
 <jsp:include page="/WEB-INF/views/import-top.jsp"/>
 <!--end top contents of page-->
