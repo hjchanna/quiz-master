@@ -25,6 +25,8 @@ public class QuestionPaper implements java.io.Serializable {
     private Integer indexNo;
     private String description;
     private Date lastUsedOn;
+    private String duration_per_question;
+    private boolean active;
     private Set<QuizSession> quizSessions = new HashSet<QuizSession>(0);
     private Set<Question> questions = new HashSet<Question>(0);
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
@@ -36,13 +38,15 @@ public class QuestionPaper implements java.io.Serializable {
         this.description = description;
     }
 
-    public QuestionPaper(String description, Date lastUsedOn, Set<QuizSession> quizSessions, Set<Question> questions, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
+
+    public QuestionPaper(Integer indexNo, String description, Date lastUsedOn, String duration_per_question, boolean active) {
+        this.indexNo = indexNo;
         this.description = description;
         this.lastUsedOn = lastUsedOn;
-        this.quizSessions = quizSessions;
-        this.questions = questions;
-        this.quizSessionUserAnswers = quizSessionUserAnswers;
+        this.duration_per_question = duration_per_question;
+        this.active = active;
     }
+    
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -99,6 +103,34 @@ public class QuestionPaper implements java.io.Serializable {
 
     public void setQuizSessionUserAnswers(Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
         this.quizSessionUserAnswers = quizSessionUserAnswers;
+    }
+
+    /**
+     * @return the duration_per_question
+     */
+    public String getDuration_per_question() {
+        return duration_per_question;
+    }
+
+    /**
+     * @param duration_per_question the duration_per_question to set
+     */
+    public void setDuration_per_question(String duration_per_question) {
+        this.duration_per_question = duration_per_question;
+    }
+
+    /**
+     * @return the active
+     */
+    public boolean isActive() {
+        return active;
+    }
+
+    /**
+     * @param active the active to set
+     */
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
 }
