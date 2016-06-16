@@ -94,7 +94,7 @@ public class QuizSessionUser implements java.io.Serializable {
         this.mobileNo = mobileNo;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "quizSessionUser")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "quizSessionUser")
     public Set<QuizSessionUserAnswer> getQuizSessionUserAnswers() {
         return this.quizSessionUserAnswers;
     }

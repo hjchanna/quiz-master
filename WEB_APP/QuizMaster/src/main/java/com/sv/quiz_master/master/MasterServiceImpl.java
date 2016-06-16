@@ -49,7 +49,7 @@ public class MasterServiceImpl implements MasterService {
         quizSession.setQuestionPaper(masterRepository.getQuestionPaper(questionPaper));
         quizSession.setStartedOn(new Date());
         quizSession.setFinishedOn(null);
-        quizSession.setStatus(QuizSessionStatus.PENDING);
+        quizSession.setStatus(QuizSessionStatus.ON_GOING);
 
         return masterRepository.saveQuizSession(quizSession);
     }

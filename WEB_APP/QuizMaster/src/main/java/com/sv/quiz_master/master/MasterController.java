@@ -27,7 +27,6 @@ public class MasterController {
         ModelAndView modelAndView = new ModelAndView("master/question-paper-list");
 
         modelAndView.addObject("paperlist", masterService.getQuestionPaperList());
-        System.out.println(masterService.getQuestionPaperList());
 
         return modelAndView;
     }
@@ -38,7 +37,9 @@ public class MasterController {
 
         modelAndView.addObject("paper", masterService.getQuestionPaper(paperIndexNo));
         modelAndView.addObject("questionlist", masterService.getQuestionList(paperIndexNo));
-
+        modelAndView.addObject("quizsessions", list?);
+        modelAndView.addObject("avaragescore", ?);
+        
         return modelAndView;
     }
 
@@ -46,18 +47,19 @@ public class MasterController {
     public String attemptNewSession(HttpServletRequest servletRequest, @PathVariable Integer questionPaper) {
         Integer quizSession = masterService.newQuizSession(questionPaper);
 
-        servletRequest.getSession().setAttribute("quiz-session", quizSession);
-        servletRequest.getSession().setAttribute("question-paper", questionPaper);
+        servletRequest.getSession().setAttribute("quizsession", quizSession);
+        servletRequest.getSession().setAttribute("questionpaper", questionPaper);
 
         return "redirect:/master/quiz-session-info";
     }
 
     @RequestMapping("/quiz-session-info")
     public ModelAndView attemptSession(HttpServletRequest servletRequest) {
-        Integer quizSession = (Integer) servletRequest.getSession().getAttribute("quiz-session");
-        Integer questionPaper = (Integer) servletRequest.getSession().getAttribute("question-paper");
+        Integer quizSession = (Integer) servletRequest.getSession().getAttribute("quizsession");
+        Integer questionPaper = (Integer) servletRequest.getSession().getAttribute("questionpaper");
 
         ModelAndView modelAndView = new ModelAndView("master/question-session");
+        modelAndView.addObject("quizsessionusers", ?);
 
         return modelAndView;
     }

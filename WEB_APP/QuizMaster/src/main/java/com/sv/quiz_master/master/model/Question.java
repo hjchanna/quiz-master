@@ -39,38 +39,9 @@ public class Question implements java.io.Serializable {
     private String answerDSi;
     private String answerDTa;
     private String correctAnswer;
-    private int duration;
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
     public Question() {
-    }
-
-    public Question(QuestionPaper questionPaper, String correctAnswer, int duration) {
-        this.questionPaper = questionPaper;
-        this.correctAnswer = correctAnswer;
-        this.duration = duration;
-    }
-
-    public Question(QuestionPaper questionPaper, String questionEn, String questionSi, String questionTa, String answerAEn, String answerASi, String answerATa, String answerBEn, String answerBSi, String answerBTa, String answerCEn, String answerCSi, String answerCTa, String answerDEn, String answerDSi, String answerDTa, String correctAnswer, int duration, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
-        this.questionPaper = questionPaper;
-        this.questionEn = questionEn;
-        this.questionSi = questionSi;
-        this.questionTa = questionTa;
-        this.answerAEn = answerAEn;
-        this.answerASi = answerASi;
-        this.answerATa = answerATa;
-        this.answerBEn = answerBEn;
-        this.answerBSi = answerBSi;
-        this.answerBTa = answerBTa;
-        this.answerCEn = answerCEn;
-        this.answerCSi = answerCSi;
-        this.answerCTa = answerCTa;
-        this.answerDEn = answerDEn;
-        this.answerDSi = answerDSi;
-        this.answerDTa = answerDTa;
-        this.correctAnswer = correctAnswer;
-        this.duration = duration;
-        this.quizSessionUserAnswers = quizSessionUserAnswers;
     }
 
     @Id
@@ -236,15 +207,6 @@ public class Question implements java.io.Serializable {
 
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
-    }
-
-    @Column(name = "duration", nullable = false)
-    public int getDuration() {
-        return this.duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
