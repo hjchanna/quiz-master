@@ -56,7 +56,7 @@ public class SecurityController {
     public String loginUser(@ModelAttribute User user,HttpServletRequest servletRequest) {
         User securityUser = securityService.getSecurityUser(user);
         servletRequest.getSession().setAttribute("user", securityUser);
-        return "forword:/";
+        return "redirect:/";
     }
 
 }

@@ -32,7 +32,7 @@ public class SecurityRepositoryImpl implements SecurityRepository {
     public User getSecurityUser(User user) {
         Session session = sessionFactory.getCurrentSession();
         return (User) session.createCriteria(User.class)
-                .add(Restrictions.eq("indexNo", user.getName()))
+                .add(Restrictions.eq("name", user.getName()))
                 .add(Restrictions.eq("password", user.getPassword()))
                 .uniqueResult();
     }
