@@ -34,6 +34,11 @@
                     <i class="fa fa-bell"></i> <span>Start Quiz Session</span>
                 </a>
             </li>
+             <li class="active">
+                <a href="${pageContext.request.contextPath}/security/new-security-user">
+                    <i class="fa fa-user"></i> <span>User Registration</span>
+                </a>
+            </li>
 
             <!--start administration-->
             <!--            <li class="treeview">
