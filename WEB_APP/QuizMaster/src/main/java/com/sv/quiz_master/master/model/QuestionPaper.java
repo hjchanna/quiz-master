@@ -26,7 +26,7 @@ public class QuestionPaper implements java.io.Serializable {
     private String description;
     private Date lastUsedOn;
     private String duration_per_question;
-    private boolean active;
+    private int active;
     private Set<QuizSession> quizSessions = new HashSet<QuizSession>(0);
     private Set<Question> questions = new HashSet<Question>(0);
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
@@ -39,7 +39,7 @@ public class QuestionPaper implements java.io.Serializable {
     }
 
 
-    public QuestionPaper(Integer indexNo, String description, Date lastUsedOn, String duration_per_question, boolean active) {
+    public QuestionPaper(Integer indexNo, String description, Date lastUsedOn, String duration_per_question, int active) {
         this.indexNo = indexNo;
         this.description = description;
         this.lastUsedOn = lastUsedOn;
@@ -122,14 +122,14 @@ public class QuestionPaper implements java.io.Serializable {
     /**
      * @return the active
      */
-    public boolean isActive() {
+    public int isActive() {
         return active;
     }
 
     /**
      * @param active the active to set
      */
-    public void setActive(boolean active) {
+    public void setActive(int active) {
         this.active = active;
     }
 

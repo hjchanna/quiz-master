@@ -26,23 +26,26 @@ public class QuizSessionUser implements java.io.Serializable {
     private String name;
     private String nicNo;
     private String mobileNo;
+    private String status;
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
     public QuizSessionUser() {
     }
 
-    public QuizSessionUser(QuizSession quizSession, String name, String nicNo, String mobileNo) {
+    public QuizSessionUser(QuizSession quizSession, String name, String nicNo, String mobileNo,String status) {
         this.quizSession = quizSession;
         this.name = name;
         this.nicNo = nicNo;
         this.mobileNo = mobileNo;
+        this.status = status;
     }
 
-    public QuizSessionUser(QuizSession quizSession, String name, String nicNo, String mobileNo, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
+    public QuizSessionUser(QuizSession quizSession, String name, String nicNo, String mobileNo,String status, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
         this.quizSession = quizSession;
         this.name = name;
         this.nicNo = nicNo;
         this.mobileNo = mobileNo;
+        this.status = status;
         this.quizSessionUserAnswers = quizSessionUserAnswers;
     }
 
@@ -101,6 +104,20 @@ public class QuizSessionUser implements java.io.Serializable {
 
     public void setQuizSessionUserAnswers(Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
         this.quizSessionUserAnswers = quizSessionUserAnswers;
+    }
+
+    /**
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(String status) {
+        this.status = status;
     }
 
 }

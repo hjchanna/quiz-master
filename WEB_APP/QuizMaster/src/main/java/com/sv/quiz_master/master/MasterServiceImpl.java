@@ -8,6 +8,7 @@ package com.sv.quiz_master.master;
 import com.sv.quiz_master.master.model.Question;
 import com.sv.quiz_master.master.model.QuestionPaper;
 import com.sv.quiz_master.master.model.QuizSession;
+import com.sv.quiz_master.master.model.QuizSessionUser;
 import com.sv.quiz_master.zsystem.QuizSessionStatus;
 import java.util.Date;
 import java.util.List;
@@ -52,6 +53,11 @@ public class MasterServiceImpl implements MasterService {
         quizSession.setStatus(QuizSessionStatus.ON_GOING);
 
         return masterRepository.saveQuizSession(quizSession);
+    }
+
+    @Override
+    public List<QuizSessionUser> getUserList(int quizSession) {
+        return masterRepository.getUserList(quizSession);
     }
 
 }
