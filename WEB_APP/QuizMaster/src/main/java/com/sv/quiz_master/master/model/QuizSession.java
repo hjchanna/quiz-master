@@ -103,7 +103,7 @@ public class QuizSession implements java.io.Serializable {
         this.status = status;
     }
 
-    @Column(name = "location", nullable = false, length = 25)
+    @Column(name = "location", nullable = true, length = 50)
     public String getLocation() {
         return this.location;
     }
