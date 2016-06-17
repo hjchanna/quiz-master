@@ -1,8 +1,16 @@
+<%@page import="com.sv.quiz_master.master.model.QuizSession"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!--start top contents of page-->
 <jsp:include page="/WEB-INF/views/import-top.jsp"/>
 <!--end top contents of page-->
+
+<%
+    //date format to format dates
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+%>
 
 <!--start page content-->
 <section class="content-header">
@@ -33,16 +41,21 @@
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-aqua">
+
                 <div class="inner">
-                    <h3>10</h3>
+                    <form:form action="" modelAttribute="paper">
+                        <h3>${paper.questions.size()}</h3>
+                    </form:form>
                     <p>Question Count</p>
                 </div>
+
                 <div class="icon">
                     <i class="glyphicon glyphicon-sort-by-order"></i>
                 </div>
                 <div class="small-box-footer">
                     &nbsp;
                 </div>
+
             </div>
         </div>
         <!--end questions-->
@@ -52,7 +65,10 @@
             <!-- small box -->
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>10</h3>
+
+                    <form:form action="" modelAttribute="paper">
+                        <h3>${paper.duration_per_question * paper.questions.size()}</h3>
+                    </form:form>
                     <p>Total Duration</p>
                 </div>
                 <div class="icon">
@@ -70,7 +86,7 @@
             <!-- small box -->
             <div class="small-box bg-orange">
                 <div class="inner">
-                    <h3>10</h3>
+                    <h3>${quizsessions.size()}</h3>
                     <p>Quiz Sessions</p>
                 </div>
                 <div class="icon">
@@ -115,12 +131,18 @@
                                 <th>Date</th>
                                 <th>Status</th>
                             </tr>
-
-                            <tr>
-                                <td>Kandy</td>
-                                <td>20th Jan 2015</td>
-                                <td><span class="badge bg-green">COMPLETED</span></td>
-                            </tr>
+                            <c:forEach items="${quizsessions}" var="quizsession">
+                                <c:if test="${quizsession.status=='COMPLETED'}">
+                                    <tr>
+                                        <td>${quizsession.location}</td>
+                                        <td>
+                                            <%=((QuizSession) pageContext.getAttribute("quizsession")).getFinishedOn() != null
+                                                    ? dateFormat.format(((QuizSession) pageContext.getAttribute("quizsession")).getFinishedOn())
+                                                    : "N/A"%>
+                                        </td>
+                                        <td><span class="badge bg-green">${quizsession.status}</span></td>        </tr>
+                                        </c:if>
+                                    </c:forEach>
                         </tbody>
                     </table>
                 </div>
@@ -149,7 +171,9 @@
                                     <td>${question.indexNo}</td>
                                     <td>${question.questionEn}</td>
 
+
                                     <td>
+
                                         <div class="progress progress-xs">
                                             <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
                                         </div>

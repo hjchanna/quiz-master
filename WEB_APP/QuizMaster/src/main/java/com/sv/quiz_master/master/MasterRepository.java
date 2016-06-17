@@ -17,10 +17,13 @@ import java.util.List;
 public interface MasterRepository {
 
     public List<QuestionPaper> getQuestionPaperList();
+    
+    public List<QuizSession> getQuizSessionList(Integer questionPaper);
 
     public QuestionPaper getQuestionPaper(Integer indexNo);
 
     public List<Question> getQuestionList(Integer questionPaper);
 
     public int saveQuizSession(QuizSession quizSession);
+
 }

@@ -32,6 +32,11 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
+    public List<QuizSession> getQuizSessionList(Integer questionPaper) {
+        return masterRepository.getQuizSessionList(questionPaper);
+    }
+
+    @Override
     public QuestionPaper getQuestionPaper(Integer indexNo) {
         return masterRepository.getQuestionPaper(indexNo);
     }

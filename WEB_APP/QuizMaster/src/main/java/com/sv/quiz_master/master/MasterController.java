@@ -37,9 +37,9 @@ public class MasterController {
 
         modelAndView.addObject("paper", masterService.getQuestionPaper(paperIndexNo));
         modelAndView.addObject("questionlist", masterService.getQuestionList(paperIndexNo));
-        modelAndView.addObject("quizsessions", list?);
-        modelAndView.addObject("avaragescore", ?);
-        
+        modelAndView.addObject("quizsessions", masterService.getQuizSessionList(paperIndexNo));
+//        modelAndView.addObject("avaragescore", );
+
         return modelAndView;
     }
 
@@ -59,7 +59,7 @@ public class MasterController {
         Integer questionPaper = (Integer) servletRequest.getSession().getAttribute("questionpaper");
 
         ModelAndView modelAndView = new ModelAndView("master/question-session");
-        modelAndView.addObject("quizsessionusers", ?);
+//        modelAndView.addObject("quizsessionusers", ?);
 
         return modelAndView;
     }

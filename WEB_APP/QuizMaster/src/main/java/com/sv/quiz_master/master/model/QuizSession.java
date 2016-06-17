@@ -29,23 +29,26 @@ public class QuizSession implements java.io.Serializable {
     private Date startedOn;
     private Date finishedOn;
     private String status;
+    private String location;
     private Set<QuizSessionUser> quizSessionUsers = new HashSet<QuizSessionUser>(0);
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
     public QuizSession() {
     }
 
-    public QuizSession(QuestionPaper questionPaper, Date startedOn, String status) {
+    public QuizSession(QuestionPaper questionPaper, Date startedOn, String status, String location) {
         this.questionPaper = questionPaper;
         this.startedOn = startedOn;
         this.status = status;
+        this.location = location;
     }
 
-    public QuizSession(QuestionPaper questionPaper, Date startedOn, Date finishedOn, String status, Set<QuizSessionUser> quizSessionUsers, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
+    public QuizSession(QuestionPaper questionPaper, Date startedOn, Date finishedOn, String status, String location, Set<QuizSessionUser> quizSessionUsers, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
         this.questionPaper = questionPaper;
         this.startedOn = startedOn;
         this.finishedOn = finishedOn;
         this.status = status;
+        this.location = location;
         this.quizSessionUsers = quizSessionUsers;
         this.quizSessionUserAnswers = quizSessionUserAnswers;
     }
@@ -98,6 +101,15 @@ public class QuizSession implements java.io.Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Column(name = "location", nullable = false, length = 25)
+    public String getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quizSession")

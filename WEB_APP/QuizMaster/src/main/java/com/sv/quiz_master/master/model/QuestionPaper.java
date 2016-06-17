@@ -87,7 +87,7 @@ public class QuestionPaper implements java.io.Serializable {
         this.quizSessions = quizSessions;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "questionPaper")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionPaper")
     public Set<Question> getQuestions() {
         return this.questions;
     }
