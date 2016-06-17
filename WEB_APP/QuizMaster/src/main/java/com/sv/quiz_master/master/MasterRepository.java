@@ -8,6 +8,7 @@ package com.sv.quiz_master.master;
 import com.sv.quiz_master.master.model.Question;
 import com.sv.quiz_master.master.model.QuestionPaper;
 import com.sv.quiz_master.master.model.QuizSession;
+import com.sv.quiz_master.master.model.QuizSessionUser;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
 public interface MasterRepository {
 
     public List<QuestionPaper> getQuestionPaperList();
-    
+
     public List<QuizSession> getQuizSessionList(Integer questionPaper);
 
     public QuestionPaper getQuestionPaper(Integer indexNo);
@@ -26,4 +27,5 @@ public interface MasterRepository {
 
     public int saveQuizSession(QuizSession quizSession);
 
+    public List<QuizSessionUser> getUserList(Integer quizSession);
 }

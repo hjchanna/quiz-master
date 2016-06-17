@@ -5,6 +5,8 @@
  */
 package com.sv.quiz_master.master;
 
+import com.sv.quiz_master.master.model.QuizSessionUser;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,8 +60,11 @@ public class MasterController {
         Integer quizSession = (Integer) servletRequest.getSession().getAttribute("quizsession");
         Integer questionPaper = (Integer) servletRequest.getSession().getAttribute("questionpaper");
 
-        ModelAndView modelAndView = new ModelAndView("master/question-session");
-//        modelAndView.addObject("quizsessionusers", ?);
+        ModelAndView modelAndView = new ModelAndView("master/user-list");
+        List<QuizSessionUser> userList = masterService.getUserList(quizSession);
+        System.out.println(userList.size());
+        modelAndView.addObject("userList", userList);
+        modelAndView.addObject("questionPaper", questionPaper);
 
         return modelAndView;
     }

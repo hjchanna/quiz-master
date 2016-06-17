@@ -8,6 +8,7 @@ package com.sv.quiz_master.master;
 import com.sv.quiz_master.master.model.Question;
 import com.sv.quiz_master.master.model.QuestionPaper;
 import com.sv.quiz_master.master.model.QuizSession;
+import com.sv.quiz_master.master.model.QuizSessionUser;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -60,6 +61,15 @@ public class MasterRepositoryImpl implements MasterRepository {
         Session session = sessionFactory.getCurrentSession();
         session.save(quizSession);
         return quizSession.getIndexNo();
+    }
+
+    @Override
+    public List<QuizSessionUser> getUserList(Integer quizSession) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(QuizSessionUser.class)
+                .add(Restrictions.eq("quizSession.indexNo", quizSession))
+                .add(Restrictions.eq("status", "true"))
+                .list();
     }
 
 }

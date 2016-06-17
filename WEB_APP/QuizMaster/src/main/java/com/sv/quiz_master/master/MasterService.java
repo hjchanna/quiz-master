@@ -8,6 +8,7 @@ package com.sv.quiz_master.master;
 import com.sv.quiz_master.master.model.Question;
 import com.sv.quiz_master.master.model.QuestionPaper;
 import com.sv.quiz_master.master.model.QuizSession;
+import com.sv.quiz_master.master.model.QuizSessionUser;
 import java.util.List;
 
 /**
@@ -17,14 +18,15 @@ import java.util.List;
 public interface MasterService {
 
     public List<QuestionPaper> getQuestionPaperList();
-    
+
     public List<QuizSession> getQuizSessionList(Integer questionPaperId);
 
     public QuestionPaper getQuestionPaper(Integer questionPaperId);
 
     public List<Question> getQuestionList(Integer questionPaperId);
-    
+
     public int newQuizSession(Integer questionPaper);
 
-    
+    public List<QuizSessionUser> getUserList(int quizSession);
+
 }
