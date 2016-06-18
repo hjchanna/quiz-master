@@ -1,3 +1,4 @@
+<%@page import="com.sv.quiz_master.master.model.QuestionPaper"%>
 <%@page import="com.sv.quiz_master.master.model.QuizSession"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -67,7 +68,27 @@
                 <div class="inner">
 
                     <form:form action="" modelAttribute="paper">
-                        <h3>${paper.duration_per_question * paper.questions.size()}</h3>
+                        <c:choose>
+                            <c:when test="${paper.durationPerQuestion * paper.questions.size() < 60}">
+                                <h3>${paper.durationPerQuestion * paper.questions.size()}/sec. </h3>
+                            </c:when>
+                            <c:when test="${paper.durationPerQuestion * paper.questions.size() > 60}">
+
+                                <h3>
+                                    <%
+                                        QuestionPaper paper = (QuestionPaper) request.getAttribute("paper");
+                                        Integer duration = paper.getDurationPerQuestion();
+                                        Integer questions = paper.getQuestions().size();
+                                        Integer total_duration = duration * questions;
+
+                                        Integer min = (Math.abs(total_duration / 60));
+                                        Integer sec = total_duration % 60;
+
+                                        out.print(min + ":" + String.format("%02d", sec)+"/min.");
+                                    %>
+                                </h3>
+                            </c:when>
+                        </c:choose>
                     </form:form>
                     <p>Total Duration</p>
                 </div>
