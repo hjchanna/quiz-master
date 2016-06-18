@@ -19,46 +19,38 @@
         <!--jquery ui css-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.css">
 
-        <style>
-            .control-button{
-                right: 0px;
-                top: 10%;
-                position: absolute;
+        <style type="text/css">
+            #box-shadow{
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             }
+            
         </style>
     </head>
 
-    <body class="hold-transition login-page">
-        <div class="control-button">
-            <a class="btn btn-default" href="${pageContext.request.contextPath}/">
-                <span class="fa fa-home"></span>
-            </a>
-        </div>
-
-
+    <body class="hold-transition">
         <div class="login-box" style="margin-top: 2%;">
             <div class="login-logo">
                 <div>
-                    <img src="${pageContext.request.contextPath}/resources/image/logo.png" width="100%" height="100%"/>
+                    <img src="${pageContext.request.contextPath}/resources/image/logo.png" width="250px" height="120px"/>
                 </div>
                 <b>Quiz</b>Master
             </div><!-- /.login-logo -->
-            <div class="login-box-body">
+            <div class="login-box-body" id="box-shadow">
                 <p class="login-box-msg">Enter your identity information</p>
 
-                <form:form action="${pageContext.request.contextPath}/user/quiz-session-save-user" method="post" modelAttribute="quizSessionUser">
+                <form:form action="${pageContext.request.contextPath}/user/quiz-session-save-user" method="post" modelAttribute="user">
                     <div class="form-group has-feedback">
-                        <form:input type="text" class="form-control" placeholder="Name" path=""/>
+                        <form:input type="text" class="form-control" placeholder="Name" path="name"/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
 
                     <div class="form-group has-feedback">
-                        <form:input type="text" class="form-control" placeholder="Identity Card Number" path=""/>
+                        <form:input type="text" class="form-control" placeholder="Identity Card Number" path="nicNo"/>
                         <span class="glyphicon glyphicon-certificate form-control-feedback"></span>
                     </div>
 
                     <div class="form-group has-feedback">
-                        <form:input type="text" class="form-control" placeholder="Telephone" path=""/>
+                        <form:input type="text" class="form-control" placeholder="Telephone" path="mobileNo"/>
                         <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                     </div>
 

@@ -1,4 +1,5 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -29,29 +30,60 @@
     </head>
 
     <body class="hold-transition">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2" style="margin-top: 2%;">
+                <div class="login-logo">
+                    <div>
+                        <img src="${pageContext.request.contextPath}/resources/image/logo.png" width="250px" height="120px"/>
+                    </div>
 
-        <div class="login-box" style="margin-top: 2%;">
-            <div class="login-logo">
-                <div>
-                    <img src="${pageContext.request.contextPath}/resources/image/logo.png" width="250px" height="120px"/>
+                    <div>
+                        &nbsp;<b>Quiz</b>Master
+
+                        <div class="pull-right">
+                            <h2><label id="second"></label></h2>
+                        </div>
+                    </div>
                 </div>
-                <b>Quiz</b>Master
+                <div class="box box-default">
+                    <div class="box-header">
+                        <div class="col-xs-12">
+                            <h3>Select Your Location</h3>
+                        </div>
+                    </div>
+
+                    <div class="box-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <th>#</th>
+                            <th>Location</th>
+                            <th></th>
+                            </head>
+
+                            <tbody>
+                                <c:forEach items="${quizsessionlist}" var="quizsessions">   
+                                    <c:if test="${quizsessions.status=='ON_GOING'}">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>${quizsessions.location}</td>
+                                            <td class="text-right">
+                                                <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/user/quiz-session-new-user/${quizsessions.indexNo}/">
+                                                    <span class="glyphicon glyphicon-play"></span> Start
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                            </tbody>
+
+                        </table>
+                    </div>
+
+
+                </div>
             </div>
-            <div class="login-box">
-                <table class="table table-hover">
-                    <thead>
-                    <th>#</th>
-                    <th>Description</th>
-                    <th>Last Used On</th>
-                    <th></th>
-                    </head>
 
-
-
-                </table>
-            </div>
         </div>
-
 
         <!--start js import-->
 

@@ -5,6 +5,7 @@
  */
 package com.sv.quiz_master.user;
 
+import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,13 @@ public class UserController {
         ModelAndView modelAndView = new ModelAndView("user/quiz-session-list");
 
         modelAndView.addObject("quizsessionlist", userService.getQuizSessionList());
-
         return modelAndView;
     }
 
     @RequestMapping("/quiz-session-new-user/{quizSession}")
     public ModelAndView attemptNewUser(@PathVariable Integer quizSession) {
         ModelAndView modelAndView = new ModelAndView("user/quiz-session-new-user");
-
+        modelAndView.addObject("user", new QuizSessionUser());
         return modelAndView;
     }
 
@@ -45,13 +45,13 @@ public class UserController {
 
         quizSessionUser = userService.saveQuizSessionUser(quizSessionUser);
 
-        Integer quizSession =  quizSessionUser.getQuizSession().getIndexNo();
-        Integer quizUser =  quizSessionUser.getIndexNo();
-        Integer questionPaper =  quizSessionUser.getQuizSession().getQuestionPaper().getIndexNo();
+        Integer quizSession = quizSessionUser.getQuizSession().getIndexNo();
+        Integer quizUser = quizSessionUser.getIndexNo();
+        Integer questionPaper = quizSessionUser.getQuizSession().getQuestionPaper().getIndexNo();
 
-        servletRequest.getSession().setAttribute("quiz-session", quizSession);
-        servletRequest.getSession().setAttribute("question-paper", questionPaper);
-        servletRequest.getSession().setAttribute("quiz-user", quizUser);
+        servletRequest.getSession().setAttribute("quizsession", quizSession);
+        servletRequest.getSession().setAttribute("questionpaper", questionPaper);
+        servletRequest.getSession().setAttribute("quizuser", quizUser);
 
         return "forward:/quiz-session-pending/" + quizSession + "/" + quizUser;
     }
