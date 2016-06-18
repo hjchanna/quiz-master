@@ -28,7 +28,7 @@ public class UserController {
     public ModelAndView attemptQuizSessionList() {
         ModelAndView modelAndView = new ModelAndView("user/quiz-session-list");
 
-        modelAndView.addObject("quiz-session-list", userService.getQuizSessionList());
+        modelAndView.addObject("quizsessionlist", userService.getQuizSessionList());
 
         return modelAndView;
     }
