@@ -26,6 +26,7 @@ public class QuizSessionUser implements java.io.Serializable {
     private String name;
     private String nicNo;
     private String mobileNo;
+    private String status;
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
     public QuizSessionUser() {
@@ -92,6 +93,15 @@ public class QuizSessionUser implements java.io.Serializable {
 
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
+    }
+
+    @Column(name = "status", nullable = false, length = 25)
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quizSessionUser")

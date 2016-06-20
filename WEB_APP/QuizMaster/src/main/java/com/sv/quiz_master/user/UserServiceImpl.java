@@ -6,9 +6,13 @@
 package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
+import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
+import com.sv.quiz_master.zsystem.QuizSessionStatus;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,34 +30,43 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
+    public QuizSession getQuizSession(Serializable quizSessionId) {
+        QuizSession quizSession = (QuizSession) userRepository.getObject(QuizSession.class, quizSessionId);
+        quizSession.getQuestionPaper();
+        return quizSession;
+    }
+
+    @Override
     public List<QuizSession> getQuizSessionList() {
         return userRepository.getQuizSessionList();
     }
 
     @Override
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser) {
-        userRepository.saveQuizSessionUser(quizSessionUser);
-        return quizSessionUser;
+        Serializable userId = userRepository.saveObject(quizSessionUser);
+        return (QuizSessionUser) userRepository.getObject(QuizSessionUser.class, userId);
     }
 
     @Override
-    public void startQuizSession(Integer quizSession, Integer quizSessionUser) {
-//        QuizSessionUser 
-//        userRepository.saveQuizSessionUser(null)
+    public QuizSession finishQuizSession(QuizSession quizSession) {
+        quizSession.setFinishedOn(new Date());
+        quizSession.setStatus(QuizSessionStatus.COMPLETED);
+        userRepository.updateObject(quizSession);
+        return quizSession;
     }
 
     @Override
-    public Question getNextQuestion(Integer quizSession, Integer currentQuestion) {
-        return userRepository.getNextQuestion(quizSession, currentQuestion);
+    public void updateQuestionPaperLastUsed(QuestionPaper questionPaper) {
+        userRepository.updateObject(questionPaper);
     }
 
     @Override
-    public void saveAnswer(Integer quizSessionId, Integer quizSessionUserId, Integer quesionPaperId, Integer questionId, String answer, Integer duration) {
+    public Question getNextQuestion(QuestionPaper questionPaper, Question currentQuestion) {
+        return userRepository.getNextQuestion(questionPaper, currentQuestion);
+    }
 
-        QuizSession quizSession = userRepository.getQuizSession(quizSessionId);
-        QuizSessionUser quizSessionUser = userRepository.getQuizSessionUser(quizSessionUserId);
-        Question question = userRepository.getQuestion(questionId);
-
+    @Override
+    public void saveAnswer(QuizSession quizSession, QuizSessionUser quizSessionUser, QuestionPaper questionPaper, Question question, String answer, Integer duration) {
         QuizSessionUserAnswer quizSessionUserAnswer = new QuizSessionUserAnswer();
 
         //quizSessionUserAnswer.setIndexNo(null);   //auto increment
@@ -64,8 +77,12 @@ public class UserServiceImpl implements UserService {
         quizSessionUserAnswer.setAnswer(answer);
         quizSessionUserAnswer.setCorrect(question.getCorrectAnswer().equalsIgnoreCase(answer));
         quizSessionUserAnswer.setDuration(duration);
-        
-        
+
         userRepository.saveQuizSessionUserAnswer(quizSessionUserAnswer);
+    }
+
+    @Override
+    public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser) {
+        return userRepository.listResults(quizSessionUser);
     }
 }

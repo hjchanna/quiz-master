@@ -6,9 +6,11 @@
 package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
+import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -19,16 +21,29 @@ public interface UserRepository {
 
     public List<QuizSession> getQuizSessionList();
 
-    public QuizSession getQuizSession(Integer indexNo);
+    public Object getObject(Class c, Serializable id);
 
-    public int saveQuizSessionUser(QuizSessionUser quizSessionUser);
+    public Serializable saveObject(Object object);
 
-    public QuizSessionUser getQuizSessionUser(Integer indexNo);
+    public void updateObject(Object object);
 
-    public Question getNextQuestion(Integer quizSession, Integer currentQuestion);
-    
-    public Question getQuestion(Integer indexNo);
+    public Question getNextQuestion(QuestionPaper quizSession, Question question);
 
     public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer);
 
+    public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser);
+
+//    public List<QuizSession> getQuizSessionList();
+//
+//    public QuizSession getQuizSession(Integer indexNo);
+//
+//    public int saveQuizSessionUser(QuizSessionUser quizSessionUser);
+//
+//    public QuizSessionUser getQuizSessionUser(Integer indexNo);
+//
+//    public Question getNextQuestion(Integer quizSession, Integer currentQuestion);
+//    
+//    public Question getQuestion(Integer indexNo);
+//
+//    public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer);
 }

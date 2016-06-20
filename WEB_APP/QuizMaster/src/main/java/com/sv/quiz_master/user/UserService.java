@@ -6,8 +6,11 @@
 package com.sv.quiz_master.user;
 
 import com.sv.quiz_master.user.model.Question;
+import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
+import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -16,14 +19,25 @@ import java.util.List;
  */
 public interface UserService {
 
+    public QuizSession getQuizSession(Serializable quizSessionId);
+
     public List<QuizSession> getQuizSessionList();
 
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser);
 
-    public void startQuizSession(Integer quizSession, Integer quizSessionUser);
+    public QuizSession finishQuizSession(QuizSession quizSession);
 
-    public Question getNextQuestion(Integer quizSession, Integer currentQuestion);
+    public void updateQuestionPaperLastUsed(QuestionPaper questionPaper);
 
-    public void saveAnswer(Integer quizSessionId, Integer quizSessionUserId, Integer quesionPaperId, Integer questionId, String answer, Integer duration);
+    public Question getNextQuestion(QuestionPaper questionPaper, Question currentQuestion);
 
+    public void saveAnswer(
+            QuizSession quizSession,
+            QuizSessionUser quizSessionUser,
+            QuestionPaper questionPaper,
+            Question question,
+            String answer,
+            Integer duration);
+
+    public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser);
 }

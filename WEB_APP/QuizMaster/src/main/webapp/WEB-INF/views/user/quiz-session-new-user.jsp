@@ -19,26 +19,34 @@
         <!--jquery ui css-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.css">
 
-        <style type="text/css">
-            #box-shadow{
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        <style>
+            .control-button{
+                right: 0px;
+                top: 10%;
+                position: absolute;
             }
-            
         </style>
     </head>
 
-    <body class="hold-transition">
+    <body class="hold-transition login-page">
+        <div class="control-button">
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/">
+                <span class="fa fa-home"></span>
+            </a>
+        </div>
+
+
         <div class="login-box" style="margin-top: 2%;">
             <div class="login-logo">
                 <div>
-                    <img src="${pageContext.request.contextPath}/resources/image/logo.png" width="250px" height="120px"/>
+                    <img src="${pageContext.request.contextPath}/resources/image/dilmah-logo.jpg" width="88px" height="66px"/>
                 </div>
                 <b>Quiz</b>Master
             </div><!-- /.login-logo -->
-            <div class="login-box-body" id="box-shadow">
+            <div class="login-box-body">
                 <p class="login-box-msg">Enter your identity information</p>
 
-                <form:form action="${pageContext.request.contextPath}/user/quiz-session-save-user" method="post" modelAttribute="user">
+                <form:form action="${pageContext.request.contextPath}/user/quiz-session-save-user" method="post" modelAttribute="quizSessionUser">
                     <div class="form-group has-feedback">
                         <form:input type="text" class="form-control" placeholder="Name" path="name"/>
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>

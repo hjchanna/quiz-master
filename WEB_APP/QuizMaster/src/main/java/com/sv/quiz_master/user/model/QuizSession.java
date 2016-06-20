@@ -28,27 +28,25 @@ public class QuizSession implements java.io.Serializable {
     private QuestionPaper questionPaper;
     private Date startedOn;
     private Date finishedOn;
-    private String status;
     private String location;
+    private String status;
     private Set<QuizSessionUser> quizSessionUsers = new HashSet<QuizSessionUser>(0);
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
     public QuizSession() {
     }
 
-    public QuizSession(QuestionPaper questionPaper, Date startedOn, String status, String location) {
+    public QuizSession(QuestionPaper questionPaper, Date startedOn, String status) {
         this.questionPaper = questionPaper;
         this.startedOn = startedOn;
         this.status = status;
-        this.location = location;
     }
 
-    public QuizSession(QuestionPaper questionPaper, Date startedOn, Date finishedOn, String status,String location, Set<QuizSessionUser> quizSessionUsers, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
+    public QuizSession(QuestionPaper questionPaper, Date startedOn, Date finishedOn, String status, Set<QuizSessionUser> quizSessionUsers, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
         this.questionPaper = questionPaper;
         this.startedOn = startedOn;
         this.finishedOn = finishedOn;
         this.status = status;
-        this.location=location;
         this.quizSessionUsers = quizSessionUsers;
         this.quizSessionUserAnswers = quizSessionUserAnswers;
     }
@@ -94,15 +92,6 @@ public class QuizSession implements java.io.Serializable {
         this.finishedOn = finishedOn;
     }
 
-    @Column(name = "status", nullable = false, length = 25)
-    public String getStatus() {
-        return this.status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-    
     @Column(name = "location", nullable = true, length = 50)
     public String getLocation() {
         return location;
@@ -112,9 +101,15 @@ public class QuizSession implements java.io.Serializable {
         this.location = location;
     }
 
-    
-    
-    
+    @Column(name = "status", nullable = false, length = 25)
+    public String getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quizSession")
     public Set<QuizSessionUser> getQuizSessionUsers() {
         return this.quizSessionUsers;
