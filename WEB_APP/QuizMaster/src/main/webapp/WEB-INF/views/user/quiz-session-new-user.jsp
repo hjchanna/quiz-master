@@ -39,7 +39,7 @@
         <div class="login-box" style="margin-top: 2%;">
             <div class="login-logo">
                 <div>
-                    <img src="${pageContext.request.contextPath}/resources/image/dilmah-logo.jpg" width="88px" height="66px"/>
+                    <img src="${pageContext.request.contextPath}/resources/image/logo.png" width="100px" height="66px"/>
                 </div>
                 <b>Quiz</b>Master
             </div><!-- /.login-logo -->

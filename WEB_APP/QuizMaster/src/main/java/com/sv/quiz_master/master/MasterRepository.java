@@ -9,6 +9,7 @@ import com.sv.quiz_master.master.model.Question;
 import com.sv.quiz_master.master.model.QuestionPaper;
 import com.sv.quiz_master.master.model.QuizSession;
 import com.sv.quiz_master.master.model.QuizSessionUser;
+import com.sv.quiz_master.master.model.QuizSessionUserAnswer;
 import java.util.List;
 
 /**
@@ -28,4 +29,6 @@ public interface MasterRepository {
     public int saveQuizSession(QuizSession quizSession);
 
     public List<QuizSessionUser> getUserList(Integer quizSession);
+
+    public List<QuizSessionUserAnswer> getQuestonAnswerList(Integer quizSession);
 }

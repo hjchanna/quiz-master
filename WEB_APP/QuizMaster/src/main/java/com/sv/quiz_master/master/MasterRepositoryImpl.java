@@ -9,6 +9,7 @@ import com.sv.quiz_master.master.model.Question;
 import com.sv.quiz_master.master.model.QuestionPaper;
 import com.sv.quiz_master.master.model.QuizSession;
 import com.sv.quiz_master.master.model.QuizSessionUser;
+import com.sv.quiz_master.master.model.QuizSessionUserAnswer;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -69,6 +70,14 @@ public class MasterRepositoryImpl implements MasterRepository {
         return session.createCriteria(QuizSessionUser.class)
                 .add(Restrictions.eq("quizSession.indexNo", quizSession))
                 .add(Restrictions.eq("status", "true"))
+                .list();
+    }
+
+    @Override
+    public List<QuizSessionUserAnswer> getQuestonAnswerList(Integer quizSession) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(QuizSessionUserAnswer.class)
+                .add(Restrictions.eq("quizSession.indexNo", quizSession))
                 .list();
     }
 

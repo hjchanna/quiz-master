@@ -61,13 +61,13 @@
                             </head>
 
                             <tbody>
-                                <c:forEach items="${quizsessionlist}" var="quizsessions">   
+                                <c:forEach items="${quizsessionlist}" var="quizsessions" varStatus="counter">   
                                     <c:if test="${quizsessions.status=='ON_GOING'}">
                                         <tr>
-                                            <td>1</td>
+                                            <td>${counter.count}</td>
                                             <td>${quizsessions.location}</td>
                                             <td class="text-right">
-                                                <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/user/quiz-session-new-user/${quizsessions.indexNo}/">
+                                                <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/user/quiz-session-new-user/${quizsessions.indexNo}">
                                                     <span class="glyphicon glyphicon-play"></span> Start
                                                 </a>
                                             </td>

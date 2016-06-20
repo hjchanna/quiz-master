@@ -56,7 +56,7 @@
                 </a>
 
                 <ul class="treeview-menu">
-                    <li><a href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/quiz-session-list"><i class="fa fa-circle-o"></i> Question Sessions</a></li>
                 </ul>
             </li>
             <!--end master-->

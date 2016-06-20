@@ -29,7 +29,7 @@
             <div class="col-sm-6 col-sm-offset-3" style="margin-top: 2%;">
                 <div class="login-logo">
                     <div>
-                        <img src="${pageContext.request.contextPath}/resources/image/dilmah-logo.jpg" width="88px" height="66px"/>
+                        <img src="${pageContext.request.contextPath}/resources/image/logo.png" width="100px" height="66px"/>
                     </div>
                     <b>Quiz</b>Master
                 </div>
@@ -42,9 +42,9 @@
                             </video>
                         </div>
 
-                        <!--                        <div class="col-xs-8 col-xs-offset-2" style="margin-top: 50px;">
-                                                    <a class="btn btn-primary btn-block" href="${pageContext.request.contextPath}/user/quiz-session-start">Start</a>
-                                                </div>-->
+                                <div class="col-xs-8 col-xs-offset-2" style="margin-top: 50px;">
+                                    <a class="btn btn-primary btn-block" href="${pageContext.request.contextPath}/user/quiz-session-start">Start</a>
+                                </div>
                     </div>
 
                 </div>

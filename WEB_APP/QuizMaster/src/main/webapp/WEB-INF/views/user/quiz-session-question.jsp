@@ -27,7 +27,7 @@
             <div class="col-sm-8 col-sm-offset-2" style="margin-top: 2%;">
                 <div class="login-logo">
                     <div>
-                        <img src="${pageContext.request.contextPath}/resources/image/dilmah-logo.jpg" width="88px" height="66px"/>
+                        <img src="${pageContext.request.contextPath}/resources/image/logo.png" width="100px" height="66px"/>
                     </div>
 
                     <div>
@@ -108,7 +108,7 @@
         <script src="${pageContext.request.contextPath}/resources/theme/js/app.min.js"></script>
 
         <script>
-                                var duration = ${sessionScope.questionpaper.durationPerQuestion};
+                                var duration = 10;
                                 var baseUrl = '${pageContext.request.contextPath}' + "/user";
 
                                 var seconds = 0;

@@ -188,6 +188,6 @@ public class UserController {
         servletRequest.getSession().setAttribute("question", null);
         servletRequest.getSession().setAttribute("allownext", null);
 
-        return "redirect:/user/quiz-session-new-user";
+        return "redirect:/user/quiz-session-list";
     }
 }

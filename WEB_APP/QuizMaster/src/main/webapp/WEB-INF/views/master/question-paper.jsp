@@ -31,11 +31,17 @@
 <section class="content">
 
     <div class="row">
-        <div class="col-lg-12" >
-            <div class="form-group pull-right">
-                <a class="btn btn-success" href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-backward"></i>&nbsp;Go Back</a>
-                <a class="btn btn-success" href="${pageContext.request.contextPath}/master/new-quiz-session/${paper.indexNo}"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</a>
-            </div>
+        <div class="col-lg-12 form-group" >
+            <form:form action="${pageContext.request.contextPath}/master/new-quiz-session/${paper.indexNo}" modelAttribute="quizsession">
+                <div class="form-group pull-right">
+                    <a class="btn btn-success" href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-backward"></i>&nbsp;Go Back</a>
+                    <button class="btn btn-success " type="submit"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</button>
+                    <!--<a class="" type="submit" ></a>-->
+                </div>
+                <div class="col-sm-4 pull-right">
+                    <form:input type="text" path="location" placeholder="Location . . " class="form-control" name="location"/>
+                </div>
+            </form:form>
         </div>
 
         <!--start questions-->
@@ -84,7 +90,7 @@
                                         Integer min = (Math.abs(total_duration / 60));
                                         Integer sec = total_duration % 60;
 
-                                        out.print(min + ":" + String.format("%02d", sec)+"/min.");
+                                        out.print(min + ":" + String.format("%02d", sec) + "/min.");
                                     %>
                                 </h3>
                             </c:when>

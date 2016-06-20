@@ -5,13 +5,17 @@
  */
 package com.sv.quiz_master.master;
 
+import com.sv.quiz_master.master.model.QuizSession;
 import com.sv.quiz_master.master.model.QuizSessionUser;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -40,33 +44,47 @@ public class MasterController {
         modelAndView.addObject("paper", masterService.getQuestionPaper(paperIndexNo));
         modelAndView.addObject("questionlist", masterService.getQuestionList(paperIndexNo));
         modelAndView.addObject("quizsessions", masterService.getQuizSessionList(paperIndexNo));
+        modelAndView.addObject("quizsession", new QuizSession());
 //        modelAndView.addObject("avaragescore", );
 
         return modelAndView;
     }
 
     @RequestMapping("/new-quiz-session/{questionPaper}")
-    public String attemptNewSession(HttpServletRequest servletRequest, @PathVariable Integer questionPaper) {
-        Integer quizSession = masterService.newQuizSession(questionPaper);
+    public String attemptNewSession(HttpServletRequest servletRequest,
+            @PathVariable Integer questionPaper, @ModelAttribute("quizsession") QuizSession quizSession) {
+        System.out.println("ABCD");
+        System.out.println(quizSession.getStartedOn());
+        System.out.println(quizSession.getStatus());
+        System.out.println(quizSession.getFinishedOn());
 
-        servletRequest.getSession().setAttribute("quizsession", quizSession);
+        Integer quizSessionId = masterService.newQuizSession(questionPaper, quizSession.getLocation());
+
+        servletRequest.getSession().setAttribute("quizsession", quizSessionId);
         servletRequest.getSession().setAttribute("questionpaper", questionPaper);
 
-        return "redirect:/master/quiz-session-info";
+        return "redirect:/master/quiz-session-info/" + quizSessionId;
     }
 
-    @RequestMapping("/quiz-session-info")
+    @RequestMapping("/quiz-session-info/{quizSession}")
     public ModelAndView attemptSession(HttpServletRequest servletRequest) {
         Integer quizSession = (Integer) servletRequest.getSession().getAttribute("quizsession");
         Integer questionPaper = (Integer) servletRequest.getSession().getAttribute("questionpaper");
 
         ModelAndView modelAndView = new ModelAndView("master/user-list");
         List<QuizSessionUser> userList = masterService.getUserList(quizSession);
-        System.out.println(userList.size());
         modelAndView.addObject("userList", userList);
         modelAndView.addObject("questionPaper", questionPaper);
 
         return modelAndView;
     }
 
+    @RequestMapping("/question-answer-list")
+    public ModelAndView attemptQuestionAnswerList(HttpServletRequest servletRequest) {
+        ModelAndView modelAndView = new ModelAndView("master/question-answer");
+        Integer quizSession = (Integer) servletRequest.getSession().getAttribute("quizsession");
+        modelAndView.addObject("QuestonAnswerList", masterService.getQuestonAnswerList(quizSession));
+
+        return modelAndView;
+    }
 }

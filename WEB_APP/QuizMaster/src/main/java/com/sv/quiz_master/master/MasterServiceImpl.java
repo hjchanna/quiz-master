@@ -9,6 +9,7 @@ import com.sv.quiz_master.master.model.Question;
 import com.sv.quiz_master.master.model.QuestionPaper;
 import com.sv.quiz_master.master.model.QuizSession;
 import com.sv.quiz_master.master.model.QuizSessionUser;
+import com.sv.quiz_master.master.model.QuizSessionUserAnswer;
 import com.sv.quiz_master.zsystem.QuizSessionStatus;
 import java.util.Date;
 import java.util.List;
@@ -48,13 +49,14 @@ public class MasterServiceImpl implements MasterService {
     }
 
     @Override
-    public int newQuizSession(Integer questionPaper) {
+    public int newQuizSession(Integer questionPaper,String location) {
         QuizSession quizSession = new QuizSession();
 
         //quizSession.setIndexNo(null); //auto increment
         quizSession.setQuestionPaper(masterRepository.getQuestionPaper(questionPaper));
         quizSession.setStartedOn(new Date());
         quizSession.setFinishedOn(null);
+        quizSession.setLocation(location);
         quizSession.setStatus(QuizSessionStatus.ON_GOING);
 
         return masterRepository.saveQuizSession(quizSession);
@@ -63,6 +65,11 @@ public class MasterServiceImpl implements MasterService {
     @Override
     public List<QuizSessionUser> getUserList(int quizSession) {
         return masterRepository.getUserList(quizSession);
+    }
+
+    @Override
+    public List<QuizSessionUserAnswer> getQuestonAnswerList(Integer quizSession) {
+        return masterRepository.getQuestonAnswerList(quizSession);
     }
 
 }
