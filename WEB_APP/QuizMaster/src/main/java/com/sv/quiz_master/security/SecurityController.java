@@ -43,19 +43,23 @@ public class SecurityController {
         return modelAndView;
     }
 
-    
     @RequestMapping("/login")
     public ModelAndView attemptLogin() {
-        ModelAndView modelAndView=new ModelAndView("security/login-user");
+        ModelAndView modelAndView = new ModelAndView("security/login-user");
         modelAndView.addObject("user", new User());
         return modelAndView;
     }
-    
-    
+
     @RequestMapping("/login-user")
-    public String loginUser(@ModelAttribute User user,HttpServletRequest servletRequest) {
+    public String loginUser(@ModelAttribute User user, HttpServletRequest servletRequest) {
         User securityUser = securityService.getSecurityUser(user);
         servletRequest.getSession().setAttribute("user", securityUser);
+        return "redirect:/";
+    }
+    
+    @RequestMapping("/logout-user")
+    public String logoutUser(HttpServletRequest servletRequest) {
+        servletRequest.getSession().setAttribute("user", null);
         return "redirect:/";
     }
 

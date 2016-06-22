@@ -12,7 +12,9 @@ import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
 import com.sv.quiz_master.zsystem.QuizSessionUserStatus;
 import java.util.List;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,7 +34,8 @@ public class UserController {
 
     @RequestMapping("/quiz-session")
     public String attemptQuizSession(HttpServletRequest servletRequest) {
-        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+//        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+        QuizSession quizSession = getQuizSession(servletRequest);
 
         if (quizSession == null) {
             return "redirect:/user/quiz-session-new";
@@ -51,22 +54,29 @@ public class UserController {
     }
 
     @RequestMapping("/quiz-session-save")
-    public String saveNewQuizSession(HttpServletRequest servletRequest, @ModelAttribute QuizSession quizSession) {
+    public String saveNewQuizSession(HttpServletRequest servletRequest, HttpServletResponse servletResponse, @ModelAttribute QuizSession quizSession) {
 
         quizSession = userService.newQuizSession(quizSession);
-        servletRequest.getSession().setAttribute("quizsession", quizSession);
+//        servletRequest.getSession().setAttribute("quizsession", quizSession);
+
+        Cookie cookie = new Cookie("quizsession", String.valueOf(quizSession.getIndexNo()));
+        servletResponse.addCookie(cookie);
 
         return "redirect:/user/quiz-session-new-user";
     }
 
     @RequestMapping("/quiz-session-finish")
-    public String finishQuizSession(HttpServletRequest servletRequest) {
-        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+    public String finishQuizSession(HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+//        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
 
+        QuizSession quizSession = getQuizSession(servletRequest);
         userService.finishQuizSession(quizSession);
-        servletRequest.getSession().setAttribute("quizsession", null);
+//        servletRequest.getSession().setAttribute("quizsession", null);
 
-        return "redirect:/user/quiz-session";
+        Cookie cookie = new Cookie("quizsession", null);
+        servletResponse.addCookie(cookie);
+
+        return "redirect:/";
     }
 
     @RequestMapping("/quiz-session-new-user")
@@ -80,7 +90,8 @@ public class UserController {
 
     @RequestMapping("/quiz-session-save-user")
     public String saveNewUser(HttpServletRequest servletRequest, @ModelAttribute QuizSessionUser quizSessionUser) {
-        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+//        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+        QuizSession quizSession = getQuizSession(servletRequest);
 
         //set quiz sessin to user
         quizSessionUser.setQuizSession(quizSession);
@@ -121,14 +132,11 @@ public class UserController {
 
         Boolean allowNext = (Boolean) servletRequest.getSession().getAttribute("allownext");
 
-//        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
         QuestionPaper questionPaper = (QuestionPaper) servletRequest.getSession().getAttribute("questionpaper");
         Question question = (Question) servletRequest.getSession().getAttribute("question");
         QuizSessionUser quizSessionUser = (QuizSessionUser) servletRequest.getSession().getAttribute("quizuser");
         String language = (String) servletRequest.getSession().getAttribute("language");
         System.out.println(language);
-        
-        
 
         if (allowNext != null ? allowNext : true) { //attempt next question
             if (question == null) {//first question
@@ -172,7 +180,9 @@ public class UserController {
             @PathVariable String answer,
             @PathVariable Integer duration) {
 
-        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+//        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+        QuizSession quizSession = getQuizSession(servletRequest);
+
         QuestionPaper questionPaper = (QuestionPaper) servletRequest.getSession().getAttribute("questionpaper");
         Question question = (Question) servletRequest.getSession().getAttribute("question");
         QuizSessionUser quizSessionUser = (QuizSessionUser) servletRequest.getSession().getAttribute("quizuser");
@@ -195,7 +205,10 @@ public class UserController {
 
     @RequestMapping("/quiz-session-skip/{duration}")
     public String skipQuestion(HttpServletRequest servletRequest, @PathVariable Integer duration) {
-        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+//        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+
+        QuizSession quizSession = getQuizSession(servletRequest);
+
         QuestionPaper questionPaper = (QuestionPaper) servletRequest.getSession().getAttribute("questionpaper");
         Question question = (Question) servletRequest.getSession().getAttribute("question");
         QuizSessionUser quizSessionUser = (QuizSessionUser) servletRequest.getSession().getAttribute("quizuser");
@@ -218,13 +231,33 @@ public class UserController {
 
     @RequestMapping("/quiz-clear")
     public String clearQuiz(HttpServletRequest servletRequest) {
-//        servletRequest.getSession().setAttribute("quizsession", null);
         servletRequest.getSession().setAttribute("questionpaper", null);
         servletRequest.getSession().setAttribute("quizuser", null);
         servletRequest.getSession().setAttribute("question", null);
         servletRequest.getSession().setAttribute("allownext", null);
 
         return "redirect:/user/quiz-session-new-user";
+    }
+
+    private QuizSession getQuizSession(HttpServletRequest servletRequest) {
+        Cookie cookie = null;
+        for (Cookie cooky : servletRequest.getCookies()) {
+            if (cooky != null) {
+                if (cooky.getName().equals("quizsession")) {
+                    cookie = cooky;
+                }
+            }
+        }
+
+        if (cookie == null) {
+            return null;
+        }
+
+        if (cookie.getValue().isEmpty()) {
+            return null;
+        }
+
+        return userService.getQuizSession(cookie.getValue());
     }
 
 }

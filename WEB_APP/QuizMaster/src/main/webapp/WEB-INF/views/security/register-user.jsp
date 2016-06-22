@@ -18,9 +18,22 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/theme/css/skins/_all-skins.min.css">
         <!--jquery ui css-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.css">
+
+        <style>
+            .control-button{
+                right: 0px;
+                top: 10%;
+                position: absolute;
+            }
+        </style>
     </head>
 
     <body class="hold-transition login-page">
+        <div class="control-button">
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/security/logout-user">
+                <span class="fa fa-home"></span>
+            </a>
+        </div>
         <div class="login-box" style="margin-top: 2%;">
             <div class="login-logo">
                 <div>

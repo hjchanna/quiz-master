@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -7,7 +8,7 @@
                 <img src="${pageContext.request.contextPath}/resources/theme/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Sample User</p>
+                <p>${sessionScope.user.type}</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -31,53 +32,16 @@
 
             <li class="active">
                 <a href="${pageContext.request.contextPath}/user/quiz-session">
-                    <i class="fa fa-bell"></i> <span>Start Quiz Session</span>
+                    <i class="fa fa-bell"></i> <span>Quiz Session</span>
                 </a>
             </li>
-             <li class="active">
-                <a href="${pageContext.request.contextPath}/security/new-security-user">
-                    <i class="fa fa-user"></i> <span>User Registration</span>
-                </a>
-            </li>
-
-            <!--start administration-->
-            <!--            <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-dashboard"></i> <span>Administration</span> <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-            
-                            <ul class="treeview-menu">
-                                <li><a href="${pageContext.request.contextPath}/admin/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
-                            </ul>
-                        </li>-->
-            <!--end administration-->
-
-
-            <!--start master-->
-<!--            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Quiz Master</span> <i class="fa fa-angle-left pull-right"></i>
-                </a>
-
-                <ul class="treeview-menu">
-                    <li><a href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
-                </ul>
-            </li>-->
-            <!--end master-->
-
-
-            <!--start master-->
-<!--            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>User</span> <i class="fa fa-angle-left pull-right"></i>
-                </a>
-
-                <ul class="treeview-menu">
-                    <li><a href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-circle-o"></i> Question Papers</a></li>
-                </ul>
-            </li>-->
-            <!--end master-->
-
+            <c:if test="${sessionScope.user.type == 'ADMIN'}">
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/security/new-security-user">
+                        <i class="fa fa-user"></i> <span>User Registration</span>
+                    </a>
+                </li>
+            </c:if>
         </ul>
     </section>
     <!-- /.sidebar -->

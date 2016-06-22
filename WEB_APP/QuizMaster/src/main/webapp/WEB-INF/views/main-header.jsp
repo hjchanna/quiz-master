@@ -18,21 +18,21 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="${pageContext.request.contextPath}/resources/theme/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Sample User</span>
+                        <span class="hidden-xs">${sessionScope.user.type}</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img src="${pageContext.request.contextPath}/resources/theme/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                             <p>
-                                Channa Jayamuni
-                                <small>Administrator</small>
+                                ${sessionScope.user.type}
                             </p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="${pageContext.request.contextPath}/user/quiz-session-finish" class="btn btn-default btn-flat">Finish Quiz Session</a>
+                                <a href="${pageContext.request.contextPath}/security/logout-user" class="btn btn-success btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

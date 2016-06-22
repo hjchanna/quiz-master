@@ -20,6 +20,8 @@ public interface UserService {
 
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser);
 
+    public QuizSession getQuizSession(String id);
+
     public QuizSession newQuizSession(QuizSession quizSession);
 
     public QuizSession finishQuizSession(QuizSession quizSession);

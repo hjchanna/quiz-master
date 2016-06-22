@@ -30,7 +30,7 @@
 
     <body class="hold-transition login-page">
         <div class="control-button">
-            <a class="btn btn-default" href="${pageContext.request.contextPath}/">
+            <a class="btn btn-default" href="${pageContext.request.contextPath}/security/logout-user">
                 <span class="fa fa-home"></span>
             </a>
         </div>

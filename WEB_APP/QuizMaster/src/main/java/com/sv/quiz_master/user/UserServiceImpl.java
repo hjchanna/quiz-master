@@ -33,9 +33,18 @@ public class UserServiceImpl implements UserService {
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser) {
         quizSessionUser.setQuestionPaper(userRepository.getRandomQuestionPaper());
         quizSessionUser.setStatus("active");
-        
+
         Serializable userId = userRepository.saveObject(quizSessionUser);
         return (QuizSessionUser) userRepository.getObject(QuizSessionUser.class, userId);
+    }
+
+    @Override
+    public QuizSession getQuizSession(String id) {
+        Integer idInt = Integer.valueOf(id);
+
+        QuizSession quizSession = (QuizSession) userRepository.getObject(QuizSession.class, idInt);
+
+        return quizSession;
     }
 
     @Override
@@ -50,9 +59,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public QuizSession finishQuizSession(QuizSession quizSession) {
-        quizSession.setFinishedOn(new Date());
-        quizSession.setStatus(QuizSessionStatus.COMPLETED);
-        userRepository.updateObject(quizSession);
+//        quizSession.setFinishedOn(new Date());
+//        quizSession.setStatus(QuizSessionStatus.COMPLETED);
+//        userRepository.updateObject(quizSession);
         return quizSession;
     }
 

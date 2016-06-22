@@ -20,6 +20,8 @@
         <!--jquery ui css-->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.css">
 
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/fonts/fonts.css">
+
 
     </head>
 
@@ -47,10 +49,10 @@
                                     <h3>${sessionScope.question.questionEn}</h3>
                                 </c:when> 
                                 <c:when test="${language=='Sinhala'}">
-                                    <h3>${sessionScope.question.questionSi}</h3>
+                                    <h3 class="sinhala">${sessionScope.question.questionSi}</h3>
                                 </c:when>
                                 <c:otherwise>
-                                    <h3>${sessionScope.question.questionTa}</h3>
+                                    <h3 class="tamil">${sessionScope.question.questionTa}</h3>
                                 </c:otherwise>
                             </c:choose>
 
@@ -67,10 +69,10 @@
                                             <b>A.</b> ${sessionScope.question.answerAEn}
                                         </c:when>
                                         <c:when test="${language=='Sinhala'}">
-                                            <b>A.</b> ${sessionScope.question.answerASi}
+                                            <b>A.</b> <p class="sinhala">${sessionScope.question.answerASi}</p>
                                         </c:when>
                                         <c:otherwise>
-                                            <b>A.</b> ${sessionScope.question.answerATa}
+                                            <b>A.</b> <p class="tamil">${sessionScope.question.answerATa}</p>
                                         </c:otherwise>
                                     </c:choose>
 
@@ -82,13 +84,13 @@
                                 <div class="text-left">
                                     <c:choose>
                                         <c:when test="${language=='English'}">
-                                            <b>B.</b> ${sessionScope.question.answerAEn}
+                                            <b>B.</b> ${sessionScope.question.answerBEn}
                                         </c:when>
                                         <c:when test="${language=='Sinhala'}">
-                                            <b>B.</b> ${sessionScope.question.answerASi}
+                                            <b>B.</b>  <p class="sinhala">${sessionScope.question.answerBSi}</p>
                                         </c:when>
                                         <c:otherwise>
-                                            <b>B.</b> ${sessionScope.question.answerATa}
+                                            <b>B.</b>  <p class="tamil">${sessionScope.question.answerBTa}</p>
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
@@ -99,13 +101,13 @@
                                 <div class="text-left">
                                     <c:choose>
                                         <c:when test="${language=='English'}">
-                                            <b>C.</b> ${sessionScope.question.answerAEn}
+                                            <b>C.</b> ${sessionScope.question.answerCEn}
                                         </c:when>
                                         <c:when test="${language=='Sinhala'}">
-                                            <b>C.</b> ${sessionScope.question.answerASi}
+                                            <b>C.</b>  <p class="sinhala">${sessionScope.question.answerCSi}</p>
                                         </c:when>
                                         <c:otherwise>
-                                            <b>C.</b> ${sessionScope.question.answerATa}
+                                            <b>C.</b>  <p class="tamil">${sessionScope.question.answerCTa}</p>
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
@@ -116,16 +118,15 @@
                                 <div class="text-left">
                                     <c:choose>
                                         <c:when test="${language=='English'}">
-                                            <b>D.</b> ${sessionScope.question.answerAEn}
+                                            <b>D.</b> ${sessionScope.question.answerDEn}
                                         </c:when>
                                         <c:when test="${language=='Sinhala'}">
-                                            <b>D.</b> ${sessionScope.question.answerASi}
+                                            <b>D.</b>  <p class="sinhala">${sessionScope.question.answerDSi}</p>
                                         </c:when>
                                         <c:otherwise>
-                                            <b>D.</b> ${sessionScope.question.answerATa}
+                                            <b>D.</b>  <p class="tamil">${sessionScope.question.answerDTa}</p>
                                         </c:otherwise>
                                     </c:choose>
-
                                 </div>
                             </a>
                         </div>
@@ -154,7 +155,7 @@
         <script src="${pageContext.request.contextPath}/resources/jquery-toaster/jquery.toaster.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
-                                    $.widget.bridge('uibutton', $.ui.button);
+                                        $.widget.bridge('uibutton', $.ui.button);
         </script>
         <!-- Bootstrap 3.3.5 -->
         <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
@@ -162,33 +163,33 @@
         <script src="${pageContext.request.contextPath}/resources/theme/js/app.min.js"></script>
 
         <script>
-                                    var duration = ${sessionScope.questionpaper.durationPerQuestion};
-                                    var baseUrl = '${pageContext.request.contextPath}' + "/user";
+                                                var duration = ${sessionScope.questionpaper.durationPerQuestion};
+                                                var baseUrl = '${pageContext.request.contextPath}' + "/user";
 
-                                    var seconds = 0;
-                                    var timer = setInterval(timeStep, 1000);
+                                                var seconds = 0;
+                                                var timer = setInterval(timeStep, 1000);
 
-                                    function timeStep() {
-                                        if (seconds >= duration) {
-                                            skipQuestion();
-                                            return;
-                                        }
+                                                function timeStep() {
+                                                    if (seconds >= duration) {
+                                                        skipQuestion();
+                                                        return;
+                                                    }
 
-                                        seconds++;
+                                                    seconds++;
 
-                                        $('#second').text(seconds + " s");
-                                        console.log(seconds);
-                                    }
+                                                    $('#second').text(seconds + " s");
+                                                    console.log(seconds);
+                                                }
 
-                                    function answer(ans) {
-                                        var url = baseUrl + "/quiz-session-answer/" + ans + "/" + seconds;
-                                        document.location = url;
-                                    }
+                                                function answer(ans) {
+                                                    var url = baseUrl + "/quiz-session-answer/" + ans + "/" + seconds;
+                                                    document.location = url;
+                                                }
 
-                                    function skipQuestion() {
-                                        var url = baseUrl + "/quiz-session-skip/" + seconds;
-                                        document.location = url;
-                                    }
+                                                function skipQuestion() {
+                                                    var url = baseUrl + "/quiz-session-skip/" + seconds;
+                                                    document.location = url;
+                                                }
         </script>
 
     </body>
