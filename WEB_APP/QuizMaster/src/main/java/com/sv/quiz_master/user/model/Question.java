@@ -40,7 +40,6 @@ public class Question implements java.io.Serializable {
     private String answerDTa;
     private String correctAnswer;
     private boolean active;
-    private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
     public Question() {
     }
@@ -217,15 +216,6 @@ public class Question implements java.io.Serializable {
 
     public void setActive(boolean active) {
         this.active = active;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "question")
-    public Set<QuizSessionUserAnswer> getQuizSessionUserAnswers() {
-        return this.quizSessionUserAnswers;
-    }
-
-    public void setQuizSessionUserAnswers(Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
-        this.quizSessionUserAnswers = quizSessionUserAnswers;
     }
 
 }
