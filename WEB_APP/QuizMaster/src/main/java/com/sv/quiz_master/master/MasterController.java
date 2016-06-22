@@ -44,21 +44,16 @@ public class MasterController {
         modelAndView.addObject("paper", masterService.getQuestionPaper(paperIndexNo));
         modelAndView.addObject("questionlist", masterService.getQuestionList(paperIndexNo));
         modelAndView.addObject("quizsessions", masterService.getQuizSessionList(paperIndexNo));
-        modelAndView.addObject("quizsession", new QuizSession());
-//        modelAndView.addObject("avaragescore", );
-
+        
         return modelAndView;
     }
 
     @RequestMapping("/new-quiz-session/{questionPaper}")
     public String attemptNewSession(HttpServletRequest servletRequest,
-            @PathVariable Integer questionPaper, @ModelAttribute("quizsession") QuizSession quizSession) {
-        System.out.println("ABCD");
-        System.out.println(quizSession.getStartedOn());
-        System.out.println(quizSession.getStatus());
-        System.out.println(quizSession.getFinishedOn());
-
-        Integer quizSessionId = masterService.newQuizSession(questionPaper, quizSession.getLocation());
+            @PathVariable Integer questionPaper
+            ,@RequestParam String location
+    ) {
+        Integer quizSessionId = masterService.newQuizSession(questionPaper, location);
 
         servletRequest.getSession().setAttribute("quizsession", quizSessionId);
         servletRequest.getSession().setAttribute("questionpaper", questionPaper);

@@ -32,16 +32,20 @@
 
     <div class="row">
         <div class="col-lg-12 form-group" >
-            <form:form action="${pageContext.request.contextPath}/master/new-quiz-session/${paper.indexNo}" modelAttribute="quizsession">
+            <%--<form:form action="${pageContext.request.contextPath}/master/new-quiz-session/${paper.indexNo}" modelAttribute="quizsession">--%>
+            <form action="${pageContext.request.contextPath}/master/new-quiz-session/${paper.indexNo}">
+                
                 <div class="form-group pull-right">
                     <a class="btn btn-success" href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-backward"></i>&nbsp;Go Back</a>
                     <button class="btn btn-success " type="submit"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</button>
                     <!--<a class="" type="submit" ></a>-->
                 </div>
                 <div class="col-sm-4 pull-right">
-                    <form:input type="text" path="location" placeholder="Location . . " class="form-control" name="location"/>
+                    <%--<form:input type="text" placeholder="Location . . " class="form-control" name="location"/>--%>
+                    <input name="location" class="form-control">
                 </div>
-            </form:form>
+            </form>
+            <%--</form:form>--%>
         </div>
 
         <!--start questions-->
