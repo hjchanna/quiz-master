@@ -10,6 +10,7 @@ import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
 import com.sv.quiz_master.user.model.QuizSessionUser;
 import com.sv.quiz_master.user.model.QuizSessionUserAnswer;
+import com.sv.quiz_master.zsystem.QuizSessionUserStatus;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +84,8 @@ public class UserController {
 
         //set quiz sessin to user
         quizSessionUser.setQuizSession(quizSession);
-
+        quizSessionUser.setStatus(QuizSessionUserStatus.CONNECTED);
+        
         //save quiz session user
         quizSessionUser = userService.saveQuizSessionUser(quizSessionUser);
 

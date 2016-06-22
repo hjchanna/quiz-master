@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/quiz_db</property>
-        <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">mysql</property>
-        <property name="hibernate.connection.charSet">UTF-8</property>
-        <!--<property name="hibernate.connection.useUnicode">true</property>-->
-        <!--<property name="hibernate.connection.characterEncoding">UTF-8</property>-->
-        <property name="hibernate.show_sql">true</property>
-        <!--<property name="hibernate.connection.useUnicode">true</property>-->
-        <!--<property name="hibernate.connection.charSet">UTF8</property>-->
-        <!--MAPPINGS-->
-        <!--admin-->
-        <mapping class="com.sv.quiz_master.admin.model.QuestionPaper"/>
-        <mapping class="com.sv.quiz_master.admin.model.Question"/>
-        <!--master-->
-        <mapping class="com.sv.quiz_master.master.model.QuizSessionUser"/>
-        <mapping class="com.sv.quiz_master.master.model.QuizSession"/>
-        <mapping class="com.sv.quiz_master.master.model.QuestionPaper"/>
-        <mapping class="com.sv.quiz_master.master.model.Question"/>
-        <mapping class="com.sv.quiz_master.master.model.QuizSessionUserAnswer"/>
-        <!--user-->
-        <mapping class="com.sv.quiz_master.user.model.QuizSessionUserAnswer"/>
-        <mapping class="com.sv.quiz_master.user.model.QuestionPaper"/>
-        <mapping class="com.sv.quiz_master.user.model.Question"/>
-        <mapping class="com.sv.quiz_master.user.model.QuizSession"/>
-        <mapping class="com.sv.quiz_master.user.model.QuizSessionUser"/>
-        <!--Security user-->
-        <mapping class="com.sv.quiz_master.security.model.User"/>
-    </session-factory>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/quiz_db</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">7259</property>
+    <property name="hibernate.connection.charSet">UTF-8</property>
+    <!--<property name="hibernate.connection.useUnicode">true</property>-->
+    <!--<property name="hibernate.connection.characterEncoding">UTF-8</property>-->
+    <property name="hibernate.show_sql">true</property>
+    <!--<property name="hibernate.connection.useUnicode">true</property>-->
+    <!--<property name="hibernate.connection.charSet">UTF8</property>-->
+    <!--MAPPINGS-->
+    <!--admin-->
+    <mapping class="com.sv.quiz_master.admin.model.QuestionPaper"/>
+    <mapping class="com.sv.quiz_master.admin.model.Question"/>
+    <!--master-->
+    <mapping class="com.sv.quiz_master.master.model.QuizSessionUser"/>
+    <mapping class="com.sv.quiz_master.master.model.QuizSession"/>
+    <mapping class="com.sv.quiz_master.master.model.QuestionPaper"/>
+    <mapping class="com.sv.quiz_master.master.model.Question"/>
+    <mapping class="com.sv.quiz_master.master.model.QuizSessionUserAnswer"/>
+    <!--user-->
+    <mapping class="com.sv.quiz_master.user.model.QuizSessionUserAnswer"/>
+    <mapping class="com.sv.quiz_master.user.model.QuestionPaper"/>
+    <mapping class="com.sv.quiz_master.user.model.Question"/>
+    <mapping class="com.sv.quiz_master.user.model.QuizSession"/>
+    <mapping class="com.sv.quiz_master.user.model.QuizSessionUser"/>
+    <!--Security user-->
+    <mapping class="com.sv.quiz_master.security.model.User"/>
+  </session-factory>
 </hibernate-configuration>

@@ -25,7 +25,6 @@ import javax.persistence.TemporalType;
 public class QuizSession implements java.io.Serializable {
 
     private Integer indexNo;
-    private QuestionPaper questionPaper;
     private Date startedOn;
     private Date finishedOn;
     private String location;
@@ -34,21 +33,6 @@ public class QuizSession implements java.io.Serializable {
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
     public QuizSession() {
-    }
-
-    public QuizSession(QuestionPaper questionPaper, Date startedOn, String status) {
-        this.questionPaper = questionPaper;
-        this.startedOn = startedOn;
-        this.status = status;
-    }
-
-    public QuizSession(QuestionPaper questionPaper, Date startedOn, Date finishedOn, String status, Set<QuizSessionUser> quizSessionUsers, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
-        this.questionPaper = questionPaper;
-        this.startedOn = startedOn;
-        this.finishedOn = finishedOn;
-        this.status = status;
-        this.quizSessionUsers = quizSessionUsers;
-        this.quizSessionUserAnswers = quizSessionUserAnswers;
     }
 
     @Id
@@ -60,16 +44,6 @@ public class QuizSession implements java.io.Serializable {
 
     public void setIndexNo(Integer indexNo) {
         this.indexNo = indexNo;
-    }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_paper", nullable = false)
-    public QuestionPaper getQuestionPaper() {
-        return this.questionPaper;
-    }
-
-    public void setQuestionPaper(QuestionPaper questionPaper) {
-        this.questionPaper = questionPaper;
     }
 
     @Temporal(TemporalType.TIMESTAMP)

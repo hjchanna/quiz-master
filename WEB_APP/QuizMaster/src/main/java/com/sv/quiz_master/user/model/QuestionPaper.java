@@ -28,23 +28,13 @@ public class QuestionPaper implements java.io.Serializable {
     private int durationPerQuestion;
     private boolean active;
 
-    private Set<QuizSession> quizSessions = new HashSet<QuizSession>(0);
     private Set<Question> questions = new HashSet<Question>(0);
-    private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
     public QuestionPaper() {
     }
 
     public QuestionPaper(String description) {
         this.description = description;
-    }
-
-    public QuestionPaper(String description, Date lastUsedOn, Set<QuizSession> quizSessions, Set<Question> questions, Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
-        this.description = description;
-        this.lastUsedOn = lastUsedOn;
-        this.quizSessions = quizSessions;
-        this.questions = questions;
-        this.quizSessionUserAnswers = quizSessionUserAnswers;
     }
 
     @Id
@@ -96,15 +86,6 @@ public class QuestionPaper implements java.io.Serializable {
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "questionPaper")
-    public Set<QuizSession> getQuizSessions() {
-        return this.quizSessions;
-    }
-
-    public void setQuizSessions(Set<QuizSession> quizSessions) {
-        this.quizSessions = quizSessions;
-    }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "questionPaper")
     public Set<Question> getQuestions() {
         return this.questions;
     }
@@ -113,12 +94,4 @@ public class QuestionPaper implements java.io.Serializable {
         this.questions = questions;
     }
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "questionPaper")
-    public Set<QuizSessionUserAnswer> getQuizSessionUserAnswers() {
-        return this.quizSessionUserAnswers;
-    }
-
-    public void setQuizSessionUserAnswers(Set<QuizSessionUserAnswer> quizSessionUserAnswers) {
-        this.quizSessionUserAnswers = quizSessionUserAnswers;
-    }
 }

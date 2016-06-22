@@ -64,8 +64,9 @@ public class UserRepositoryImpl implements UserRepository {
                 .add(Restrictions.eq("active", true))
                 .list();
 
-        int max = questionPapers.size() - 1;
+        int max = questionPapers.size();
         int randomIndex = (int) (Math.random() * max);
+        System.out.println(randomIndex + " random quiz paper");
 
         return questionPapers.get(randomIndex);
     }

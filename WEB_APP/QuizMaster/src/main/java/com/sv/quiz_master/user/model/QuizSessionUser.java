@@ -23,9 +23,12 @@ public class QuizSessionUser implements java.io.Serializable {
 
     private Integer indexNo;
     private QuizSession quizSession;
+    private QuestionPaper questionPaper;
     private String name;
     private String nicNo;
     private String mobileNo;
+    private String language;
+    private String status;
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
     public QuizSessionUser() {
@@ -51,6 +54,16 @@ public class QuizSessionUser implements java.io.Serializable {
     @Column(name = "index_no", unique = true, nullable = false)
     public Integer getIndexNo() {
         return this.indexNo;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "question_paper", nullable = false)
+    public QuestionPaper getQuestionPaper() {
+        return this.questionPaper;
+    }
+
+    public void setQuestionPaper(QuestionPaper questionPaper) {
+        this.questionPaper = questionPaper;
     }
 
     public void setIndexNo(Integer indexNo) {
@@ -92,6 +105,24 @@ public class QuizSessionUser implements java.io.Serializable {
 
     public void setMobileNo(String mobileNo) {
         this.mobileNo = mobileNo;
+    }
+
+    @Column(name = "language", nullable = false, length = 25)
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    @Column(name = "status", nullable = false, length = 25)
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quizSessionUser")
