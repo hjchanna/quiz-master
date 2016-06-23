@@ -85,13 +85,16 @@ public class UserController {
         //set quiz sessin to user
         quizSessionUser.setQuizSession(quizSession);
         quizSessionUser.setStatus(QuizSessionUserStatus.CONNECTED);
-        
+
         //save quiz session user
         quizSessionUser = userService.saveQuizSessionUser(quizSessionUser);
 
+//        System.out.println(quizSessionUser.getQuizSession().getLocation());
+//        System.out.println(quizSessionUser.getStatus());
         //assign session variables
-        servletRequest.getSession().setAttribute("questionpaper", quizSession.getQuestionPaper());
+        servletRequest.getSession().setAttribute("questionpaper", quizSessionUser.getQuestionPaper());
         servletRequest.getSession().setAttribute("quizuser", quizSessionUser);
+        servletRequest.getSession().setAttribute("language", quizSessionUser.getLanguage());
 
         return "redirect:/user/quiz-session-pending";
     }
@@ -122,6 +125,10 @@ public class UserController {
         QuestionPaper questionPaper = (QuestionPaper) servletRequest.getSession().getAttribute("questionpaper");
         Question question = (Question) servletRequest.getSession().getAttribute("question");
         QuizSessionUser quizSessionUser = (QuizSessionUser) servletRequest.getSession().getAttribute("quizuser");
+        String language = (String) servletRequest.getSession().getAttribute("language");
+        System.out.println(language);
+        
+        
 
         if (allowNext != null ? allowNext : true) { //attempt next question
             if (question == null) {//first question
@@ -155,6 +162,7 @@ public class UserController {
 
         servletRequest.getSession().setAttribute("question", question);
         servletRequest.getSession().setAttribute("allownext", false);
+        modelAndView.addObject("language", language);
 
         return modelAndView;
     }

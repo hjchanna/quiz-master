@@ -31,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser) {
+        quizSessionUser.setQuestionPaper(userRepository.getRandomQuestionPaper());
+        quizSessionUser.setStatus("active");
+        
         Serializable userId = userRepository.saveObject(quizSessionUser);
         return (QuizSessionUser) userRepository.getObject(QuizSessionUser.class, userId);
     }
@@ -39,8 +42,6 @@ public class UserServiceImpl implements UserService {
     public QuizSession newQuizSession(QuizSession quizSession) {
         quizSession.setStartedOn(new Date());
         quizSession.setStatus(QuizSessionStatus.ON_GOING);
-
-        quizSession.setQuestionPaper(userRepository.getRandomQuestionPaper());
 
         Integer quizSessinId = (Integer) userRepository.saveObject(quizSession);
         quizSession = (QuizSession) userRepository.getObject(QuizSession.class, quizSessinId);
@@ -70,7 +71,7 @@ public class UserServiceImpl implements UserService {
         QuizSessionUserAnswer quizSessionUserAnswer = new QuizSessionUserAnswer();
 
         //quizSessionUserAnswer.setIndexNo(null);   //auto increment
-        quizSessionUserAnswer.setQuestionPaper(quizSession.getQuestionPaper());
+        quizSessionUserAnswer.setQuestionPaper(quizSessionUser.getQuestionPaper());
         quizSessionUserAnswer.setQuestion(question);
         quizSessionUserAnswer.setQuizSession(quizSession);
         quizSessionUserAnswer.setQuizSessionUser(quizSessionUser);

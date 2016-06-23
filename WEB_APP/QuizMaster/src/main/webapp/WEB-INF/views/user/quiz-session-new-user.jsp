@@ -61,6 +61,15 @@
                         <form:input type="text" class="form-control" placeholder="Telephone" path="mobileNo"/>
                         <span class="glyphicon glyphicon-phone form-control-feedback"></span>
                     </div>
+                    <div class="form-group has-feedback">
+                        <form:select path="language" cssClass="form-control">     
+                            <form:option value="English"/>
+                            <form:option value="Sinhala"/>
+                            <form:option value="Tamil"/>
+                        </form:select>
+                    </div>
+
+
 
                     <div class="row">
                         <div class="col-xs-12 form-group">

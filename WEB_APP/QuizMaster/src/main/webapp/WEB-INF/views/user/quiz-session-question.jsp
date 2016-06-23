@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <!DOCTYPE html>
@@ -41,7 +42,18 @@
                 <div class="box box-default">
                     <div class="box-header">
                         <div class="col-xs-12">
-                            <h3>${sessionScope.question.questionEn}</h3>
+                            <c:choose>
+                                <c:when test="${language=='English'}">
+                                    <h3>${sessionScope.question.questionEn}</h3>
+                                </c:when> 
+                                <c:when test="${language=='Sinhala'}">
+                                    <h3>${sessionScope.question.questionSi}</h3>
+                                </c:when>
+                                <c:otherwise>
+                                    <h3>${sessionScope.question.questionTa}</h3>
+                                </c:otherwise>
+                            </c:choose>
+
                         </div>
                     </div>
 
@@ -49,29 +61,71 @@
 
                         <div class="col-xs-6 form-group">
                             <a type="button" class="btn btn-success btn-block btn-lg" onclick="answer('A');">
-                                <div class="text-left">
-                                    <b>A.</b> ${sessionScope.question.answerAEn}
+                                <div class="text-left">   
+                                    <c:choose>
+                                        <c:when test="${language=='English'}">
+                                            <b>A.</b> ${sessionScope.question.answerAEn}
+                                        </c:when>
+                                        <c:when test="${language=='Sinhala'}">
+                                            <b>A.</b> ${sessionScope.question.answerASi}
+                                        </c:when>
+                                        <c:otherwise>
+                                            <b>A.</b> ${sessionScope.question.answerATa}
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 </div>
                             </a>
                         </div>
                         <div class="col-xs-6 form-group">
                             <a type="button" class="btn btn-success btn-block btn-lg" onclick="answer('B');">
                                 <div class="text-left">
-                                    <b>B.</b> ${sessionScope.question.answerBEn}
+                                    <c:choose>
+                                        <c:when test="${language=='English'}">
+                                            <b>B.</b> ${sessionScope.question.answerAEn}
+                                        </c:when>
+                                        <c:when test="${language=='Sinhala'}">
+                                            <b>B.</b> ${sessionScope.question.answerASi}
+                                        </c:when>
+                                        <c:otherwise>
+                                            <b>B.</b> ${sessionScope.question.answerATa}
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </a>
                         </div>
                         <div class="col-xs-6 form-group">
                             <a type="button" class="btn btn-success btn-block btn-lg" onclick="answer('C');">
                                 <div class="text-left">
-                                    <b>C.</b> ${sessionScope.question.answerCEn}
+                                    <c:choose>
+                                        <c:when test="${language=='English'}">
+                                            <b>C.</b> ${sessionScope.question.answerAEn}
+                                        </c:when>
+                                        <c:when test="${language=='Sinhala'}">
+                                            <b>C.</b> ${sessionScope.question.answerASi}
+                                        </c:when>
+                                        <c:otherwise>
+                                            <b>C.</b> ${sessionScope.question.answerATa}
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </a>
                         </div>
                         <div class="col-xs-6 form-group">
                             <a type="button" class="btn btn-success btn-block btn-lg" onclick="answer('D');">
                                 <div class="text-left">
-                                    <b>D.</b> ${sessionScope.question.answerDEn}
+                                    <c:choose>
+                                        <c:when test="${language=='English'}">
+                                            <b>D.</b> ${sessionScope.question.answerAEn}
+                                        </c:when>
+                                        <c:when test="${language=='Sinhala'}">
+                                            <b>D.</b> ${sessionScope.question.answerASi}
+                                        </c:when>
+                                        <c:otherwise>
+                                            <b>D.</b> ${sessionScope.question.answerATa}
+                                        </c:otherwise>
+                                    </c:choose>
+
                                 </div>
                             </a>
                         </div>
@@ -100,7 +154,7 @@
         <script src="${pageContext.request.contextPath}/resources/jquery-toaster/jquery.toaster.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
-                                $.widget.bridge('uibutton', $.ui.button);
+                                    $.widget.bridge('uibutton', $.ui.button);
         </script>
         <!-- Bootstrap 3.3.5 -->
         <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
@@ -108,33 +162,33 @@
         <script src="${pageContext.request.contextPath}/resources/theme/js/app.min.js"></script>
 
         <script>
-                                var duration = ${sessionScope.questionpaper.durationPerQuestion};
-                                var baseUrl = '${pageContext.request.contextPath}' + "/user";
+                                    var duration = ${sessionScope.questionpaper.durationPerQuestion};
+                                    var baseUrl = '${pageContext.request.contextPath}' + "/user";
 
-                                var seconds = 0;
-                                var timer = setInterval(timeStep, 1000);
+                                    var seconds = 0;
+                                    var timer = setInterval(timeStep, 1000);
 
-                                function timeStep() {
-                                    if (seconds >= duration) {
-                                        skipQuestion();
-                                        return;
+                                    function timeStep() {
+                                        if (seconds >= duration) {
+                                            skipQuestion();
+                                            return;
+                                        }
+
+                                        seconds++;
+
+                                        $('#second').text(seconds + " s");
+                                        console.log(seconds);
                                     }
 
-                                    seconds++;
+                                    function answer(ans) {
+                                        var url = baseUrl + "/quiz-session-answer/" + ans + "/" + seconds;
+                                        document.location = url;
+                                    }
 
-                                    $('#second').text(seconds + " s");
-                                    console.log(seconds);
-                                }
-
-                                function answer(ans) {
-                                    var url = baseUrl + "/quiz-session-answer/" + ans + "/" + seconds;
-                                    document.location = url;
-                                }
-
-                                function skipQuestion() {
-                                    var url = baseUrl + "/quiz-session-skip/" + seconds;
-                                    document.location = url;
-                                }
+                                    function skipQuestion() {
+                                        var url = baseUrl + "/quiz-session-skip/" + seconds;
+                                        document.location = url;
+                                    }
         </script>
 
     </body>
