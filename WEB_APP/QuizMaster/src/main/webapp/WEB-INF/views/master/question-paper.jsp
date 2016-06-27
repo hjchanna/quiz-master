@@ -3,6 +3,8 @@
 <%@page import="java.text.SimpleDateFormat"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!--start top contents of page-->
 <jsp:include page="/WEB-INF/views/import-top.jsp"/>
@@ -34,7 +36,7 @@
         <div class="col-lg-12 form-group" >
             <%--<form:form action="${pageContext.request.contextPath}/master/new-quiz-session/${paper.indexNo}" modelAttribute="quizsession">--%>
             <form action="${pageContext.request.contextPath}/master/new-quiz-session/${paper.indexNo}">
-                
+
                 <div class="form-group pull-right">
                     <a class="btn btn-success" href="${pageContext.request.contextPath}/master/question-paper-list"><i class="fa fa-backward"></i>&nbsp;Go Back</a>
                     <button class="btn btn-success " type="submit"><i class="glyphicon glyphicon-play"></i>&nbsp;Start</button>
@@ -135,7 +137,7 @@
             <!-- small box -->
             <div class="small-box bg-red">
                 <div class="inner">
-                    <h3>75%</h3>
+                    <h3>${avaragescore}%</h3>
                     <p>Average Score</p>
                 </div>
                 <div class="icon">
@@ -197,16 +199,18 @@
                                 <th>Quality</th>
                             </tr>
 
-                            <c:forEach items="${questionlist}" var="question">                    
+                            <c:forEach items="${questionlist}" var="question" varStatus="counter">                      
                                 <tr>
                                     <td>${question.indexNo}</td>
                                     <td>${question.questionEn}</td>
 
 
                                     <td>
-
+                                        <fmt:formatNumber type="number" 
+                                                          maxIntegerDigits="2" value="${(average[counter.count-1])*100}" />
+                                        %
                                         <div class="progress progress-xs">
-                                            <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                                            <div class="progress-bar progress-bar-danger" style="width: ${(average[counter.count-1])*100}%"></div>
                                         </div>
                                     </td>
                                 </tr>

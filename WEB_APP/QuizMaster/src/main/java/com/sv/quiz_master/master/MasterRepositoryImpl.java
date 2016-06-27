@@ -10,9 +10,12 @@ import com.sv.quiz_master.master.model.QuestionPaper;
 import com.sv.quiz_master.master.model.QuizSession;
 import com.sv.quiz_master.master.model.QuizSessionUser;
 import com.sv.quiz_master.master.model.QuizSessionUserAnswer;
+import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,7 +38,7 @@ public class MasterRepositoryImpl implements MasterRepository {
 
     @Override
     public List<QuizSession> getQuizSessionList(Integer questionPaper) {
-       Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
         return session.createCriteria(QuizSession.class)
                 .add(Restrictions.eq("questionPaper.indexNo", questionPaper))
                 .list();
@@ -69,7 +72,7 @@ public class MasterRepositoryImpl implements MasterRepository {
         Session session = sessionFactory.getCurrentSession();
         return session.createCriteria(QuizSessionUser.class)
                 .add(Restrictions.eq("quizSession.indexNo", quizSession))
-                .add(Restrictions.eq("status", "true"))
+                //                .add(Restrictions.eq("status", "true"))
                 .list();
     }
 
@@ -79,6 +82,62 @@ public class MasterRepositoryImpl implements MasterRepository {
         return session.createCriteria(QuizSessionUserAnswer.class)
                 .add(Restrictions.eq("quizSession.indexNo", quizSession))
                 .list();
+    }
+
+    @Override
+    public double getAverage(Integer paperId) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return (Double) session.createCriteria(QuizSessionUserAnswer.class)
+                .setProjection(Projections.avg("correct"))
+                .add(Restrictions.eq("questionPaper.indexNo", paperId))
+                .uniqueResult();
+
+    }
+
+    @Override
+    public List<Double> getAverageForQuestion(Integer paperId) {
+        Session session = sessionFactory.getCurrentSession();
+
+        List<Question> list = getQuestionList(paperId);
+        List<Double> values = new ArrayList<Double>();
+        for (Question question : list) {
+            values.add((Double) session.createCriteria(QuizSessionUserAnswer.class)
+                    .setProjection(Projections.avg("correct"))
+                    .add(Restrictions.eq("questionPaper.indexNo", paperId))
+                    .add(Restrictions.eq("question.indexNo", question.getIndexNo()))
+                    .uniqueResult());
+        }
+        return values;
+
+    }
+
+    @Override
+    public int getCorrectCount(Integer sessionId, Integer userId) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createCriteria(QuizSessionUserAnswer.class)
+                .add(Restrictions.eq("quizSession.indexNo", sessionId))
+                .add(Restrictions.eq("quizSessionUser.indexNo", userId))
+                .add(Restrictions.eq("correct", true))
+                .list().size();
+    }
+
+    @Override
+    public List<QuizSessionUserAnswer> getDuration(Integer sessionId, Integer userId) {
+        Session session = sessionFactory.getCurrentSession();
+        
+         int ob=0;
+        List<QuizSessionUserAnswer> list = session.createCriteria(QuizSessionUserAnswer.class)
+//            .setProjection(Projections.sum("duration"))
+                .add(Restrictions.eq("quizSession.indexNo", sessionId))
+                .add(Restrictions.eq("quizSessionUser.indexNo", userId))
+                .list();
+        for (QuizSessionUserAnswer list1 : list) {
+            ob=ob+list1.getDuration();
+        }
+        System.out.println("dao Impl "+list.size());
+        System.out.println("dao Impl "+ob);
+        return list;
     }
 
 }

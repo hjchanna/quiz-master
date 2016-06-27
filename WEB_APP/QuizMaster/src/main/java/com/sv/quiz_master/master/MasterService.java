@@ -30,6 +30,14 @@ public interface MasterService {
 
     public List<QuizSessionUser> getUserList(int quizSession);
 
-    public List<QuizSessionUserAnswer> getQuestonAnswerList(Integer quizSession);
+    public List<QuizSessionUserAnswer> getQuestionAnswerList(Integer quizSession);
+
+    public double getAverage(Integer paperId);
+
+    public List<Double> getAverageForQuestion(Integer paperId);
+
+    public int getCorrectCount(Integer sessionId, Integer userId);
+
+    public int getDuration(Integer sessionId, Integer userId);
 
 }

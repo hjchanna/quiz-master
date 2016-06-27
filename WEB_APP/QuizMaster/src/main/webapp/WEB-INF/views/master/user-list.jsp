@@ -25,7 +25,7 @@
 <section class="content">
     <!--start item basic information-->
     <div class="text-right">
-        <a class="btn btn-success btn-sm" href="#">
+        <a class="btn btn-success btn-sm" href="${pageContext.request.contextPath}/master/quiz-session-question">
             <span class="glyphicon glyphicon-play"></span> Start
         </a>
     </div>
@@ -40,8 +40,7 @@
                 <thead>
                 <th>#</th>
                 <th>User Name</th>
-                <th>Nic</th>
-                <th>Mobile</th>
+                
                 <th></th>
                 </head>
 
@@ -50,8 +49,7 @@
                         <tr>
                             <td>${count.count}</td>
                             <td>${user.name}</td>
-                            <td>${user.nicNo}</td>
-                            <td>${user.mobileNo}</td>
+                           
                             <td class="text-right ">
                                 <a class="label label-success" href="#">
                                     <span class="glyphicon glyphicon-ok"></span> <b>Connected</b>

@@ -43,6 +43,11 @@
                         <div class="pull-right">
                             <h2><label id="second"></label></h2>
                         </div>
+                        <div class="control-button pull-right">
+                            <a class="btn btn-default" href="${pageContext.request.contextPath}/">
+                                <span class="fa fa-home"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="box box-default">

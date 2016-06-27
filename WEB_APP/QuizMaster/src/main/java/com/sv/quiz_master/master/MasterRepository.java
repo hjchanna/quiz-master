@@ -31,4 +31,14 @@ public interface MasterRepository {
     public List<QuizSessionUser> getUserList(Integer quizSession);
 
     public List<QuizSessionUserAnswer> getQuestonAnswerList(Integer quizSession);
+    
+    public double getAverage(Integer paperId);
+    
+    public List<Double> getAverageForQuestion(Integer paperId);
+    
+    public int getCorrectCount (Integer sessionId,Integer userId);  
+    
+    public List<QuizSessionUserAnswer> getDuration(Integer sessionId, Integer userId);
+    
+    
 }

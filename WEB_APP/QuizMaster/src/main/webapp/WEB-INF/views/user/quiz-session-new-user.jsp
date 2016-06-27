@@ -29,11 +29,7 @@
     </head>
 
     <body class="hold-transition login-page">
-        <div class="control-button">
-            <a class="btn btn-default" href="${pageContext.request.contextPath}/">
-                <span class="fa fa-home"></span>
-            </a>
-        </div>
+        
 
 
         <div class="login-box" style="margin-top: 2%;">
