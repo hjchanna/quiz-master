@@ -60,6 +60,7 @@ public class UserController {
 //        servletRequest.getSession().setAttribute("quizsession", quizSession);
 
         Cookie cookie = new Cookie("quizsession", String.valueOf(quizSession.getIndexNo()));
+        cookie.setMaxAge(60 * 60 * 24 * 365 * 10);
         servletResponse.addCookie(cookie);
 
         return "redirect:/user/quiz-session-new-user";
