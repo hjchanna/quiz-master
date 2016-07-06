@@ -41,6 +41,12 @@
                         <i class="fa fa-user"></i> <span>User Registration</span>
                     </a>
                 </li>
+
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/user/quiz-session-list">
+                        <i class="fa fa-print"></i> <span>Reports</span>
+                    </a>
+                </li>
             </c:if>
         </ul>
     </section>

@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public QuizSessionUser saveQuizSessionUser(QuizSessionUser quizSessionUser) {
         quizSessionUser.setQuestionPaper(userRepository.getRandomQuestionPaper());
+        quizSessionUser.setWinner(false);
         quizSessionUser.setStatus("active");
 
         Serializable userId = userRepository.saveObject(quizSessionUser);
@@ -43,6 +44,8 @@ public class UserServiceImpl implements UserService {
         Integer idInt = Integer.valueOf(id);
 
         QuizSession quizSession = (QuizSession) userRepository.getObject(QuizSession.class, idInt);
+        
+        quizSession.getQuizSessionUsers();
 
         return quizSession;
     }
@@ -58,10 +61,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public QuizSession finishQuizSession(QuizSession quizSession) {
-//        quizSession.setFinishedOn(new Date());
-//        quizSession.setStatus(QuizSessionStatus.COMPLETED);
-//        userRepository.updateObject(quizSession);
+    public QuizSession finishQuizSession(Integer quizSessionId) {
+        QuizSession quizSession = (QuizSession) userRepository.getObject(QuizSession.class, quizSessionId);
+
+        quizSession.setFinishedOn(new Date());
+        quizSession.setStatus(QuizSessionStatus.COMPLETED);
+        userRepository.updateObject(quizSession);
         return quizSession;
     }
 
@@ -92,8 +97,30 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+
+    public void makeWinner(QuizSessionUser quizSessionUser) {
+        quizSessionUser.setWinner(true);
+
+        userRepository.updateObject(quizSessionUser);
+    }
+
+    @Override
     public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser) {
         return userRepository.listResults(quizSessionUser);
     }
+
+    @Override
+    public List<QuizSession> listQuizSessions() {
+        return userRepository.getList(QuizSession.class);
+    }
+
+    @Override
+    public List<QuizSessionUser> listQuizSessionUsers(Integer quizSession) {
+        return userRepository.listQuizSessionUsers(quizSession);
+    }
+    
+    
+    
+    
 
 }

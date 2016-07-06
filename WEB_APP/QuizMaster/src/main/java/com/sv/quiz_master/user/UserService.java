@@ -24,7 +24,7 @@ public interface UserService {
 
     public QuizSession newQuizSession(QuizSession quizSession);
 
-    public QuizSession finishQuizSession(QuizSession quizSession);
+    public QuizSession finishQuizSession(Integer quizSessionId);
 
     public void updateQuestionPaperLastUsed(QuestionPaper questionPaper);
 
@@ -37,7 +37,13 @@ public interface UserService {
             Question question,
             String answer,
             Integer duration);
+    
+    public void makeWinner(QuizSessionUser quizSessionUser);
 
     public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser);
+    
+    public List<QuizSession> listQuizSessions();
+    
+    public List<QuizSessionUser> listQuizSessionUsers(Integer quizSession);
 
 }

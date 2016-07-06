@@ -57,9 +57,9 @@
 
                     <div class="form-group has-feedback">
                         <form:select path="type" cssClass="form-control">     
-                            <form:option value="Admin" label="admin"/>
-                            <form:option value="Quiz Master" label="Quiz Master"/>
-                            <form:option value="User" label="User"/>
+                            <form:option value="ADMIN" label="Admin"/>
+                            <form:option value="QUIZ_MASTER" label="Quiz Master"/>
+                            <form:option value="USER" label="User"/>
                         </form:select>
                     </div>
 

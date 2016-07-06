@@ -28,6 +28,7 @@ public class QuizSessionUser implements java.io.Serializable {
     private String nicNo;
     private String mobileNo;
     private String language;
+    private boolean winner;
     private String status;
     private Set<QuizSessionUserAnswer> quizSessionUserAnswers = new HashSet<QuizSessionUserAnswer>(0);
 
@@ -114,6 +115,15 @@ public class QuizSessionUser implements java.io.Serializable {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+
+    @Column(name = "winner", nullable = false)
+    public boolean isWinner() {
+        return winner;
+    }
+
+    public void setWinner(boolean winner) {
+        this.winner = winner;
     }
 
     @Column(name = "status", nullable = false, length = 25)

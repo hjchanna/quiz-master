@@ -98,4 +98,26 @@ public class UserRepositoryImpl implements UserRepository {
 
         return criteria.list();
     }
+
+    @Override
+    public List getList(Class c) {
+        Session session = sessionFactory.getCurrentSession();
+        
+        Criteria criteria = session.createCriteria(c);
+        
+        return criteria.list();
+
+    }
+
+    @Override
+    public List<QuizSessionUser> listQuizSessionUsers(Integer quizSession) {
+        Session session = sessionFactory.getCurrentSession();
+        
+        Criteria criteria = session.createCriteria(QuizSessionUser.class);
+        criteria.add(Restrictions.eq("quizSession.indexNo", quizSession));
+        
+        return criteria.list();
+    }
+    
+    
 }

@@ -71,7 +71,9 @@ public class UserController {
 //        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
 
         QuizSession quizSession = getQuizSession(servletRequest);
-        userService.finishQuizSession(quizSession);
+        if (quizSession != null) {
+            userService.finishQuizSession(quizSession.getIndexNo());
+        }
 //        servletRequest.getSession().setAttribute("quizsession", null);
 
         Cookie cookie = new Cookie("quizsession", null);
@@ -91,7 +93,10 @@ public class UserController {
 
     @RequestMapping("/quiz-session-save-user")
     public String saveNewUser(HttpServletRequest servletRequest, @ModelAttribute QuizSessionUser quizSessionUser) {
-//        QuizSession quizSession = (QuizSession) servletRequest.getSession().getAttribute("quizsession");
+        if (quizSessionUser.getName().length()<=3) {
+            return "redirect:/user/quiz-session-new-user";
+        }
+        
         QuizSession quizSession = getQuizSession(servletRequest);
 
         //set quiz sessin to user
@@ -101,8 +106,6 @@ public class UserController {
         //save quiz session user
         quizSessionUser = userService.saveQuizSessionUser(quizSessionUser);
 
-//        System.out.println(quizSessionUser.getQuizSession().getLocation());
-//        System.out.println(quizSessionUser.getStatus());
         //assign session variables
         servletRequest.getSession().setAttribute("questionpaper", quizSessionUser.getQuestionPaper());
         servletRequest.getSession().setAttribute("quizuser", quizSessionUser);
@@ -161,10 +164,16 @@ public class UserController {
             }
             Double correctPercent = ((double) correctAnswers) / ((double) totalAnswers) * 100;
 
+            if (correctPercent > 66.66) {
+                userService.makeWinner(quizSessionUser);
+            }
+
             modelAndView.addObject("totalAnswers", totalAnswers);
             modelAndView.addObject("correctAnswers", correctAnswers);
             modelAndView.addObject("correctPercent", String.format("%.2f", correctPercent));
             modelAndView.addObject("totalDuration", totalDuration);
+            modelAndView.addObject("won", correctPercent > 66.66);
+
         } else {
             modelAndView = new ModelAndView("user/quiz-session-question");
         }
@@ -259,6 +268,25 @@ public class UserController {
         }
 
         return userService.getQuizSession(cookie.getValue());
+    }
+
+    @RequestMapping("/quiz-session-list")
+    public ModelAndView atteptQuizSessionInfo() {
+        ModelAndView modelAndView = new ModelAndView("user/quiz-session-list");
+
+        modelAndView.addObject("quizSessions", userService.listQuizSessions());
+
+        return modelAndView;
+    }
+
+    @RequestMapping("/quiz-session-user-list/{quizSession}")
+    public ModelAndView atteptQuizSessionUserInfo(@PathVariable Integer quizSession) {
+        ModelAndView modelAndView = new ModelAndView("user/quiz-session-user-list");
+
+        modelAndView.addObject("quizSession", userService.getQuizSession(String.valueOf(quizSession)));
+        modelAndView.addObject("quizSessionUsers", userService.listQuizSessionUsers(quizSession));
+
+        return modelAndView;
     }
 
 }

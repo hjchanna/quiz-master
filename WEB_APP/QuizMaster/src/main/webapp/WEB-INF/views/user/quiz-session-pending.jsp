@@ -25,7 +25,7 @@
     </head>
 
     <body class="hold-transition login-page">
-        <div class="row">
+<!--        <div class="row">
             <div class="col-sm-6 col-sm-offset-3" style="margin-top: 2%;">
                 <div class="login-logo">
                     <div>
@@ -35,22 +35,18 @@
                 </div>
                 <div class="box box-default">
                     <div class="box-body">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12">-->
                             <video id="video" class="video-js vjs-default-skin col-lg-12"
-                                   data-setup='{"controls" : false, "autoplay" : true, "preload" : "auto"}'>
+                                   data-setup='{"controls" : false, "autoplay" : true, "preload" : "auto", "fullscreen" : true}' width="100%" height="100vh" style="height: 100vh;">
                                 <source src="${pageContext.request.contextPath}/resources/video/dilmah.flv" type="video/x-flv">
                             </video>
-                        </div>
-
-                        <!--                        <div class="col-xs-8 col-xs-offset-2" style="margin-top: 50px;">
-                                                    <a class="btn btn-primary btn-block" href="${pageContext.request.contextPath}/user/quiz-session-start">Start</a>
-                                                </div>-->
+<!--                        </div>
                     </div>
 
                 </div>
             </div>
 
-        </div>
+        </div>-->
 
 
         <!--start js import-->

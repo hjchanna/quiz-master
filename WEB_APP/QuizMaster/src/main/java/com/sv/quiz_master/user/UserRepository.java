@@ -17,6 +17,8 @@ import java.util.List;
  * @author Mohan
  */
 public interface UserRepository {
+    
+    public List getList(Class c);
 
     public Object getObject(Class c, Serializable id);
 
@@ -31,5 +33,7 @@ public interface UserRepository {
     public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer);
 
     public List<QuizSessionUserAnswer> listResults(QuizSessionUser quizSessionUser);
+    
+    public List<QuizSessionUser> listQuizSessionUsers(Integer quizSession);
 
 }
