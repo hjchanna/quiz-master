@@ -25,10 +25,14 @@
                 top: 10%;
                 position: absolute;
             }
+            .back-background{
+                background-color: black;
+                color: white;
+            }
         </style>
     </head>
 
-    <body class="hold-transition login-page">
+    <body class="hold-transition back-background">
         <div class="control-button">
             <a class="btn btn-default" href="${pageContext.request.contextPath}/security/logout-user">
                 <span class="fa fa-home"></span>

@@ -24,14 +24,18 @@
             .result-status{
                 color: red;
             }
+            .back-background{
+                background-color: black;
+                color: white;
+            }
         </style>
 
     </head>
 
-    <body class="hold-transition login-page">
+    <body class="hold-transition back-background">
         <div class="row">
             <div  class="col-sm-8 col-sm-offset-2" style="margin-top: 7%;">
-                <div id="result" class="login-logo">
+                <div  class="login-logo" id="result">
                     <div>
                         <img src="${pageContext.request.contextPath}/resources/image/dilmah-logo.jpg" width="88px" height="66px"/>
                     </div>

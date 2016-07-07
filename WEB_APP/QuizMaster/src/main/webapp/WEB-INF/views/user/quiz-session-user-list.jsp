@@ -29,7 +29,8 @@
     <!--start item basic information-->
     <div class="box box-primary">
         <div class="box-header with-border">
-            <b>Quiz Session at ${quizSession.location}, on  ${quizSession.startedOn}
+            <b>Quiz Session at ${quizSession.location}, on  ${quizSession.startedOn}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Winner Count : &nbsp;<i class="text-success h3">${winCount}</i>
             </b>
             <div class="col-lg-2 pull-right">
                 <a class="btn btn-success" href="${pageContext.request.contextPath}/user/quiz-session-list"><i class="fa fa-backward"></i>&nbsp;Go Back</a>
@@ -50,17 +51,15 @@
                 <tbody>
 
 
-                    <c:forEach items="${quizSessionUsers}" var="user">
+                    <c:forEach items="${quizSessionUsers}" var="user" varStatus="counter">
                         <tr>
-                            <td>${user.indexNo}</td>
+                            <td>${counter.count}</td>
                             <td>${user.name}</td>
                             <td>${user.nicNo}</td>
                             <td>${user.mobileNo}</td>
                             <td>
                                 <c:if test="${user.winner}">
                                     <div class="btn btn-sm btn-success">
-
-
                                         WINNER
                                     </div>
                                 </c:if>

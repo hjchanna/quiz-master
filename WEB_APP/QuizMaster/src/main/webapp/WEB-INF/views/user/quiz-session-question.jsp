@@ -21,11 +21,16 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/jquery-ui/jquery-ui.min.css">
 
         <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/fonts/fonts.css">
-
+        <style type="text/css">
+            .back-background{
+                background-color: black;
+                color: white;
+            }
+        </style>
 
     </head>
 
-    <body class="hold-transition login-page">
+    <body class="hold-transition back-background">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2" style="margin-top: 2%;">
                 <div class="login-logo">

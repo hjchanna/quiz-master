@@ -29,18 +29,24 @@
                     <i class="fa fa-bookmark"></i> <span>Question Papers</span>
                 </a>
             </li>
+            <c:if test="${sessionScope.user.type == 'QUIZ_MASTER' }">
 
-            <li class="active">
-                <a href="${pageContext.request.contextPath}/user/quiz-session">
-                    <i class="fa fa-bell"></i> <span>Quiz Session</span>
-                </a>
-            </li>
+                <li class="active">
+                    <a href="${pageContext.request.contextPath}/user/quiz-session">
+                        <i class="fa fa-bell"></i> <span>Quiz Session</span>
+                    </a>
+                </li>
+            </c:if>
+
             <c:if test="${sessionScope.user.type == 'ADMIN'}">
                 <li class="active">
                     <a href="${pageContext.request.contextPath}/security/new-security-user">
                         <i class="fa fa-user"></i> <span>User Registration</span>
                     </a>
                 </li>
+            </c:if>
+            <c:if test="${sessionScope.user.type == 'ADMIN' && sessionScope.user.type == 'QUIZ_MASTER'}">
+
 
                 <li class="active">
                     <a href="${pageContext.request.contextPath}/user/quiz-session-list">

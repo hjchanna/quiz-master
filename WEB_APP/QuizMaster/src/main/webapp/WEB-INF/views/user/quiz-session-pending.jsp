@@ -38,7 +38,7 @@
                         <div class="col-lg-12">-->
                             <video id="video" class="video-js vjs-default-skin col-lg-12"
                                    data-setup='{"controls" : false, "autoplay" : true, "preload" : "auto", "fullscreen" : true}' width="100%" height="100vh" style="height: 100vh;">
-                                <source src="${pageContext.request.contextPath}/resources/video/dilmah.flv" type="video/x-flv">
+                                <source src="${pageContext.request.contextPath}/resources/video/dilmah.mp4" type="video/x-flv">
                             </video>
 <!--                        </div>
                     </div>
