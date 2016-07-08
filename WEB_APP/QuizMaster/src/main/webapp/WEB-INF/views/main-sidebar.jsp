@@ -23,13 +23,14 @@
                 </a>
             </li>
             <!--end home-->
-
+            <c:if test="${sessionScope.user.type == 'ADMIN' || sessionScope.user.type == 'USER'}">
             <li class="active">
                 <a href="${pageContext.request.contextPath}/admin/question-paper-list">
                     <i class="fa fa-bookmark"></i> <span>Question Papers</span>
                 </a>
             </li>
-            <c:if test="${sessionScope.user.type == 'QUIZ_MASTER' }">
+            </c:if>
+            <c:if test="${sessionScope.user.type == 'ADMIN' || sessionScope.user.type == 'QUIZ_MASTER' }">
 
                 <li class="active">
                     <a href="${pageContext.request.contextPath}/user/quiz-session">
@@ -45,7 +46,7 @@
                     </a>
                 </li>
             </c:if>
-            <c:if test="${sessionScope.user.type == 'ADMIN' && sessionScope.user.type == 'QUIZ_MASTER'}">
+            <c:if test="${sessionScope.user.type == 'ADMIN' || sessionScope.user.type == 'QUIZ_MASTER'}">
 
 
                 <li class="active">

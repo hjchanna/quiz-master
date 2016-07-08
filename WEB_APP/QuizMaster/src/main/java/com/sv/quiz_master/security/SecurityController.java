@@ -36,9 +36,15 @@ public class SecurityController {
 
     @RequestMapping("/save-security-user")
     public ModelAndView saveUser(@ModelAttribute User user) {
+        User securityUser = securityService.getSecurityUser(user);
         ModelAndView modelAndView = new ModelAndView("security/register-user");
-        user.setActive(true);
-        modelAndView.addObject("user", securityService.newSecurityUser(user));
+        if (user.getName() != "" || user.getPassword() != "") {
+
+            if (securityUser == null) {
+                user.setActive(true);
+                modelAndView.addObject("user", securityService.newSecurityUser(user));
+            }
+        }
         modelAndView.addObject("user", new User());
         return modelAndView;
     }
@@ -56,7 +62,7 @@ public class SecurityController {
         servletRequest.getSession().setAttribute("user", securityUser);
         return "redirect:/";
     }
-    
+
     @RequestMapping("/logout-user")
     public String logoutUser(HttpServletRequest servletRequest) {
         servletRequest.getSession().setAttribute("user", null);

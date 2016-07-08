@@ -10,7 +10,9 @@
     //date format to format dates
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 %>
-
+<c:if test="${sessionScope.user==null}">
+    <c:redirect url="security/login"/>
+</c:if> 
 <!--start page content-->
 <section class="content-header">
     <h1>
@@ -67,18 +69,20 @@
                             <td>${paper.questions.size()}</td>
 
                             <td class="text-right">
-                                <c:choose>
-                                    <c:when test="${paper.active}">
-                                        <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question-paper/${paper.indexNo}">
-                                            <span ><i class="glyphicon glyphicon-eye-open"></i> Activated</span>
-                                        </a> 
-                                    </c:when>
-                                    <c:otherwise>
-                                        <a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question-paper/${paper.indexNo}">
-                                            <span ><i class="glyphicon glyphicon-eye-close"></i> Deactivated</span>
-                                        </a> 
-                                    </c:otherwise>
-                                </c:choose>
+                                <c:if test="${sessionScope.user.type != 'USER'}">
+                                    <c:choose>
+                                        <c:when test="${paper.active}">
+                                            <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question-paper/${paper.indexNo}">
+                                                <span ><i class="glyphicon glyphicon-eye-open"></i> Activated</span>
+                                            </a> 
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question-paper/${paper.indexNo}">
+                                                <span ><i class="glyphicon glyphicon-eye-close"></i> Deactivated</span>
+                                            </a> 
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
                                 <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/question-paper/${paper.indexNo}">  
                                     <span class="glyphicon glyphicon-play"></span> View
                                 </a>

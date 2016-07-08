@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header class="main-header">
     <!-- Logo -->
     <a href="index.html" class="logo">
@@ -31,7 +32,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-right">
-                                <a href="${pageContext.request.contextPath}/user/quiz-session-finish" class="btn btn-default btn-flat">Finish Quiz Session</a>
+                                <c:if test="${sessionScope.user.type != 'USER'}">
+                                    <a href="${pageContext.request.contextPath}/user/quiz-session-finish" class="btn btn-default btn-flat">Finish Quiz Session</a>
+                                </c:if>
+
                                 <a href="${pageContext.request.contextPath}/security/logout-user" class="btn btn-success btn-flat">Sign out</a>
                             </div>
                         </li>

@@ -4,7 +4,9 @@
 <!--start top contents of page-->
 <jsp:include page="/WEB-INF/views/import-top.jsp"/>
 <!--end top contents of page-->
-
+<c:if test="${sessionScope.user==null}">
+    <c:redirect url="security/login"/>
+</c:if>
 <script type="text/javascript">
     /*$(document).ready(function () {
      $('#save').click(function () {
@@ -118,18 +120,20 @@
                                 <td>${question.indexNo}</td>
                                 <td>${question.questionEn}</td>
                                 <td class="text-right">
-                                    <c:choose>
-                                        <c:when test="${question.active}">
-                                            <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question/${paper.indexNo}/${question.indexNo}">
-                                                <span ><i class="glyphicon glyphicon-eye-open"></i> Activated</span>
-                                            </a> 
-                                        </c:when>
-                                        <c:otherwise>
-                                            <a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question/${paper.indexNo}/${question.indexNo}">
-                                                <span ><i class="glyphicon glyphicon-eye-close"></i> Deactivated</span>
-                                            </a> 
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <c:if test="${sessionScope.user.type != 'USER'}">
+                                        <c:choose>
+                                            <c:when test="${question.active}">
+                                                <a class="btn btn-success btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question/${paper.indexNo}/${question.indexNo}">
+                                                    <span ><i class="glyphicon glyphicon-eye-open"></i> Activated</span>
+                                                </a> 
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/admin/toggle-enability-question/${paper.indexNo}/${question.indexNo}">
+                                                    <span ><i class="glyphicon glyphicon-eye-close"></i> Deactivated</span>
+                                                </a> 
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
                                     <a class="btn btn-success btn-xs"  href="${pageContext.request.contextPath}/admin/question/${paper.indexNo}/${question.indexNo}">
                                         <span class="glyphicon glyphicon-edit"></span> Edit
                                     </a>
