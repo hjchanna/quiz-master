@@ -29,8 +29,8 @@
     <!--start item basic information-->
     <div class="box box-primary">
         <div class="box-header with-border">
-            <b>Quiz Session at ${quizSession.location}, on  ${quizSession.startedOn}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                Winner Count : &nbsp;<i class="text-success h3">${winCount}</i>
+            <b>Quiz Session at ${quizSession.location}, on  <%= dateFormat.format(((QuizSession) request.getAttribute("quizSession")).getStartedOn()) %> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                Winner Count : &nbsp;${winCount}
             </b>
             <div class="col-lg-2 pull-right">
                 <a class="btn btn-success" href="${pageContext.request.contextPath}/user/quiz-session-list"><i class="fa fa-backward"></i>&nbsp;Go Back</a>
@@ -46,6 +46,7 @@
                 <th>Name</th>
                 <th>NIC No.</th>
                 <th>Mobile No.</th>
+                <th>Language</th>
                 <th></th>
                 </head>
                 <tbody>
@@ -57,9 +58,10 @@
                             <td>${user.name}</td>
                             <td>${user.nicNo}</td>
                             <td>${user.mobileNo}</td>
+                            <td>${user.language}</td>
                             <td>
                                 <c:if test="${user.winner}">
-                                    <div class="btn btn-sm btn-success">
+                                    <div class="btn btn-sm btn-danger">
                                         WINNER
                                     </div>
                                 </c:if>

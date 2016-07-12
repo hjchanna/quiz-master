@@ -5,6 +5,7 @@
  */
 package com.sv.quiz_master.user;
 
+import com.sv.quiz_master.security.model.User;
 import com.sv.quiz_master.user.model.Question;
 import com.sv.quiz_master.user.model.QuestionPaper;
 import com.sv.quiz_master.user.model.QuizSession;
@@ -55,7 +56,9 @@ public class UserController {
 
     @RequestMapping("/quiz-session-save")
     public String saveNewQuizSession(HttpServletRequest servletRequest, HttpServletResponse servletResponse, @ModelAttribute QuizSession quizSession) {
-
+        if (quizSession.getLocation() == null || quizSession.getLocation() == "") {
+            return "redirect:/user/quiz-session-new";
+        }
         quizSession = userService.newQuizSession(quizSession);
 //        servletRequest.getSession().setAttribute("quizsession", quizSession);
 
@@ -93,19 +96,19 @@ public class UserController {
 
     @RequestMapping("/quiz-session-save-user")
     public String saveNewUser(HttpServletRequest servletRequest, @ModelAttribute QuizSessionUser quizSessionUser) {
-        if (quizSessionUser.getName().length()<=1) {
+        if (quizSessionUser.getName().length() <= 1) {
             return "redirect:/user/quiz-session-new-user";
         }
-        
+
         QuizSession quizSession = getQuizSession(servletRequest);
 
         //set quiz sessin to user
         quizSessionUser.setQuizSession(quizSession);
         if (quizSessionUser.getMobileNo().equals("")) {
-            quizSessionUser.setMobileNo("0000000000");
+            quizSessionUser.setMobileNo("N/A");
         }
         if (quizSessionUser.getNicNo().equals("")) {
-            quizSessionUser.setNicNo("000000000V");
+            quizSessionUser.setNicNo("N/A");
         }
         quizSessionUser.setStatus(QuizSessionUserStatus.CONNECTED);
 
@@ -146,7 +149,6 @@ public class UserController {
         Question question = (Question) servletRequest.getSession().getAttribute("question");
         QuizSessionUser quizSessionUser = (QuizSessionUser) servletRequest.getSession().getAttribute("quizuser");
         String language = (String) servletRequest.getSession().getAttribute("language");
-        System.out.println(language);
 
         if (allowNext != null ? allowNext : true) { //attempt next question
             if (question == null) {//first question
@@ -287,19 +289,17 @@ public class UserController {
 
     @RequestMapping("/quiz-session-user-list/{quizSession}")
     public ModelAndView atteptQuizSessionUserInfo(@PathVariable Integer quizSession) {
-        Integer wincount=0;
+        Integer wincount = 0;
         ModelAndView modelAndView = new ModelAndView("user/quiz-session-user-list");
         List<QuizSessionUser> listQuizSessionUsers = userService.listQuizSessionUsers(quizSession);
         for (QuizSessionUser listQuizSessionUser : listQuizSessionUsers) {
             if (listQuizSessionUser.isWinner()) {
                 wincount++;
             }
-        }
-        
-        
+        }       
         modelAndView.addObject("quizSession", userService.getQuizSession(String.valueOf(quizSession)));
-        modelAndView.addObject("quizSessionUsers",listQuizSessionUsers );
-        modelAndView.addObject("winCount",wincount );
+        modelAndView.addObject("quizSessionUsers", listQuizSessionUsers);
+        modelAndView.addObject("winCount", wincount);
 
         return modelAndView;
     }
