@@ -46,7 +46,7 @@
                     </a>
                 </li>
             </c:if>
-            <c:if test="${sessionScope.user.type == 'ADMIN' || sessionScope.user.type == 'QUIZ_MASTER'}">
+            <c:if test="${sessionScope.user.type == 'ADMIN'}">
 
 
                 <li class="active">
