@@ -32,8 +32,18 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public int saveQuizSessionUserAnswer(QuizSessionUserAnswer quizSessionUserAnswer) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(quizSessionUserAnswer);
-        return quizSessionUserAnswer.getIndexNo();
+
+        Criteria criteria = session.createCriteria(QuizSessionUserAnswer.class)
+                .add(Restrictions.eq("quizSessionUser", quizSessionUserAnswer.getQuizSessionUser()))
+                .add(Restrictions.eq("questionPaper", quizSessionUserAnswer.getQuestionPaper()))
+                .add(Restrictions.eq("question", quizSessionUserAnswer.getQuestion()));
+
+        if (criteria.list().isEmpty()) {
+            session.save(quizSessionUserAnswer);
+            return quizSessionUserAnswer.getIndexNo();
+        }
+        
+        return -1;
     }
 
     @Override
@@ -102,9 +112,9 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List getList(Class c) {
         Session session = sessionFactory.getCurrentSession();
-        
+
         Criteria criteria = session.createCriteria(c);
-        
+
         return criteria.list();
 
     }
@@ -112,12 +122,11 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public List<QuizSessionUser> listQuizSessionUsers(Integer quizSession) {
         Session session = sessionFactory.getCurrentSession();
-        
+
         Criteria criteria = session.createCriteria(QuizSessionUser.class);
         criteria.add(Restrictions.eq("quizSession.indexNo", quizSession));
-        
+
         return criteria.list();
     }
-    
-    
+
 }
