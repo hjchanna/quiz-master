@@ -160,7 +160,7 @@
         <script src="${pageContext.request.contextPath}/resources/jquery-toaster/jquery.toaster.js"></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
-                                        $.widget.bridge('uibutton', $.ui.button);
+                                    $.widget.bridge('uibutton', $.ui.button);
         </script>
         <!-- Bootstrap 3.3.5 -->
         <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
@@ -168,33 +168,73 @@
         <script src="${pageContext.request.contextPath}/resources/theme/js/app.min.js"></script>
 
         <script>
-                                                var duration = ${sessionScope.questionpaper.durationPerQuestion};
-                                                var baseUrl = '${pageContext.request.contextPath}' + "/user";
+                                    var duration = ${sessionScope.questionpaper.durationPerQuestion};
+                                    var baseUrl = '${pageContext.request.contextPath}' + "/user";
 
-                                                var seconds = 0;
-                                                var timer = setInterval(timeStep, 1000);
+                                    var seconds = 0;
+                                    var timer = setInterval(timeStep, 1000);
 
-                                                function timeStep() {
-                                                    if (seconds >= duration) {
-                                                        skipQuestion();
-                                                        return;
-                                                    }
+                                    function timeStep() {
+                                        if (seconds >= duration) {
+                                            skipQuestion();
+                                            return;
+                                        }
 
-                                                    seconds++;
+                                        seconds++;
 
-                                                    $('#second').text(seconds + " s");
-                                                    console.log(seconds);
+                                        $('#second').text(seconds + " s");
+                                        console.log(seconds);
+                                    }
+
+                                    function answer(ans) {
+                                        var url = baseUrl + "/quiz-session-answer/" + ans + "/" + seconds;
+                                        document.location = url;
+                                    }
+
+                                    function skipQuestion() {
+                                        var url = baseUrl + "/quiz-session-skip/" + seconds;
+                                        document.location = url;
+                                    }
+
+                                    (function (global) {
+
+                                        if (typeof (global) === "undefined") {
+                                            throw new Error("window is undefined");
+                                        }
+
+                                        var _hash = "!";
+                                        var noBackPlease = function () {
+                                            global.location.href += "#";
+
+                                            // making sure we have the fruit available for juice (^__^)
+                                            global.setTimeout(function () {
+                                                global.location.href += "!";
+                                            }, 50);
+                                        };
+
+                                        global.onhashchange = function () {
+                                            if (global.location.hash !== _hash) {
+                                                global.location.hash = _hash;
+                                            }
+                                        };
+
+                                        global.onload = function () {
+                                            noBackPlease();
+
+                                            // disables backspace on page except on input fields and textarea..
+                                            document.body.onkeydown = function (e) {
+                                                var elm = e.target.nodeName.toLowerCase();
+                                                if (e.which === 8 && (elm !== 'input' && elm !== 'textarea')) {
+                                                    e.preventDefault();
                                                 }
+                                                // stopping event bubbling up the DOM tree..
+                                                e.stopPropagation();
+                                            };
+                                        }
 
-                                                function answer(ans) {
-                                                    var url = baseUrl + "/quiz-session-answer/" + ans + "/" + seconds;
-                                                    document.location = url;
-                                                }
+                                    })(window);
 
-                                                function skipQuestion() {
-                                                    var url = baseUrl + "/quiz-session-skip/" + seconds;
-                                                    document.location = url;
-                                                }
+
         </script>
 
     </body>

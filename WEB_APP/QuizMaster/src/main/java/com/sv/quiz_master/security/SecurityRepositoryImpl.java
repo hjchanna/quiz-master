@@ -6,6 +6,7 @@
 package com.sv.quiz_master.security;
 
 import com.sv.quiz_master.security.model.User;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -31,10 +32,13 @@ public class SecurityRepositoryImpl implements SecurityRepository {
     @Override
     public User getSecurityUser(User user) {
         Session session = sessionFactory.getCurrentSession();
-        return (User) session.createCriteria(User.class)
+        
+        List<User> users = session.createCriteria(User.class)
                 .add(Restrictions.eq("name", user.getName()))
                 .add(Restrictions.eq("password", user.getPassword()))
-                .uniqueResult();
+                .list();
+        
+        return users.isEmpty()?null:users.get(0);
     }
 
 }
